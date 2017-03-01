@@ -1,0 +1,53 @@
+<html>
+	<head>
+		<title>Web Service Composition - Workflow Description Language</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+		<script src="./libs/jquery/jquery-2.0.3.min.js"></script>
+		<!-- <script src="./libs/jquery/jquery.mobile-1.4.5.min.js"></script> -->
+		<script src="./libs/cytospace/cytoscape.min.js"></script>
+		<script src="./libs/cytospace/dagre.min.js"></script>
+		<script src="./libs/cytospace/cytoscape-dagre.js"></script>
+		<script src="./libs/cytospace/cytoscape-context-menus.js"></script>
+		<script src="./sources/workflow_plan.js"></script>
+    <script src="./scripts/workflow_plan_des_lang.js"></script>
+		<link rel="stylesheet" type="text/css" href="./css/workflow.css">
+		<link href="./css/cytoscape-context-menus.css" rel="stylesheet" type="text/css" />
+		<link href="./css/jquery.mobile-1.4.5.min.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript">
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 226) {
+                $(".header").addClass("fixed");
+            } else {
+                $(".header").removeClass("fixed");
+            }
+        });
+    </script>
+    <style type="text/css">
+        .fixed {
+        position:fixed;
+        width:100%;
+        top:0;
+        left:0;
+    }
+    </style>
+	</head>
+
+	<body>
+		<div class="header">
+			<h1>Web Services Composition - Workflow Description model</h1>
+			<fieldset>
+			     <input type='file' id='fileinput' accept=".json">
+			     <input type='button' id='btnLoad' value='Load' onclick='loadFile();'>
+			</fieldset>
+			<fieldset>
+		    <button id="btnDisplayWF" onclick="DisplayWorkflow_Graphic();">Display Workflow from Souce</button>
+		    <button id="btnAddNode" onclick="AddNodeData();">Add a node</button>
+		    <button id="btnAddEdge" onclick="AddEdgeData();">Add an edge</button>
+				<button id="btnGenWF" onclick="GenerateWorkflow();">GenerateWorkflow</button>
+				<button id="btnClearData" onclick="clearData();">Clear data</button>
+			</fieldset>
+		</div>
+		<div id="cy"></div>
+
+	</body>
+</html>
