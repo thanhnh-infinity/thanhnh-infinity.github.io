@@ -4,7 +4,9 @@
  * Date : 25-Feb-2017
  **/
 var GLOBAL_NODES_DATA = [];
-
+var cy;
+var CURRENT_X;
+var CURRENT_Y;
 var GLOBAL_EDGES_DATA = [];
 var ORIGIN_INIT_INPUT = GLOBAL_WORKFLOW_PLAN_DATA.request_parameters.input
 var ORIGIN_GOAL_OUTPUT = GLOBAL_WORKFLOW_PLAN_DATA.request_parameters.output
@@ -14,6 +16,60 @@ function clearData(){
   GLOBAL_NODES_DATA = [];
   GLOBAL_EDGES_DATA = [];
   //GLOBAL_WORKFLOW_PLAN_DATA = {};
+  document.getElementById('cy').style.visibility = "visible";
+}
+
+function openAddOperationNodeData_Modal(){
+    document.getElementById('cy').style.visibility = "hidden";
+    var addOperationNodeData_modal = document.getElementById('addOperationNodeDataModal');
+    addOperationNodeData_modal.style.display = "block";
+}
+
+function closeAddOperationNodeData_Modal(){
+  var addOperationNodeData_modal = document.getElementById('addOperationNodeDataModal');
+  addOperationNodeData_modal.style.display = "none";
+  document.getElementById('cy').style.visibility = "visible";
+  return;
+}
+
+function saveAddOperationNodeData_Modal(){
+   var addOperationNodeData_modal = document.getElementById('addOperationNodeDataModal');
+   addOperationNodeData_modal.style.display = "none";
+   document.getElementById('cy').style.visibility = "visible";
+
+   var nid= "getPhylogeneticTree_TreeBase_GET"
+
+   if (nid == null) {
+       return;
+   }
+
+   var data = {
+       group: 'nodes',
+       id: nid,
+       name:nid,
+       type:'operation_node',
+       faveShape:'ellipse'
+   };
+
+   cy.add({
+       data: data,
+       position: {
+           x: CURRENT_X,
+           y: CURRENT_Y
+       }
+   });
+}
+
+function openAddEdgeData_Modal(){
+    document.getElementById('cy').style.visibility = "hidden";
+    var addEdgeData_modal = document.getElementById('addEdgeDataModal');
+    addEdgeData_modal.style.display = "block";
+}
+
+function closeAddEdgeData_Modal(){
+   var addEdgeData_modal = document.getElementById('addEdgeDataModal');
+   addEdgeData_modal.style.display = "none";
+   document.getElementById('cy').style.visibility = "visible";
 }
 
 function initNode(node){
@@ -253,7 +309,7 @@ function DisplayWorkflow_Graphic(){
   var last_edge = setUpEdge_FromLastOperation_ToGoal(goalNode,operation_nodes,ORIGIN_GOAL_OUTPUT,ORIGIN_LAST_OPERATION)
   GLOBAL_EDGES_DATA.push(last_edge)
 
-  var cy = window.cy = cytoscape({
+  cy = window.cy = cytoscape({
     container: document.getElementById('cy'),
     boxSelectionEnabled: false,
     autounselectify: true,
@@ -336,25 +392,9 @@ function DisplayWorkflow_Graphic(){
               title: 'Add operation node',
               coreAsWell: true,
               onClickFunction: function (event) {
-                var nid = prompt("New operation ID", "getPhylogeneticTree_TreeBase_GET");
-                if (nid == null) {
-                    return;
-                }
-                var data = {
-                    group: 'nodes',
-                    id: nid,
-                    name:nid,
-                    type:'operation_node',
-                    faveShape:'ellipse'
-                };
-
-                cy.add({
-                    data: data,
-                    position: {
-                        x: event.cyPosition.x,
-                        y: event.cyPosition.y
-                    }
-                });
+                openAddOperationNodeData_Modal();
+                CURRENT_X = event.cyPosition.x;
+                CURRENT_Y = event.cyPosition.y;
               }
             },
             {
@@ -373,4 +413,5 @@ function DisplayWorkflow_Graphic(){
 
 $(function(){
   console.log("Ready to Go")
+
 });
