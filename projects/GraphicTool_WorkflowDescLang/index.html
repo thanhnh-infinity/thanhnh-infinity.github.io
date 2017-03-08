@@ -10,6 +10,8 @@
 		<script src="./libs/cytospace/cytoscape-context-menus.js"></script>
 		<script src="./sources/workflow_plan.js"></script>
     <script src="./scripts/workflow_plan_des_lang.js"></script>
+		<script src="./scripts/utility.js"></script>
+		<script src="./scripts/configuration.js"></script>
 		<link rel="stylesheet" type="text/css" href="./css/workflow.css">
 		<link href="./css/cytoscape-context-menus.css" rel="stylesheet" type="text/css" />
 		<link href="./css/jquery.mobile-1.4.5.min.css" rel="stylesheet" type="text/css" />
@@ -42,9 +44,7 @@
 			</fieldset>
 			<fieldset>
 		    <button id="btnDisplayWF" onclick="DisplayWorkflow_Graphic();">Display Workflow from Souce</button>
-		    <button id="btnAddNode" onclick="openAddOperationNodeData_Modal();">Add a node</button>
-		    <button id="btnAddEdge" onclick="openAddEdgeData_Modal();">Add an edge</button>
-				<button id="btnGenWF" onclick="GenerateWorkflow();">GenerateWorkflow</button>
+				<button id="btnGenWF" onclick="GenerateWorkflow();">Generate Workflow</button>
 				<button id="btnClearData" onclick="clearData();">Clear data</button>
 			</fieldset>
 
@@ -53,13 +53,18 @@
 			  <!-- Modal content -->
 			  <div class="modal-content">
 			    <span class="close" onclick="closeAddEdgeData_Modal();">&times;</span>
-			    <p>Web Service composition</p>
-					<p>Web Service composition</p>
-					<p>Web Service composition</p>
-
-					<p>Web Service composition</p>
-					<p>Web Service composition</p>
-					<button id="save" onclick="closeAddEdgeData_Modal();">Save</button>
+					<p>Source Node</p>
+					<select id="sourceOperationNode">
+						 <!-- for demo -->
+						 <option value=""></option>
+				 </select>
+				 <p>Target Node</p>
+				 <select id="targetOperationNode">
+						<!-- for demo -->
+						<option value=""></option>
+				</select>
+				<br/><br/>
+					<button id="save" onclick="saveAddNewEdgeData_Modal();">Save</button>
 			  </div>
 			</div>
 
@@ -67,13 +72,30 @@
 			  <!-- Modal content -->
 			  <div class="modal-content">
 			    <span class="close" onclick="closeAddOperationNodeData_Modal();">&times;</span>
-			    <p>Operation name</p>
-					<input type="text" id="txtNewOperationNodeID"></text>
-					<p>Ontology Resource ID</p>
-					<input type="text" id="txtOntologyResourceID_Node"></text>
 					<p>Ontology Reference Link</p>
-					<input type="text" id="txtOntologyReferenceLink_Node"></text>
-					<br/><br/>
+					<!-- <input type="text" id="txtOntologyReferenceLink_Node"></text> -->
+					<select id="selectOntologyReferenceLink_Node" onchange="setOperationNodeData_FromOWL(this);">
+							<!-- for demo -->
+							<option value=""></option>
+						  <option value="http://www.cs.nmsu.edu/~epontell/CDAO/cdao.owl#phylotastic_GetPhylogeneticTree_TreeBase_GET">http://www.cs.nmsu.edu/~epontell/CDAO/cdao.owl#phylotastic_GetPhylogeneticTree_TreeBase_GET</option>
+					</select>
+					<!--
+					<p>Operation name</p>
+					<input type="text" id="txtNewOperationNodeName" style="width:100%" disabled></text>
+				  -->
+					<p>Ontology Resource ID</p>
+					<input type="text" id="txtOntologyResourceID_Node" style="width:100%" disabled></input>
+					<br/>
+					<br/>
+					<hr>
+					<div id="divInputParams">
+					</div>
+					<hr>
+					<br/>
+					<div id="divOutputParams">
+					</div>
+					<br/>
+					<br/>
 					<button id="save" onclick="saveAddOperationNodeData_Modal();">Save</button>
 			  </div>
 			</div>

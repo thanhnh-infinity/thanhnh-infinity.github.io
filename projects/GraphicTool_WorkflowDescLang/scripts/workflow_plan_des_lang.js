@@ -17,6 +17,86 @@ function clearData(){
   GLOBAL_EDGES_DATA = [];
   //GLOBAL_WORKFLOW_PLAN_DATA = {};
   document.getElementById('cy').style.visibility = "visible";
+  console.log("Clear")
+}
+
+function setOperationNodeData_FromOWL(selectOperationOWLObject){
+  var owl_resource_link = selectOperationOWLObject.value
+  var owl_resource_id = getResourceID_FromOWLLink(owl_resource_link)
+  if (!isEmpty(owl_resource_id)){
+    //document.getElementById('txtNewOperationNodeName').value = owl_resource_id
+    document.getElementById('txtOntologyResourceID_Node').value = owl_resource_id
+  } else {
+    //document.getElementById('txtNewOperationNodeName').value = GLOBAL_NO_ONTOLOGY_DATA
+    document.getElementById('txtOntologyResourceID_Node').value = GLOBAL_NO_ONTOLOGY_DATA
+  }
+
+  /* MAke ontology API request to fill Input and Output forms */
+  /*
+  $.ajax({
+        type: "GET",
+        url: "http://128.123.177.21:8080/query?version=0.2&action=get&object=landcover_landinfo&recorder_name=phihuongthanh@gmail.com&quantity=100",
+        dataType: "json",
+        async:false,
+        data: JSON.stringify({ version: '0.2.1', action: 'get', object:'landcover_landinfo',recorder_name:'phihuongthanh@gmail.com', quantity:100 }),
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+              console.log(data)
+        },
+        error: function (textStatus, errorThrown) {
+                console.log(textStatus)
+        }
+
+  });
+  */
+  if (!isEmpty(owl_resource_link)){
+    var input_data = TEST_OPERATION_API_JSON.operation_parameters.input
+    var output_data = TEST_OPERATION_API_JSON.operation_parameters.output
+    generateInputPartData(input_data)
+    generateOutputPartData(output_data)
+  } else {
+    generateInputPartData("")
+    generateOutputPartData("")
+  }
+}
+function generateOutputPartData(output_data){
+  var html = ""
+  if (!isEmpty(output_data)){
+      html += "<p>Operation Output params</p>"
+      html += "<p>Data format : &nbsp;&nbsp;&nbsp; " + output_data.info.data_format + "</p>"
+
+      for(var i = 0 ; i < output_data.components.length ; i++){
+        var component = output_data.components[i]
+        html += "<p>Output Param component " + (i+1) + "</p>"
+        html += "&nbsp;&nbsp;&nbsp;&nbsp;Name :  " + component.name + "<br/>"
+        html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology Resource ID :  " + component.ontology_resource_id + "<br/>"
+        html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology Resource Link :  " + component.ontology_resource_link + "<br/>"
+        html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology param name :  " + component.ontology_param_name + "<br/>"
+        html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology param link :  " + component.ontology_param_link + "<br/>"
+      }
+  } else {
+    html = ""
+  }
+  document.getElementById('divOutputParams').innerHTML = html
+}
+function generateInputPartData(input_data){
+  if (!isEmpty(input_data)){
+    var html = "<p>Operation input params</p>"
+    html += "<p>Data format : &nbsp;&nbsp;&nbsp; " + input_data.info.data_format + "</p>"
+
+    for(var i = 0 ; i < input_data.components.length ; i++){
+      var component = input_data.components[i]
+      html += "<p>Input Param component " + (i+1) + "</p>"
+      html += "&nbsp;&nbsp;&nbsp;&nbsp;Name :  " + component.name + "<br/>"
+      html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology Resource ID :  " + component.ontology_resource_id + "<br/>"
+      html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology Resource Link :  " + component.ontology_resource_link + "<br/>"
+      html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology param name :  " + component.ontology_param_name + "<br/>"
+      html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology param link :  " + component.ontology_param_link + "<br/>"
+    }
+    document.getElementById('divInputParams').innerHTML = html
+  } else {
+    document.getElementById('divInputParams').innerHTML = ""
+  }
 }
 
 function openAddOperationNodeData_Modal(){
@@ -51,6 +131,13 @@ function saveAddOperationNodeData_Modal(){
        faveShape:'ellipse'
    };
 
+   var new_node = {}
+   new_node.id = nid
+   new_node.name = nid
+   new_node.shape = 'ellipse'
+   new_node.type = 'operation_node'
+   GLOBAL_NODES_DATA.push(initNode(new_node))
+
    cy.add({
        data: data,
        position: {
@@ -64,6 +151,25 @@ function openAddEdgeData_Modal(){
     document.getElementById('cy').style.visibility = "hidden";
     var addEdgeData_modal = document.getElementById('addEdgeDataModal');
     addEdgeData_modal.style.display = "block";
+
+    document.getElementById('sourceOperationNode').innerHTML = getHTMLdocOption_ListOfNodes(GLOBAL_NODES_DATA)
+    document.getElementById('targetOperationNode').innerHTML = getHTMLdocOption_ListOfNodes(GLOBAL_NODES_DATA)
+}
+
+function saveAddNewEdgeData_Modal(){
+  //console.log("Vao day")
+  var addEdgeData_Modal = document.getElementById('addEdgeDataModal');
+  addEdgeData_Modal.style.display = "none";
+  document.getElementById('cy').style.visibility = "visible";
+
+  source_node_id = document.getElementById('sourceOperationNode').value
+  target_node_id = document.getElementById('targetOperationNode').value
+  if (!isEmpty(source_node_id) && !isEmpty(target_node_id)){
+    edge_data = { group: "edges", data: { source: source_node_id, target: target_node_id } }
+    cy.add(edge_data)
+  }
+  //console.log("Tai sao ko vao day????")
+  return
 }
 
 function closeAddEdgeData_Modal(){
@@ -106,6 +212,7 @@ function loadFile() {
     }
     else {
       file = input.files[0];
+      console.log(file)
       fr = new FileReader();
       fr.onload = receivedText;
       fr.readAsText(file);
@@ -402,7 +509,7 @@ function DisplayWorkflow_Graphic(){
               title: 'Add edge',
               coreAsWell: true,
               onClickFunction: function (event) {
-                console.log("add edge")
+                  openAddEdgeData_Modal();
               }
             }
           ],
