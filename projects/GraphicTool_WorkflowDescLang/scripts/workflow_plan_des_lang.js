@@ -11,7 +11,9 @@ var GLOBAL_EDGES_DATA = [];
 var ORIGIN_INIT_INPUT = GLOBAL_WORKFLOW_PLAN_DATA.request_parameters.input
 var ORIGIN_GOAL_OUTPUT = GLOBAL_WORKFLOW_PLAN_DATA.request_parameters.output
 var ORIGIN_FIRST_OPERATION = GLOBAL_WORKFLOW_PLAN_DATA.workflow_plan[0].plan[0]
+var ORIGIN_OPERATION_NODE_LIST = GLOBAL_WORKFLOW_PLAN_DATA.workflow_plan[0].plan
 var ORIGIN_LAST_OPERATION = GLOBAL_WORKFLOW_PLAN_DATA.workflow_plan[0].plan[GLOBAL_WORKFLOW_PLAN_DATA.workflow_plan[0].plan.length - 1]
+var ADDED_OPERATION_NODES_LIST = []
 function clearData(){
   GLOBAL_NODES_DATA = [];
   GLOBAL_EDGES_DATA = [];
@@ -63,16 +65,16 @@ function generateOutputPartData(output_data){
   var html = ""
   if (!isEmpty(output_data)){
       html += "<p>Operation Output params</p>"
-      html += "<p>Data format : &nbsp;&nbsp;&nbsp; " + output_data.info.data_format + "</p>"
+      html += "<p>Data format : &nbsp;&nbsp;&nbsp; <text id='txtOutputDataFormat'>" + output_data.info.data_format + "</text></p>"
 
       for(var i = 0 ; i < output_data.components.length ; i++){
         var component = output_data.components[i]
         html += "<p>Output Param component " + (i+1) + "</p>"
-        html += "&nbsp;&nbsp;&nbsp;&nbsp;Name :  " + component.name + "<br/>"
-        html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology Resource ID :  " + component.ontology_resource_id + "<br/>"
-        html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology Resource Link :  " + component.ontology_resource_link + "<br/>"
-        html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology param name :  " + component.ontology_param_name + "<br/>"
-        html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology param link :  " + component.ontology_param_link + "<br/>"
+        html += "&nbsp;&nbsp;&nbsp;&nbsp;Name :  <text name='txtOutputComponentName'>" + component.name + "</text><br/>"
+        html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology Resource ID :  <text name='txtOutputComponentOntologyResourceID'>" + component.ontology_resource_id + "</text><br/>"
+        html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology Resource Link :  <text name='txtOutputComponentOntologyResourceLink'>" + component.ontology_resource_link + "</text><br/>"
+        html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology param name :  <text name='txtOutputComponentOntologyParamName'>" + component.ontology_param_name + "</text><br/>"
+        html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology param link :  <text name='txtOutputComponentOntologyParamLink'>" + component.ontology_param_link + "</text><br/>"
       }
   } else {
     html = ""
@@ -82,16 +84,16 @@ function generateOutputPartData(output_data){
 function generateInputPartData(input_data){
   if (!isEmpty(input_data)){
     var html = "<p>Operation input params</p>"
-    html += "<p>Data format : &nbsp;&nbsp;&nbsp; " + input_data.info.data_format + "</p>"
+    html += "<p>Data format : &nbsp;&nbsp;&nbsp;<text id='txtInputDataFormat'>" + input_data.info.data_format + "</text></p>"
 
     for(var i = 0 ; i < input_data.components.length ; i++){
       var component = input_data.components[i]
       html += "<p>Input Param component " + (i+1) + "</p>"
-      html += "&nbsp;&nbsp;&nbsp;&nbsp;Name :  " + component.name + "<br/>"
-      html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology Resource ID :  " + component.ontology_resource_id + "<br/>"
-      html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology Resource Link :  " + component.ontology_resource_link + "<br/>"
-      html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology param name :  " + component.ontology_param_name + "<br/>"
-      html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology param link :  " + component.ontology_param_link + "<br/>"
+      html += "&nbsp;&nbsp;&nbsp;&nbsp;Name :  <text name='txtInputComponentName'>" + component.name + "</text><br/>"
+      html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology Resource ID :  <text name='txtInputComponentOntologyResourceID'>" + component.ontology_resource_id + "</text><br/>"
+      html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology Resource Link :  <text name='txtInputComponentOntologyResourceLink'>" + component.ontology_resource_link + "</text><br/>"
+      html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology param name :  <text name='txtInputComponentOntologyParamName'>" + component.ontology_param_name + "</text><br/>"
+      html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology param link :  <text name='txtInputComponentOntologyParamLink'>" + component.ontology_param_link + "</text><br/>"
     }
     document.getElementById('divInputParams').innerHTML = html
   } else {
@@ -117,26 +119,90 @@ function saveAddOperationNodeData_Modal(){
    addOperationNodeData_modal.style.display = "none";
    document.getElementById('cy').style.visibility = "visible";
 
-   var nid= "getPhylogeneticTree_TreeBase_GET"
+   var ontology_resource_id = document.getElementById('txtOntologyResourceID_Node').value
+   var ontology_resource_link = document.getElementById('selectOntologyReferenceLink_Node').value
+   //console.log(ontology_resouce_id)
+   var object_type = 'operation_node'
+   var object_shape = 'ellipse'
+   var input_data_format = document.getElementById('txtInputDataFormat').innerText
+   //console.log(input_data_format)
+   var output_data_format = document.getElementById('txtOutputDataFormat').innerText
+   //console.log(output_data_format)
+   var input_components_names = document.getElementsByName('txtInputComponentName')
+   //console.log(input_components_names)
+   var input_components_resource_ids = document.getElementsByName('txtInputComponentOntologyResourceID')
+   var input_components_resource_links = document.getElementsByName('txtInputComponentOntologyResourceLink')
+   var input_components_param_names = document.getElementsByName('txtInputComponentOntologyParamName')
+   var input_components_param_links = document.getElementsByName('txtInputComponentOntologyParamLink')
 
-   if (nid == null) {
+   var input_components_length = 0
+   //console.log(input_components_resource_ids.length )
+   //if (input_components_names.length == input_components_resource_ids.length == input_components_resource_links.length == input_components_param_names.length == input_components_param_links.length){
+     input_components_length = input_components_resource_ids.length
+   //}
+   //console.log(input_components_length)
+
+   var output_components_names = document.getElementsByName('txtOutputComponentName')
+   //console.log(output_components_names)
+   var output_components_resource_ids = document.getElementsByName('txtOutputComponentOntologyResourceID')
+   var output_components_resource_links = document.getElementsByName('txtOutputComponentOntologyResourceLink')
+   var output_components_param_names = document.getElementsByName('txtOutputComponentOntologyParamName')
+   var output_components_param_links = document.getElementsByName('txtOutputComponentOntologyParamLink')
+
+   var output_components_length = 0
+   //console.log(output_components_resource_ids.length)
+   //if (output_components_names.length == output_components_resource_ids.length == output_components_resource_links.length == output_components_param_names.length == output_components_param_links.length){
+   output_components_length = output_components_resource_ids.length
+   //}
+   //console.log(output_components_length)
+
+   var operation_node_ont_data = initOperationNode_Ontology()
+   operation_node_ont_data.operation_name = ontology_resource_id
+   operation_node_ont_data.operation_ontology_link = ontology_resource_link
+   operation_node_ont_data.operation_parameters.input.info.data_format = input_data_format
+   operation_node_ont_data.operation_parameters.output.info.data_format = output_data_format
+   for(var i = 0 ; i < input_components_length ;i++){
+     var component_for_node_ont_data = initComponent_forNode_Ontology()
+     component_for_node_ont_data.name = input_components_names[i].innerText
+     component_for_node_ont_data.ontology_resource_id = input_components_resource_ids[i].innerText
+     component_for_node_ont_data.ontology_resource_link = input_components_resource_links[i].innerText
+     component_for_node_ont_data.ontology_param_name = input_components_param_names[i].innerText
+     component_for_node_ont_data.ontology_param_link = input_components_param_links[i].innerText
+     operation_node_ont_data.operation_parameters.input.components.push(component_for_node_ont_data)
+   }
+   for(var i = 0 ; i < output_components_length ;i++){
+     var component_for_node_ont_data = initComponent_forNode_Ontology()
+     component_for_node_ont_data.name = output_components_names[i].innerText
+     component_for_node_ont_data.ontology_resource_id = output_components_resource_ids[i].innerText
+     component_for_node_ont_data.ontology_resource_link = output_components_resource_links[i].innerText
+     component_for_node_ont_data.ontology_param_name = output_components_param_names[i].innerText
+     component_for_node_ont_data.ontology_param_link = output_components_param_links[i].innerText
+     operation_node_ont_data.operation_parameters.output.components.push(component_for_node_ont_data)
+   }
+
+   //console.log(operation_node_ont_data)
+   ADDED_OPERATION_NODES_LIST.push(operation_node_ont_data)
+
+   if (ontology_resource_id == null) {
        return;
    }
 
    var data = {
        group: 'nodes',
-       id: nid,
-       name:nid,
+       id: ontology_resource_id,
+       name:ontology_resource_id,
        type:'operation_node',
        faveShape:'ellipse'
    };
 
    var new_node = {}
-   new_node.id = nid
-   new_node.name = nid
+   new_node.id = ontology_resource_id
+   new_node.name = ontology_resource_id
    new_node.shape = 'ellipse'
    new_node.type = 'operation_node'
    GLOBAL_NODES_DATA.push(initNode(new_node))
+
+
 
    cy.add({
        data: data,
@@ -156,6 +222,41 @@ function openAddEdgeData_Modal(){
     document.getElementById('targetOperationNode').innerHTML = getHTMLdocOption_ListOfNodes(GLOBAL_NODES_DATA)
 }
 
+function mapCommonComponents(Output_Source_Node, Input_Target_Node){
+  try{
+        var common = []
+
+        var outputSource_Components = Output_Source_Node.operation_parameters.output.components;
+        var inputTarget_Components = Input_Target_Node.operation_parameters.input.components;
+
+        for(var i = 0 ; i < outputSource_Components.length ; i++){
+          for(var j = 0 ; j < inputTarget_Components.length ; j++){
+            if (outputSource_Components[i].ontology_resource_id.trim().toUpperCase() === inputTarget_Components[j].ontology_resource_id.trim().toUpperCase()){
+              common.push(outputSource_Components[i].ontology_resource_id.trim().toUpperCase())
+            }
+          }
+        }
+        return common
+  } catch(ex){
+    return []
+  }
+}
+
+function getFullNodeData_FromNodeID(node_id,origin_operations_nodes,added_operations_nodes){
+  //console.log(origin_operations_nodes)
+  for(var i = 0 ; i < origin_operations_nodes.length ; i++){
+    if (node_id.trim().toUpperCase() === origin_operations_nodes[i].operation_name.trim().toUpperCase()){
+      return origin_operations_nodes[i]
+    }
+  }
+  for(var i = 0 ; i < added_operations_nodes.length ; i++){
+    if (node_id.trim().toUpperCase() === added_operations_nodes[i].operation_name.trim().toUpperCase()){
+      return added_operations_nodes[i]
+    }
+  }
+  return null
+}
+
 function saveAddNewEdgeData_Modal(){
   //console.log("Vao day")
   var addEdgeData_Modal = document.getElementById('addEdgeDataModal');
@@ -164,8 +265,17 @@ function saveAddNewEdgeData_Modal(){
 
   source_node_id = document.getElementById('sourceOperationNode').value
   target_node_id = document.getElementById('targetOperationNode').value
+
+  //console.log(source_node_id)
+  //console.log(target_node_id)
+  source_node  = getFullNodeData_FromNodeID(source_node_id,ORIGIN_OPERATION_NODE_LIST,ADDED_OPERATION_NODES_LIST)
+  target_node  = getFullNodeData_FromNodeID(target_node_id,ORIGIN_OPERATION_NODE_LIST,ADDED_OPERATION_NODES_LIST)
+
+  var common = mapCommonComponents(source_node,target_node)
+
+  console.log(target_node)
   if (!isEmpty(source_node_id) && !isEmpty(target_node_id)){
-    edge_data = { group: "edges", data: { source: source_node_id, target: target_node_id } }
+    edge_data = { group: "edges", data: { source: source_node_id, target: target_node_id, label:common.toString() } }
     cy.add(edge_data)
   }
   //console.log("Tai sao ko vao day????")
