@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="assets/plugins/github-calendar/dist/github-calendar.css"/>
     <!-- github acitivity css -->
     <link rel="stylesheet" href="assets/plugins/github-activity/src/github-activity.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/octicons/2.0.2/octicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/4.4.0/font/octicons.min.css">
 
     <!-- Theme CSS -->
     <link id="theme-style" rel="stylesheet" href="assets/css/styles.css">
@@ -28,7 +28,17 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script
+        src="https://cdn.rawgit.com/IonicaBizau/github-calendar/gh-pages/dist/github-calendar.min.js">
+    </script>
 
+    <!-- Optionally, include the theme (if you don't want to struggle to write the CSS) -->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/IonicaBizau/github-calendar/gh-pages/dist/github-calendar.css"/>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="assets/css/github-activity.css">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+    <script type="text/javascript" src="assets/js/github-activity.js"></script>
 </head>
 
 <body>
@@ -38,7 +48,8 @@
             <img class="profile-image img-responsive pull-left" src="assets/images/profile.png" alt="Thanh Nguyen" />
             <div class="profile-content pull-left">
                 <h1 class="name">Thanh H. Nguyen</h1>
-                <h2 class="desc">Software Developer - AI & Data Mining Researcher</h2>
+                <h2 class="desc">Software Developer - Software Engineer</h2>
+                <h2 class="desc">Artificial Intelligence & Data Mining - Knowledge Discovery researcher</h2>
                 <ul class="social list-inline">
                     <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                     <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
@@ -58,7 +69,9 @@
                         <h2 class="heading">About Me</h2>
                         <div class="content">
                             <p>I am a PhD candidate in the Computer Science Department at New Mexico State University. I graduated with his Masters of Computer Science at James Cook University in Australia. My thesis, entitled Data Mining in Internet Banking, is currently being used in a number of Asian banks. My research interests include data mining and knowledge discovery (classification, clustering, association rules and predictio models ), Artificial Intelligence (knowledge representation and reasoning, planning, logic programming, answer set programming and Web semantics) and big-data processing.</p>
-                            <p>My research now focuses on Automation Web Services Composition in Web Semantics. I am developing a completed end-to-end AI system to collect requirements from users in Natural Language and explore workflows that can satisfy the users requirements automatically. After the workflow is achieved, our system is able to execute each Web Service component in workflow sequence in order to achieve the goal.
+                            <p>My primary research now focuses on Automation Web Services Composition in Web Semantics. I am developing a completed end-to-end AI system to collect requirements from users in Natural Language and explore workflows that can satisfy the users requirements automatically. After the workflow is achieved, our system is able to execute each Web Service component in workflow sequence in order to achieve the goal.
+                             </p>
+
                         </div><!--//content-->
                     </div><!--//section-inner-->
                 </section><!--//section-->
@@ -68,6 +81,49 @@
                         <h2 class="heading">Latest Projects</h2>
                         <div class="content">
 
+                            <div class="item featured text-center">
+                                <h3 class="title"><a href="http://phylotastic.org/" target="_blank">Web Semantics - Web Service Composition</a></h3>
+                                <p class="summary">Service-oriented computing (SOC) represents a paradigm for building distributed computing applications over the Internet. In the past decade, Web services composition has been an active area of research and development endeavors for application integration and interoperation. Although Web services composition has been heavily investigated, several issues related to dependability, ubiquity, personalization, among others, still need to be addressed, especially giving the recent rise of several new computing paradigms such as Cloud computing, social computing, and Web of Things. </p>
+                                <div class="featured-image">
+                                    <a href="#" target="_blank">
+                                    <img class="img-responsive project-image" src="assets/images/projects/ws_composition/service_composition.png" alt="project name" />
+                                    </a>
+                                    <div class="ribbon">
+                                        <div class="text">New</div>
+                                        </div>
+                                    </div>
+
+                                <div class="desc text-left">
+                                    <p>My primary research now focuses on Automation Web Services Composition in Web Semantics. I am developing a completed end-to-end AI system to collect requirements from users in Natural Language and explore workflows that can satisfy the users requirements automatically. After the workflow is achieved, our system is able to execute each Web Service component in workflow sequence in order to achieve the goal. This system includes many parts in Artificial Intelligence area. They are :
+                                    <ul>
+                                            <li>A Web Service Registry : An CMS (Content Management System) web-based system (PHP, MySQL, Drupal, HTML and JavaScript) is used to collect and store Web Services from service providers. It provides ways how to invoke and execute a web service. In AI, it is responsible about syntax of Web Service execution. 
+                                            </li>
+                                            <li>An Ontology : An Ontology (OWL) is an explicit specication of a conceptualization. For AI system, what "exits" is that which can be represented. When the knowledge of a domain is represented in a declarative formalism, the set of objects that can be represented is called the universe of discourse. Ontology is responsible about semantics of Web Service execution.
+                                            </li>
+                                            <li>An AI Planning : It includes Planing Engine (Answer Set Programming and C language), Planing Monitor (C language) and Planing Execution (Java). Planning Engine is a computer software to generate plan/workflow based on Web Service compostion algorithms and AI planning theory. Planning Monitor is responsible to monitor and control generation processes and provide additional functions such as failure correctness, adaptability, scalability, reliability. And Planning Execution is a software that will execute and invoke all web service components in workflow/plan to achieve the Goal.
+                                            </li>
+                                            <li>An Ontology Core Engine: It is an software created based on SPARQL engine and programming languages (C and JAVA) in order to provide functionality and methods to access, retrieve and interact with Ontology classes, instances and properties. This software is a back-end of some components:
+                                                 <ul>
+                                                    <li>Ontology Web Service API: developed based on Python and provide serives API(s) to retrieve and access Ontology assets via Internet. It works with other UI components and Natural Language processing module to create end-users environment.
+                                                    </li>
+                                                    <li>Translation program: developed based on C and Java in order to translate Ontology OWL language to any other programming languages such as Logic Programming, C, etc. These products will contribute with Planning Engine.
+                                                    </li>
+                                                 </ul>
+                                            </li>
+                                            <li>Workflow Description Graphical Tool (WDGL) : This is an UI computer software used by end-users in order to provide tools to build an workflow based on user's requirements. Normal users will be provided enough tools to describle which input/output of composition, which services they want or don't want, generate workflow in visulization, change or modify origin workflow and re-generate new workflow.
+                                            </li>
+                                             </li>
+                                            <li>Natural Language Processing module : This module is created to describe workflow as human readable language and make Input/Output description to become much easier when end-users are not expert.
+                                            </li>
+                                    </ul>
+                                    </p>
+                                    <p>More detail information about this project.</p>
+                                    <p>Main web site : <a href="http://phylotastic.org/" target="_blank"></a></p>
+                                    <p>Portal Site: <a href="http://phylo.cs.nmsu.edu:3000/static_pages/about"></a></p>
+                                    <p>Github repo : <a href="#"><i class="fa fa-github-alt"></i></a></p>
+                                </div><!--//desc-->
+                                <a class="btn btn-cta-secondary" href="#" target="_blank"><i class="fa fa-thumbs-o-up"></i> Back my project</a>
+                            </div><!--//item-->
                             <div class="item featured text-center">
                                 <h3 class="title"><a href="http://phylotastic.org/" target="_blank">Phylotastic</a></h3>
                                 <p class="summary">The Phylotastic project is an NSF-funded research project ("Collaborative Research: ABI Development: An open infrastructure to disseminate phylogenetic knowledge", NSF 1458572)</p>
@@ -84,8 +140,57 @@
                                     <p>"Phylotastic" refers to a community-based system for delivering phylogenetic knowledge via web services composition. Individual web services provide taxonomy resolutions, source trees, pruning operations, calibrations, and so on. Clients of the system combine these services to provide species trees to users. The idea emerged from NESCent's HIP (Hackathons, Interoperability, Phylogenies) working group, and was prototyped at a NESCent-sponsored hackathon in 2012, as described by Stoltzfus et al, 2013.</p>
                                     <p>More detail information about this project.</p>
                                     <p>Main web site : <a href="http://phylotastic.org/" target="_blank">http://phylotastic.org/</a></p>
-                                    <p>Portal Site: <a href="http://phylo.cs.nmsu.edu:3000/static_pages/about"></a></p>
+                                    <p>Portal Site: <a href="http://phylo.cs.nmsu.edu:3000/static_pages/about">http://phylotastic.net</a></p>
+                                    <p>Mobile app: <a href="https://itunes.apple.com/us/app/phylotastic/id1092317979?mt=8">Apple App Store</a></p>
                                     <p>Github repo : <a href="https://github.com/phylotastic"><i class="fa fa-github-alt"></i></a></p>
+                                </div><!--//desc-->
+                                <a class="btn btn-cta-secondary" href="http://phylotastic.org/" target="_blank"><i class="fa fa-thumbs-o-up"></i> Back my project</a>
+                            </div><!--//item-->
+                            <div class="item featured text-center">
+                                <h3 class="title"><a href="http://phylotastic.org/" target="_blank">LandPKS - Land Potential Knowledge System</a></h3>
+                                <p class="summary">Landpotential.org is a global partnership committed to developing and supporting the adoption of freely available technology and tools for sustainable land use management, monitoring, and connecting people across the globe.<br/>The Land-Potential Knowledge System (LandPKS) delivers tools and knowledge through apps and cloud computing in order to manage land to be productive, resilient, and healthy.</p>
+                                <div class="featured-image">
+                                    <a href="http://landpotential.org/" target="_blank">
+                                    <img class="img-responsive project-image" src="assets/images/projects/landpks/landpks.png" alt="project name" />
+                                    </a>
+                                    <div class="ribbon">
+                                        <div class="text">New</div>
+                                        </div>
+                                    </div>
+
+                                <div class="desc text-left">
+                                    <p>"The Land-Potential Knowledge System (LandPKS) aims to serve as the primary access and development point for free, simple to use, and locally appropriate technologies and knowledge needed for making sustainable land management decisions. The program develops innovative web-based and mobile data collection and analysis methods and tools to support local land use planning and to optimize design and implementation of food security, land restoration, climate change adaptation, and biodiversity conservation programs.
+                                    <br/>
+                                    As global populations increase and land resources diminish, sustainable management of current natural resources becomes increasingly paramount. In order to design and implement better management practices, land resource managers need access to better and more site specific datasets on soils, vegetation, topography and climate. Collecting or accessing these datasets can be labor intensive, expensive, or even both. LandPKS is designed to help offset some of these challenges by not only making it easier for land managers to collect site specific soil and vegetation data, but also allowing them to access several global databases on soils, climate and topography. The combination of geo-referenced site characterization data and these global datasets will also eventually allow the system to  provide estimates of potential productivity and risk of erosion, offering assessments of sustainability under various land use scenarios. To achieve this interface, the global LandPKS is being developed as an open-source suite of mobile phone apps connected to cloud-based global databases and models (Herrick et al. 2013; Herrick et al. 2016).
+                                    <br/>
+                                    This system is designed to provide tools for: 
+                                    <ul>
+                                      <li>
+                                         1) collection, storage, access, and sharing of local and scientific data, information, and knowledge
+                                      </li>
+                                      <li>
+                                         2) selection and interpretation of management- and policy-relevant information to support decision making
+                                      </li>
+                                    </ul>
+                                    
+                                    The initial components of LandPKS are two integrated mobile apps for collecting 
+                                     <ul>
+                                      <li>
+                                         (1) the basic soil and topographic information necessary to determine land potential (LandInfo)
+                                      </li>
+                                      <li>
+                                         (2) soil and vegetation cover data necessary to assess and monitor major changes in plant community composition and wind and water erosion risk (LandCover).
+                                      </li>
+                                      <li>
+                                         Further mobile apps are being developed to help collect information on Biomass (Biomass Monitor), Livestock body condition (Body Condition Score) as well as crops (Crop Monitor)
+                                      </li>
+                                    </ul>
+                                    </p>
+                                    <p>More detail information about this project.</p>
+                                    <p>Main web site : <a href="http://landpotential.org/" target="_blank">http://landpotential.org/</a></p>
+                                    <p>Portal Site: <a href="https://portal.landpotential.org/">https://portal.landpotential.org/</a></p>
+                                    <p>Mobile app: <a href="https://itunes.apple.com/us/app/phylotastic/id1092317979?mt=8">Apple App Store</a>  <a href="https://itunes.apple.com/us/app/phylotastic/id1092317979?mt=8">Google Play Store</a></p>
+                                    <p>Github repo : <a href="hhttps://github.com/LandPotential"><i class="fa fa-github-alt"></i></a></p>
                                 </div><!--//desc-->
                                 <a class="btn btn-cta-secondary" href="http://phylotastic.org/" target="_blank"><i class="fa fa-thumbs-o-up"></i> Back my project</a>
                             </div><!--//item-->
@@ -187,17 +292,22 @@
                 <section class="github section">
                     <div class="section-inner">
                         <h2 class="heading">My GitHub</h2>
-                        <p>You can embed your GitHub contribution graph calendar using IonicaBizau's <a href="https://github.com/IonicaBizau/github-calendar" target="_blank">GitHub Calendar</a> widget.
+                        <p>GitHub Calendar</p>
 
                         <div id="github-graph" class="github-graph">
-
+                            <!-- Prepare a container for your calendar. -->
+                            <div class="calendar">
+                                Loading the data just for you.
+                            </div>
+                            <script>
+                                GitHubCalendar(".calendar", "thanhnh-infinity");
+                            </script>
                         </div><!--//github-graph-->
 
-                        <p>You can also embed your GitHub activities using Casey Scarborough's <a href="http://caseyscarborough.com/projects/github-activity/" target="_blank">GitHub Activity Stream</a> widget.
+                        <p>Github Activities</p>
                         <!--//Usage: http://caseyscarborough.com/projects/github-activity/ -->
-                        <div id="ghfeed" class="ghfeed">
-                        </div><!--//ghfeed-->
-
+                        <div id="feed"></div>
+                        <script>GitHubActivity.feed({ username: "thanhnh-infinity", selector: "#feed" });</script>
                     </div><!--//secton-inner-->
                 </section><!--//section-->
             </div><!--//primary-->
@@ -220,28 +330,56 @@
                         <h2 class="heading">Skills</h2>
                         <div class="content">
                             <p class="intro">
-                                Intro about your skills goes here. Keep the list lean and only show your primary skillset. You can always provide a link to your Linkedin or Coderwall profile so people can get more info there.</p>
+                                My programming language skills.</p>
 
                             <div class="skillset">
 
                                 <div class="item">
-                                    <h3 class="level-title">Python &amp; Python's libraries<span class="level-label" data-toggle="tooltip" data-placement="left" data-animation="true" title="You can use the tooltip to add more info...">Expert</span></h3>
+                                    <h3 class="level-title">Python &amp; Python's frameworks<span class="level-label" data-toggle="tooltip" data-placement="left" data-animation="true" title="You can use the tooltip to add more info...">Expert</span></h3>
                                     <div class="level-bar">
                                         <div class="level-bar-inner" data-level="96%">
                                         </div>
                                     </div><!--//level-bar-->
                                 </div><!--//item-->
                                 <div class="item">
-                                    <h3 class="level-title">JAVA &amp; C#<span class="level-label" data-toggle="tooltip" data-placement="left" data-animation="true" title="You can use the tooltip to add more info...">Expert</span></h3>
+                                    <h3 class="level-title">JAVA &amp; Java's frameworks<span class="level-label" data-toggle="tooltip" data-placement="left" data-animation="true" title="You can use the tooltip to add more info...">Expert</span></h3>
                                     <div class="level-bar">
                                         <div class="level-bar-inner" data-level="98%">
                                         </div>
                                     </div><!--//level-bar-->
                                 </div><!--//item-->
                                 <div class="item">
-                                    <h3 class="level-title">C &amp; C++<span class="level-label" data-toggle="tooltip" data-placement="left" data-animation="true" title="You can use the tooltip to add more info...">Pro</span></h3>
+                                    <h3 class="level-title">C#<span class="level-label" data-toggle="tooltip" data-placement="left" data-animation="true" title="You can use the tooltip to add more info...">Expert</span></h3>
                                     <div class="level-bar">
-                                        <div class="level-bar-inner" data-level="85%">
+                                        <div class="level-bar-inner" data-level="98%">
+                                        </div>
+                                    </div><!--//level-bar-->
+                                </div><!--//item-->
+                                <div class="item">
+                                    <h3 class="level-title">C &amp; C++<span class="level-label" data-toggle="tooltip" data-placement="left" data-animation="true" title="You can use the tooltip to add more info...">Expert</span></h3>
+                                    <div class="level-bar">
+                                        <div class="level-bar-inner" data-level="95%">
+                                        </div>
+                                    </div><!--//level-bar-->
+                                </div><!--//item-->
+                                <div class="item">
+                                    <h3 class="level-title">Objective C<span class="level-label" data-toggle="tooltip" data-placement="left" data-animation="true" title="You can use the tooltip to add more info...">Pro</span></h3>
+                                    <div class="level-bar">
+                                        <div class="level-bar-inner" data-level="90%">
+                                        </div>
+                                    </div><!--//level-bar-->
+                                </div><!--//item-->
+                                <div class="item">
+                                    <h3 class="level-title">Swift<span class="level-label" data-toggle="tooltip" data-placement="left" data-animation="true" title="You can use the tooltip to add more info...">Good</span></h3>
+                                    <div class="level-bar">
+                                        <div class="level-bar-inner" data-level="75%">
+                                        </div>
+                                    </div><!--//level-bar-->
+                                </div><!--//item-->
+                                <div class="item">
+                                    <h3 class="level-title">NodeJS<span class="level-label">Expert</span></h3>
+                                    <div class="level-bar">
+                                        <div class="level-bar-inner" data-level="96%">
                                         </div>
                                     </div><!--//level-bar-->
                                 </div><!--//item-->
@@ -253,14 +391,26 @@
                                     </div><!--//level-bar-->
                                 </div><!--//item-->
                                 <div class="item">
-                                    <h3 class="level-title">Javascript , NodeJS &amp; jQuery<span class="level-label">Expert</span></h3>
+                                    <h3 class="level-title">Prolog<span class="level-label">Expert</span></h3>
                                     <div class="level-bar">
                                         <div class="level-bar-inner" data-level="96%">
                                         </div>
                                     </div><!--//level-bar-->
                                 </div><!--//item-->
-
-
+                                <div class="item">
+                                    <h3 class="level-title">Javascript, AngularJS &amp; jQuery<span class="level-label">Expert</span></h3>
+                                    <div class="level-bar">
+                                        <div class="level-bar-inner" data-level="97%">
+                                        </div>
+                                    </div><!--//level-bar-->
+                                </div><!--//item-->
+                                <div class="item">
+                                    <h3 class="level-title">Go Language<span class="level-label">Good</span></h3>
+                                    <div class="level-bar">
+                                        <div class="level-bar-inner" data-level="75%">
+                                        </div>
+                                    </div><!--//level-bar-->
+                                </div><!--//item-->
                                 <div class="item">
                                     <h3 class="level-title">HTML5, CSS3, SASS &amp; LESS<span class="level-label">Expert</span></h3>
                                     <div class="level-bar">
@@ -273,6 +423,20 @@
                                     <h3 class="level-title">Ruby on Rails<span class="level-label">Pro</span></h3>
                                     <div class="level-bar">
                                         <div class="level-bar-inner" data-level="85%">
+                                        </div>
+                                    </div><!--//level-bar-->
+                                </div><!--//item-->
+                                <div class="item">
+                                    <h3 class="level-title">PHP &amp; frameworks<span class="level-label">Pro</span></h3>
+                                    <div class="level-bar">
+                                        <div class="level-bar-inner" data-level="92%">
+                                        </div>
+                                    </div><!--//level-bar-->
+                                </div><!--//item-->
+                               <div class="item">
+                                    <h3 class="level-title">SQL &amp; PL/SQL<span class="level-label">Expert</span></h3>
+                                    <div class="level-bar">
+                                        <div class="level-bar-inner" data-level="96%">
                                         </div>
                                     </div><!--//level-bar-->
                                 </div><!--//item-->
@@ -289,7 +453,7 @@
                         <div class="content">
                             <div class="item">
                                 <blockquote class="quote">
-                                    <p><i class="fa fa-quote-left"></i>James is an excellent software engineer and he is passionate about what he does. You can totally count on him to deliver your projects!</p>
+                                    <p><i class="fa fa-quote-left"></i>Thanh is an excellent software engineer and he is passionate about what he does. You can totally count on him to deliver your projects!</p>
                                 </blockquote>
                                 <p class="source"><span class="name">Tim Adams</span><br /><span class="title">Curabitur commodo</span></p>
                             </div><!--//item-->
@@ -305,12 +469,16 @@
                         <h2 class="heading">Education</h2>
                         <div class="content">
                             <div class="item">
-                                <h3 class="title"><i class="fa fa-graduation-cap"></i> MSc Psychology and Computer Science</h3>
-                                <h4 class="university">University College London <span class="year">(2011-2012)</span></h4>
+                                <h3 class="title"><i class="fa fa-graduation-cap"></i> Current : PhD Candidate in Computer Science</h3>
+                                <h4 class="university">New Mexico State University <span class="year">(2013-now)</span></h4>
+                            </div><!--//item-->
+                            <div class="item">
+                                <h3 class="title"><i class="fa fa-graduation-cap"></i> MSc Computer Science and Information Technology</h3>
+                                <h4 class="university">James Cook University - Australia <span class="year">(2009-2011)</span></h4>
                             </div><!--//item-->
                             <div class="item">
                                 <h3 class="title"><i class="fa fa-graduation-cap"></i> BSc Computer Science</h3>
-                                <h4 class="university">University of Bristol <span class="year">(2008-2011)</span></h4>
+                                <h4 class="university">Hanoi University of Technology - Vietnam<span class="year">(2003-2008)</span></h4>
                             </div><!--//item-->
                         </div><!--//content-->
                     </div><!--//section-inner-->
@@ -322,12 +490,12 @@
                         <div class="content">
                             <ul class="list-unstyled">
                                 <li class="item">
-                                    <span class="title"><strong>English:</strong></span>
+                                    <span class="title"><strong>Vietnamese:</strong></span>
                                     <span class="level">Native Speaker <br class="visible-xs"/><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </span>
                                 </li><!--//item-->
                                 <li class="item">
-                                    <span class="title"><strong>Spanish:</strong></span>
-                                    <span class="level">Professional Proficiency <br class="visible-sm visible-xs"/><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-half"></i></span>
+                                    <span class="title"><strong>English:</strong></span>
+                                    <span class="level">Professional Proficiency<br class="visible-sm visible-xs"/><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i><i class="fa fa-star-half"></i></span>
                                 </li><!--//item-->
                             </ul>
                         </div><!--//content-->
@@ -420,7 +588,6 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fetch/0.10.1/fetch.min.js"></script>
     <script type="text/javascript" src="assets/plugins/github-calendar/dist/github-calendar.min.js"></script>
     <!-- github activity plugin -->
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>
     <script type="text/javascript" src="assets/plugins/github-activity/src/github-activity.js"></script>
     <!-- custom js -->
     <script type="text/javascript" src="assets/js/main.js"></script>
