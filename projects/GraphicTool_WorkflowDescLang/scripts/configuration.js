@@ -1,3 +1,21 @@
+/* Global variable and components */
+var GLOBAL_NODES_DATA = [];
+var cy;
+var CURRENT_X;
+var CURRENT_Y;
+var GLOBAL_EDGES_DATA = [];
+var ORIGIN_INIT_INPUT = GLOBAL_WORKFLOW_PLAN_DATA.request_parameters.input
+var ORIGIN_GOAL_OUTPUT = GLOBAL_WORKFLOW_PLAN_DATA.request_parameters.output
+var ORIGIN_FIRST_OPERATION = GLOBAL_WORKFLOW_PLAN_DATA.workflow_plan[0].plan[0]
+var ORIGIN_OPERATION_NODE_LIST = GLOBAL_WORKFLOW_PLAN_DATA.workflow_plan[0].plan
+var ORIGIN_LAST_OPERATION = GLOBAL_WORKFLOW_PLAN_DATA.workflow_plan[0].plan[GLOBAL_WORKFLOW_PLAN_DATA.workflow_plan[0].plan.length - 1]
+var ADDED_OPERATION_NODES_LIST = []
+var GLOBAL_INITIAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE = {}
+var GLOBAL_GOAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE = {}
+var GLOBAL_LIST_RESOURCES_ONTOLOGY = []
+
+
+
 var GLOBAL_NO_ONTOLOGY_DATA = "NO_ONTOLOGY_DATA"
 var WS_COMPOSITION_ONTOLOGY_API = "http://thanhnh-infinity.github.io/projects/GraphicTool_WorkflowDescLang/sources/"
 var TEST_OPERATION_API_JSON = {

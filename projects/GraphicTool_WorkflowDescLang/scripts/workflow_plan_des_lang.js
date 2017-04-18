@@ -3,22 +3,15 @@
  * Doc : Service composition framework - Workflow Description Tool
  * Date : 25-Feb-2017
  **/
-var GLOBAL_NODES_DATA = [];
-var cy;
-var CURRENT_X;
-var CURRENT_Y;
-var GLOBAL_EDGES_DATA = [];
-var ORIGIN_INIT_INPUT = GLOBAL_WORKFLOW_PLAN_DATA.request_parameters.input
-var ORIGIN_GOAL_OUTPUT = GLOBAL_WORKFLOW_PLAN_DATA.request_parameters.output
-var ORIGIN_FIRST_OPERATION = GLOBAL_WORKFLOW_PLAN_DATA.workflow_plan[0].plan[0]
-var ORIGIN_OPERATION_NODE_LIST = GLOBAL_WORKFLOW_PLAN_DATA.workflow_plan[0].plan
-var ORIGIN_LAST_OPERATION = GLOBAL_WORKFLOW_PLAN_DATA.workflow_plan[0].plan[GLOBAL_WORKFLOW_PLAN_DATA.workflow_plan[0].plan.length - 1]
-var ADDED_OPERATION_NODES_LIST = []
+
 function clearData(){
   GLOBAL_NODES_DATA = [];
   GLOBAL_EDGES_DATA = [];
+  GLOBAL_INITIAL_STATE_ONTOLOGY = {};
+  GLOBAL_GOAL_STATE_ONTOLOTY = {};
   //GLOBAL_WORKFLOW_PLAN_DATA = {};
   document.getElementById('cy').style.visibility = "visible";
+  initGraphicFrame();
   console.log("Clear")
 }
 
@@ -200,8 +193,7 @@ function saveAddOperationNodeData_Modal(){
    new_node.name = ontology_resource_id
    new_node.shape = 'ellipse'
    new_node.type = 'operation_node'
-   GLOBAL_NODES_DATA.push(initNode(new_node))
-
+   GLOBAL_NODES_DATA.push(initNode_forGraphic(new_node))
 
 
    cy.add({
@@ -242,19 +234,28 @@ function mapCommonComponents(Output_Source_Node, Input_Target_Node){
   }
 }
 
-function getFullNodeData_FromNodeID(node_id,origin_operations_nodes,added_operations_nodes){
-  //console.log(origin_operations_nodes)
-  for(var i = 0 ; i < origin_operations_nodes.length ; i++){
-    if (node_id.trim().toUpperCase() === origin_operations_nodes[i].operation_name.trim().toUpperCase()){
-      return origin_operations_nodes[i]
-    }
-  }
-  for(var i = 0 ; i < added_operations_nodes.length ; i++){
-    if (node_id.trim().toUpperCase() === added_operations_nodes[i].operation_name.trim().toUpperCase()){
-      return added_operations_nodes[i]
-    }
-  }
-  return null
+function openAddGoalState_FromOntology_Modal(){
+  document.getElementById('cy').style.visibility = "hidden";
+  var addGoalState_modal = document.getElementById('addGoalStateModal');
+  addGoalState_modal.style.display = "block";
+}
+
+function openAddInitialState_FromOntology_Modal(){
+  document.getElementById('cy').style.visibility = "hidden";
+  var addInitialState_modal = document.getElementById('addInitialStateModal');
+  addInitialState_modal.style.display = "block";
+}
+
+function closeAddInitialState_FromOntology_Modal(){
+  var addInitialState_modal = document.getElementById('addInitialStateModal');
+  addInitialState_modal.style.display = "none";
+  document.getElementById('cy').style.visibility = "visible";
+}
+
+function closeAddGoalState_FromOntology_Modal(){
+  var addGoalState_modal = document.getElementById('addGoalStateModal');
+  addGoalState_modal.style.display = "none";
+  document.getElementById('cy').style.visibility = "visible";
 }
 
 function saveAddNewEdgeData_Modal(){
@@ -286,14 +287,6 @@ function closeAddEdgeData_Modal(){
    var addEdgeData_modal = document.getElementById('addEdgeDataModal');
    addEdgeData_modal.style.display = "none";
    document.getElementById('cy').style.visibility = "visible";
-}
-
-function initNode(node){
-  return {data : {id : node.id, name : node.name, faveShape: node.shape, type:node.type}}
-}
-
-function initEdge(edge){
-  return {data: { source: edge.source, target: edge.target, label:edge.label} }
 }
 
 function AddNodeData(){
@@ -334,159 +327,8 @@ function loadFile() {
       clearData();
       GLOBAL_WORKFLOW_PLAN_DATA = newArr
     }
-  }
-
-function setUpInitalState(GLOBAL_WORKFLOW_PLAN_DATA){
-  var requestInput = GLOBAL_WORKFLOW_PLAN_DATA.request_parameters.input
-  var initialState_Node_Temp = {}
-  var id = ""
-  var name = "Init State : "
-  var type = "initial_state_node"
-  for(var i = 0 ; i < requestInput.length ; i++){
-    if (i < requestInput.length - 1) {
-       id += requestInput[i].ontology_resource_id + "_"
-       name += requestInput[i].name + ","
-    } else {
-       id = requestInput[i].ontology_resource_id
-       name += requestInput[i].name
-    }
-  }
-  initialState_Node_Temp.id = id
-  initialState_Node_Temp.name = name
-  initialState_Node_Temp.type = type
-  initialState_Node_Temp.shape = "triangle"
-  var initialState_Node = initNode(initialState_Node_Temp)
-  return initialState_Node
 }
 
-function setUpOneOperationNode(operation){
-  var operation_node_temp = {}
-  operation_node_temp.id = operation.operation_name
-  operation_node_temp.name = operation.operation_name
-  operation_node_temp.type = "operation_node"
-  operation_node_temp.shape = "ellipse"
-  var operation_node = initNode(operation_node_temp)
-  return operation_node
-}
-
-function setUpAllEdgesForOperationNodes(operation_nodes,plan){
-  var operation_nodes_edges = []
-  var edge_temp = {}
-  for(var i = 0 ; i < operation_nodes.length ; i++){
-    if (i < operation_nodes.length - 1){
-      edge_temp = {}
-      edge_temp.source = operation_nodes[i].data.id
-      edge_temp.target = operation_nodes[i+1].data.id
-
-      var common_label = []
-      var operation_i = plan[i]
-      var operation_iplus1 = plan[i+1]
-      for(var k = 0 ; k < operation_i.operation_parameters.output.components.length ; k++){
-        for(var h = 0 ; h < operation_iplus1.operation_parameters.input.components.length ; h++){
-          var consider_out_op_1 = operation_i.operation_parameters.output.components[k]
-          var consider_in_op_2 = operation_iplus1.operation_parameters.input.components[h]
-          if (consider_out_op_1.ontology_resource_id.trim().toUpperCase()
-              === consider_in_op_2.ontology_resource_id.trim().toUpperCase()){
-              common_label.push(consider_out_op_1.ontology_resource_id)
-          }
-        }
-      }
-
-      edge_temp.label = common_label.toString()
-      var edge = initEdge(edge_temp)
-      operation_nodes_edges.push(edge)
-    }
-  }
-  return operation_nodes_edges
-}
-
-function checkExisted(item, list){
-  for(var i = 0 ; i < list.length ; i++){
-    if (item.ontology_resource_id.trim().toUpperCase === list[i].ontology_resource_id.trim().toUpperCase()){
-      return true
-    }
-  }
-  return false
-}
-
-function setUpEdge_FromInit_ToFirstOperation(initNode,operation_nodes,origin_input,origin_first_operation){
-  var edge_temp = {}
-  edge_temp.source = initNode.data.id
-  edge_temp.target = operation_nodes[0].data.id
-  var common_label = []
-  var added_label = ""
-  var origin_first_operation_input = origin_first_operation.operation_parameters.input.components
-
-  for(var i = 0 ; i < origin_first_operation_input.length ; i++){
-    for(var j = 0 ; j < origin_input.length ; j++){
-          if (origin_input[j].ontology_resource_id.trim().toUpperCase() ===
-              origin_first_operation_input[i].ontology_resource_id.trim().toUpperCase()){
-            common_label.push(origin_input[j].ontology_resource_id)
-          }
-    }
-  }
-  edge_temp.label = common_label.toString()
-
-  var edge = initEdge(edge_temp)
-  return edge
-}
-
-function setUpEdge_FromLastOperation_ToGoal(goalNode,operation_nodes,origin_output,origin_last_operation){
-  var edge_temp = {}
-  edge_temp.source = operation_nodes[operation_nodes.length-1].data.id
-  edge_temp.target = goalNode.data.id
-
-  var common_label = []
-  var added_label = ""
-  var origin_last_operation_output = origin_last_operation.operation_parameters.output.components
-
-  for(var i = 0 ; i < origin_last_operation_output.length ; i++){
-    for(var j = 0 ; j < origin_output.length ; j++){
-          if (origin_output[j].ontology_resource_id.trim().toUpperCase() ===
-              origin_last_operation_output[i].ontology_resource_id.trim().toUpperCase()){
-            common_label.push(origin_output[j].ontology_resource_id)
-          }
-    }
-  }
-  edge_temp.label = common_label.toString()
-
-  var edge = initEdge(edge_temp)
-  return edge
-}
-
-function setUpAllOperationNodes(GLOBAL_WORKFLOW_PLAN_DATA){
-   var plan = GLOBAL_WORKFLOW_PLAN_DATA.workflow_plan[0].plan
-   var operation_nodes = []
-   for(var i = 0 ; i < plan.length ; i++){
-     var operation_node = setUpOneOperationNode(plan[i])
-     operation_nodes.push(operation_node)
-   }
-   return operation_nodes
-}
-
-function setUpGoalState(GLOBAL_WORKFLOW_PLAN_DATA){
-  var requestOutput = GLOBAL_WORKFLOW_PLAN_DATA.request_parameters.output
-  var goalState_Node_Temp = {}
-  var id = ""
-  var name = "Goal State : "
-  var type = "goal_state_node"
-  for(var i = 0 ; i < requestOutput.length ; i++){
-    if (i < requestOutput.length - 1) {
-       id += requestOutput[i].ontology_resource_id + "_"
-       name += requestOutput[i].name + ","
-    } else {
-       id = requestOutput[i].ontology_resource_id
-       name += requestOutput[i].name
-    }
-  }
-  goalState_Node_Temp.id = id
-  goalState_Node_Temp.name = name
-  goalState_Node_Temp.type = type
-  goalState_Node_Temp.shape = "triangle"
-  var goalState_Node = initNode(goalState_Node_Temp)
-  return goalState_Node
-
-}
 
 function interactiveNode(action,node){
   if (action.trim().toUpperCase() == "TAP"){
@@ -494,6 +336,43 @@ function interactiveNode(action,node){
   }
 }
 
+function DisplayWorkflow_Graphic_From_Source(PLAN_DATA){
+  GLOBAL_NODES_DATA = []
+  GLOBAL_NODES_DATA = []
+
+  /* Add node for Input request */
+  var initNode = setUpInitialState_From_WorkFlow(PLAN_DATA)
+  GLOBAL_NODES_DATA.push(initNode)
+
+  /* Add Goal State */
+  var goalNode = setUpGoalState_From_WorkFlow(PLAN_DATA)
+  GLOBAL_NODES_DATA.push(goalNode)
+
+  /* Set up action */
+  var operation_nodes = setUpAllOperationNodes_From_WorkFlow(PLAN_DATA)
+  for(var i = 0 ; i < operation_nodes.length ; i++){
+    GLOBAL_NODES_DATA.push(operation_nodes[i])
+  }
+
+  /* Set up all edge for operation nodes */
+  var operation_nodes_edges = setUpAllEdgesForOperationNodes_From_WorkFlow(operation_nodes,PLAN_DATA.workflow_plan[0].plan)
+  for(var i = 0 ; i < operation_nodes_edges.length ; i++){
+    GLOBAL_EDGES_DATA.push(operation_nodes_edges[i])
+  }
+
+  var first_edge = setUpEdge_FromInit_ToFirstOperation(initNode,operation_nodes,
+              PLAN_DATA.request_parameters.input,
+              PLAN_DATA.workflow_plan[0].plan[0])
+  GLOBAL_EDGES_DATA.push(first_edge)
+
+  var last_edge = setUpEdge_FromLastOperation_ToGoal(goalNode,
+                                                     operation_nodes,
+                                                     PLAN_DATA.request_parameters.output,
+                                  PLAN_DATA.workflow_plan[0].plan[PLAN_DATA.workflow_plan[0].plan.length - 1])
+  GLOBAL_EDGES_DATA.push(last_edge)
+
+  initGraphicFrame()
+}
 
 function DisplayWorkflow_Graphic(){
   /* Init GLOBAL_NODES_DATA object and GLOBAL_EDGES_DATA objects from workflow_plan.json or worflow_plan.js*/
@@ -501,21 +380,21 @@ function DisplayWorkflow_Graphic(){
 
 
   /* Add node for Input request */
-  var initNode = setUpInitalState(GLOBAL_WORKFLOW_PLAN_DATA)
+  var initNode = setUpInitialState_From_WorkFlow(GLOBAL_WORKFLOW_PLAN_DATA)
   GLOBAL_NODES_DATA.push(initNode)
 
   /* Add Goal State */
-  var goalNode = setUpGoalState(GLOBAL_WORKFLOW_PLAN_DATA)
+  var goalNode = setUpGoalState_From_WorkFlow(GLOBAL_WORKFLOW_PLAN_DATA)
   GLOBAL_NODES_DATA.push(goalNode)
 
   /* Set up action */
-  var operation_nodes = setUpAllOperationNodes(GLOBAL_WORKFLOW_PLAN_DATA)
+  var operation_nodes = setUpAllOperationNodes_From_WorkFlow(GLOBAL_WORKFLOW_PLAN_DATA)
   for(var i = 0 ; i < operation_nodes.length ; i++){
     GLOBAL_NODES_DATA.push(operation_nodes[i])
   }
 
   /* Set up all edge for operation nodes */
-  var operation_nodes_edges = setUpAllEdgesForOperationNodes(operation_nodes,GLOBAL_WORKFLOW_PLAN_DATA.workflow_plan[0].plan)
+  var operation_nodes_edges = setUpAllEdgesForOperationNodes_From_WorkFlow(operation_nodes,GLOBAL_WORKFLOW_PLAN_DATA.workflow_plan[0].plan)
   for(var i = 0 ; i < operation_nodes_edges.length ; i++){
     GLOBAL_EDGES_DATA.push(operation_nodes_edges[i])
   }
@@ -526,6 +405,114 @@ function DisplayWorkflow_Graphic(){
   var last_edge = setUpEdge_FromLastOperation_ToGoal(goalNode,operation_nodes,ORIGIN_GOAL_OUTPUT,ORIGIN_LAST_OPERATION)
   GLOBAL_EDGES_DATA.push(last_edge)
 
+  initGraphicFrame()
+}
+
+function saveGoalState_From_Ontology(){
+  var selected_components_links = document.getElementsByName('goalState_Component')
+  if (!isEmpty(selected_components_links) && selected_components_links.length > 0){
+    var components= []
+
+    if (!isEmpty(GLOBAL_LIST_RESOURCES_ONTOLOGY) && GLOBAL_LIST_RESOURCES_ONTOLOGY.length > 0){
+      for(var i = 0 ; i < selected_components_links.length ; i++){
+        var ontology_link = selected_components_links[i].value
+        for(var j = 0 ; j < GLOBAL_LIST_RESOURCES_ONTOLOGY.length; j++){
+          if (ontology_link.trim().toUpperCase() === GLOBAL_LIST_RESOURCES_ONTOLOGY[j].ontology_link.trim().toUpperCase()){
+            components.push(GLOBAL_LIST_RESOURCES_ONTOLOGY[j])
+          }
+        }
+      }
+    }
+
+    /* End similator */
+    var goal_state_node = {}
+    goal_state_node.components = components
+
+    displayGoalState_From_Ontology(goal_state_node)
+  }
+
+  var addGoalStateModal_modal = document.getElementById('addGoalStateModal');
+  addGoalStateModal_modal.style.display = "none";
+  document.getElementById('cy').style.visibility = "visible";
+}
+
+function saveInitialState_From_Ontology(){
+  var selected_components_links = document.getElementsByName('initialState_Component')
+  if (!isEmpty(selected_components_links) && selected_components_links.length > 0){
+    var components= []
+
+    if (!isEmpty(GLOBAL_LIST_RESOURCES_ONTOLOGY) && GLOBAL_LIST_RESOURCES_ONTOLOGY.length > 0){
+      for(var i = 0 ; i < selected_components_links.length ; i++){
+        var ontology_link = selected_components_links[i].value
+        for(var j = 0 ; j < GLOBAL_LIST_RESOURCES_ONTOLOGY.length; j++){
+          if (ontology_link.trim().toUpperCase() === GLOBAL_LIST_RESOURCES_ONTOLOGY[j].ontology_link.trim().toUpperCase()){
+            components.push(GLOBAL_LIST_RESOURCES_ONTOLOGY[j])
+          }
+        }
+      }
+    }
+
+    console.log(components)
+
+    var initial_state_node = {}
+    initial_state_node.components = components
+    //initial_state_node.components.push(component)
+
+    displayInitialState_From_Ontology(initial_state_node)
+  }
+
+  var addInitialStateModal_modal = document.getElementById('addInitialStateModal');
+  addInitialStateModal_modal.style.display = "none";
+  document.getElementById('cy').style.visibility = "visible";
+}
+
+function drawGraphicFrame_with_CurrentNodesEdge(){
+  initGraphicFrame()
+}
+
+function update_Components_for_InitialState(htmlSelectNumberOfComponents_InitialState){
+  var numberOfComponents = parseInt(htmlSelectNumberOfComponents_InitialState.value)
+  var divInitialStateComponents = document.getElementById('divInitialStateComponents')
+  divInitialStateComponents.innerHTML = ""
+  for(var i = 0 ; i < numberOfComponents ; i++){
+    var index_select = i + 1
+    var innerHTMLString = '<p>Resource/Component '+ index_select +' : </p>'
+    innerHTMLString += '<select name="initialState_Component">'
+    innerHTMLString += '<option value=""></option>'
+    if (!isEmpty(GLOBAL_LIST_RESOURCES_ONTOLOGY) && GLOBAL_LIST_RESOURCES_ONTOLOGY.length > 0){
+      for(var j = 0 ; j < GLOBAL_LIST_RESOURCES_ONTOLOGY.length ; j++){
+        innerHTMLString += '<option value="' + GLOBAL_LIST_RESOURCES_ONTOLOGY[j].ontology_link +'">' +  GLOBAL_LIST_RESOURCES_ONTOLOGY[j].ontology_link +'</option>'
+      }
+    }
+
+    innerHTMLString += '</select>'
+    divInitialStateComponents.innerHTML += innerHTMLString
+
+  }
+}
+
+function update_Components_for_GoalState(htmlSelectNumberOfComponents_GoalState){
+  var numberOfComponents = parseInt(htmlSelectNumberOfComponents_GoalState.value)
+  var divGoalStateComponents = document.getElementById('divGoalStateComponents')
+  divGoalStateComponents.innerHTML = ""
+  for(var i = 0 ; i < numberOfComponents ; i++){
+    var index_select = i + 1
+    var innerHTMLString = '<p>Resource/Component '+ index_select +' : </p>'
+    innerHTMLString += '<select name="goalState_Component">'
+    innerHTMLString += '<option value=""></option>'
+    if (!isEmpty(GLOBAL_LIST_RESOURCES_ONTOLOGY) && GLOBAL_LIST_RESOURCES_ONTOLOGY.length > 0){
+      for(var j = 0 ; j < GLOBAL_LIST_RESOURCES_ONTOLOGY.length ; j++){
+        innerHTMLString += '<option value="' + GLOBAL_LIST_RESOURCES_ONTOLOGY[j].ontology_link +'">' +  GLOBAL_LIST_RESOURCES_ONTOLOGY[j].ontology_link +'</option>'
+      }
+    }
+
+    innerHTMLString += '</select>'
+    divGoalStateComponents.innerHTML += innerHTMLString
+
+  }
+}
+
+function initGraphicFrame(){
   cy = window.cy = cytoscape({
     container: document.getElementById('cy'),
     boxSelectionEnabled: false,
@@ -615,6 +602,26 @@ function DisplayWorkflow_Graphic(){
               }
             },
             {
+              id: 'add-node-initial-state',
+              title: 'Add Inital State Node',
+              coreAsWell: true,
+              onClickFunction: function (event) {
+                openAddInitialState_FromOntology_Modal();
+                CURRENT_X = event.cyPosition.x;
+                CURRENT_Y = event.cyPosition.y;
+              }
+            },
+            {
+              id: 'add-node-goal-state',
+              title: 'Add Goal State Node',
+              coreAsWell: true,
+              onClickFunction: function (event) {
+                openAddGoalState_FromOntology_Modal();
+                CURRENT_X = event.cyPosition.x;
+                CURRENT_Y = event.cyPosition.y;
+              }
+            },
+            {
               id: 'add-edge',
               title: 'Add edge',
               coreAsWell: true,
@@ -625,10 +632,13 @@ function DisplayWorkflow_Graphic(){
           ],
           menuItemClasses: ['custom-menu-item'],
           contextMenuClasses: ['custom-context-menu']
-        });
+    });
 }
 
 $(function(){
-  console.log("Ready to Go")
+  console.log("Make API to get list of resources ontology - For Initial/Goal State Description")
+  request_PlanningOntologyEngine_List_Of_All_Resources()
 
+  console.log("Ready to Go")
+  initGraphicFrame();
 });

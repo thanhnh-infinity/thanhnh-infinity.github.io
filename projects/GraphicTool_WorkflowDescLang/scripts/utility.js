@@ -55,3 +55,21 @@ function getHTMLdocOption_ListOfNodes(nodes){
   }
   return html
 }
+
+function checkExisted(item, list){
+  for(var i = 0 ; i < list.length ; i++){
+    if (item.ontology_resource_id.trim().toUpperCase === list[i].ontology_resource_id.trim().toUpperCase()){
+      return true
+    }
+  }
+  return false
+}
+
+function checkExisted_Ontology_Link(item, list){
+  for(var i = 0 ; i < list.length ; i++){
+    if (item.trim().toUpperCase === list[i].ontology_link.trim().toUpperCase()){
+      return true
+    }
+  }
+  return false
+}

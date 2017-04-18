@@ -8,10 +8,22 @@
 		<script src="./libs/cytospace/dagre.min.js"></script>
 		<script src="./libs/cytospace/cytoscape-dagre.js"></script>
 		<script src="./libs/cytospace/cytoscape-context-menus.js"></script>
+		<!-- Demo -->
 		<script src="./sources/workflow_plan.js"></script>
-    <script src="./scripts/workflow_plan_des_lang.js"></script>
-		<script src="./scripts/utility.js"></script>
+		<script src="./sources/demo_resources_ontology_list.js"></script>
+		<!-- End Demo -->
 		<script src="./scripts/configuration.js"></script>
+
+
+		<script src="./scripts/node.js"></script>
+		<script src="./scripts/edge.js"></script>
+		<script src="./scripts/planning.js"></script>
+
+    <script src="./scripts/workflow_plan_des_lang.js"></script>
+		<script src="./scripts/connect_api_planning_ontology_engine.js"></script>
+
+		<script src="./scripts/utility.js"></script>
+
 		<link rel="stylesheet" type="text/css" href="./css/workflow.css">
 		<link href="./css/cytoscape-context-menus.css" rel="stylesheet" type="text/css" />
 		<link href="./css/jquery.mobile-1.4.5.min.css" rel="stylesheet" type="text/css" />
@@ -27,28 +39,31 @@
     </script>
     <style type="text/css">
         .fixed {
-        position:fixed;
-        width:100%;
-        top:0;
-        left:0;
-    }
+		        position:fixed;
+		        width:100%;
+		        top:0;
+		        left:0;
+    		}
     </style>
 	</head>
 
 	<body>
 		<div class="header">
 			<h1>Web Services Composition - Workflow Description model</h1>
+			<!--
 			<fieldset>
 			     <input type='file' id='fileinput' accept=".json">
 			     <input type='button' id='btnLoad' value='Load' onclick='loadFile();'>
 			</fieldset>
+		  -->
 			<fieldset>
 		    <button id="btnDisplayWF" onclick="DisplayWorkflow_Graphic();">Display Workflow from Souce</button>
-				<button id="btnGenWF" onclick="GenerateWorkflow();">Generate Workflow</button>
+				<button id="btnExecutePlanner" onclick="executePlanner_toGet_WorkFlow();">Execute Planning Engine (via Web Service API)</button>
+				<button id="btnGenWF" onclick="GenerateWorkflow();">Re-Generate Workflow</button>
 				<button id="btnClearData" onclick="clearData();">Clear data</button>
 			</fieldset>
 
-
+			<!-- Modal for Edge Adding tool -->
 			<div id="addEdgeDataModal" class="modal">
 			  <!-- Modal content -->
 			  <div class="modal-content">
@@ -68,6 +83,60 @@
 			  </div>
 			</div>
 
+			<!-- Modal for Initial State Adding tool -->
+			<div id="addInitialStateModal" class="modal">
+				<!-- Modal content -->
+				 <div class="modal-content">
+					<span class="close" onclick="closeAddInitialState_FromOntology_Modal();">&times;</span>
+					<p>Provide compomnents, resources data in Initial State</p>
+
+					<p>Number of components/resources</p>
+					<select id="numberOfComponents_InitialState" onchange="update_Components_for_InitialState(this);">
+							<option value="0" default>0</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+					</select>
+					<p>Components : </p>
+					<div id="divInitialStateComponents">
+						<!--
+						<select id="initialState_Component_1">
+								<option value=""></option>
+								<option value="http://www.cs.nmsu.edu/~epontell/CDAO/cdao.owl#free_text">http://www.cs.nmsu.edu/~epontell/CDAO/cdao.owl#free_text</option>
+						</select>
+					 -->
+					</div>
+				 <br/><br/>
+					 <button id="btnSaveInitialState" onclick="saveInitialState_From_Ontology();">Save</button>
+				 </div>
+			</div>
+
+			<!-- Modal for Goal State Adding tool -->
+			<div id="addGoalStateModal" class="modal">
+				<!-- Modal content -->
+				 <div class="modal-content">
+					<span class="close" onclick="closeAddGoalState_FromOntology_Modal();">&times;</span>
+					<p>Provide compomnents, resources data in Goal State</p>
+					<p>Number of components</p>
+					<select id="numberOfComponent_GoalState" onchange="update_Components_for_GoalState(this);">
+						<option value="0" default>0</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+					</select>
+					<p>Components : </p>
+					<div id="divGoalStateComponents">
+					</div>
+				 <br/><br/>
+					 <button id="btnSaveGoalState" onclick="saveGoalState_From_Ontology();">Save</button>
+				 </div>
+			</div>
+
+			<!-- Modal for Operation Node Adding tool -->
 			<div id="addOperationNodeDataModal" class="modal">
 			  <!-- Modal content -->
 			  <div class="modal-content">
