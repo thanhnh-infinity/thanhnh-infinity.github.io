@@ -1,3 +1,9 @@
+/**
+ * Author : Thanh Nguyen
+ * Doc : Service composition framework - Workflow Description Tool
+ * Date : 25-Feb-2017
+ **/
+
 
 function initEdge_forGraphic(edge){
   return {data: { source: edge.source, target: edge.target, label:edge.label} }

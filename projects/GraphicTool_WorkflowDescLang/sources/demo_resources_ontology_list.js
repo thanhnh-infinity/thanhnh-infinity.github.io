@@ -1,4 +1,4 @@
-var demo_list_of_resource_from_ontoly = [
+var demo_list_of_resource_from_ontology = [
   {
     "name" : "Free Format of Text",
     "ontology_link" : "http://www.cs.nmsu.edu/~epontell/CDAO/cdao.owl#free_text",

@@ -1,3 +1,10 @@
+/**
+ * Author : Thanh Nguyen
+ * Doc : Service composition framework - Workflow Description Tool
+ * Date : 25-Feb-2017
+ **/
+
+
 function initComponent_forNode_Ontology(){
   return {
     "name" : "",

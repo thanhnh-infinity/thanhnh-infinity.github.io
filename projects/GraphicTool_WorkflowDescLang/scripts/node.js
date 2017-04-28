@@ -1,3 +1,10 @@
+/**
+ * Author : Thanh Nguyen
+ * Doc : Service composition framework - Workflow Description Tool
+ * Date : 25-Feb-2017
+ **/
+
+
 /* Set up Nodes (Operation Node and Initial + Goal) FROM WORKFLOW DATA */
 function initNode_forGraphic(node){
   return {data : {id : node.id, name : node.name, faveShape: node.shape, type:node.type}}
@@ -95,11 +102,11 @@ function setUpInitialState_From_Ontology(initial_state_node){
   var type = "initial_state_node"
   for(var i = 0 ; i < initial_state_node.components.length ; i++){
     if (i < initial_state_node.components.length - 1) {
-       id += initial_state_node.components[i].ontology_resource_id + "_"
-       name += initial_state_node.components[i].name + ","
+       id += initial_state_node.components[i].uri + "_"
+       name += initial_state_node.components[i].local_name + ","
     } else {
-       id = initial_state_node.components[i].ontology_resource_id
-       name += initial_state_node.components[i].name
+       id = initial_state_node.components[i].uri
+       name += initial_state_node.components[i].local_name
     }
   }
   initialState_Node_Temp.id = id
@@ -126,11 +133,11 @@ function setUpGoalState_From_Ontology(goal_state_node){
   var type = "goal_state_node"
   for(var i = 0 ; i < goal_state_node.components.length ; i++){
     if (i < goal_state_node.components.length - 1) {
-       id += goal_state_node.components[i].ontology_resource_id + "_"
-       name += goal_state_node.components[i].name + ","
+       id += goal_state_node.components[i].uri + "_"
+       name += goal_state_node.components[i].local_name + ","
     } else {
-       id = goal_state_node.components[i].ontology_resource_id
-       name += goal_state_node.components[i].name
+       id = goal_state_node.components[i].uri
+       name += goal_state_node.components[i].local_name
     }
   }
   goalState_Node_Temp.id = id

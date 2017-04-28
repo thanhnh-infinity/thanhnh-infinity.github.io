@@ -1,3 +1,10 @@
+/**
+ * Author : Thanh Nguyen
+ * Doc : Service composition framework - Workflow Description Tool
+ * Date : 25-Feb-2017
+ **/
+
+
 function executePlanner_toGet_WorkFlow(){
   var initial_state_data = {}
   var goal_state_data = {}
