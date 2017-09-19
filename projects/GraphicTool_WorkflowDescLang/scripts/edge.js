@@ -21,13 +21,16 @@ function setUpAllEdgesForOperationNodes_From_WorkFlow(operation_nodes,plan){
       var common_label = []
       var operation_i = plan[i]
       var operation_iplus1 = plan[i+1]
+
+      
+
       for(var k = 0 ; k < operation_i.operation_parameters.output.components.length ; k++){
         for(var h = 0 ; h < operation_iplus1.operation_parameters.input.components.length ; h++){
           var consider_out_op_1 = operation_i.operation_parameters.output.components[k]
           var consider_in_op_2 = operation_iplus1.operation_parameters.input.components[h]
-          if (consider_out_op_1.ontology_resource_id.trim().toUpperCase()
-              === consider_in_op_2.ontology_resource_id.trim().toUpperCase()){
-              common_label.push(consider_out_op_1.ontology_resource_id)
+          if (consider_out_op_1.resource_ontology_id.trim().toUpperCase()
+              === consider_in_op_2.resource_ontology_id.trim().toUpperCase()){
+              common_label.push(consider_out_op_1.resource_ontology_id)
           }
         }
       }
@@ -49,11 +52,12 @@ function setUpEdge_FromInit_ToFirstOperation(initNode,operation_nodes,origin_inp
   var added_label = ""
   var origin_first_operation_input = origin_first_operation.operation_parameters.input.components
 
+  
   for(var i = 0 ; i < origin_first_operation_input.length ; i++){
     for(var j = 0 ; j < origin_input.length ; j++){
-          if (origin_input[j].ontology_resource_id.trim().toUpperCase() ===
-              origin_first_operation_input[i].ontology_resource_id.trim().toUpperCase()){
-            common_label.push(origin_input[j].ontology_resource_id)
+          if (origin_input[j].resource_ontology_id.trim().toUpperCase() ===
+              origin_first_operation_input[i].resource_ontology_id.trim().toUpperCase()){
+            common_label.push(origin_input[j].resource_ontology_id)
           }
     }
   }
@@ -74,9 +78,9 @@ function setUpEdge_FromLastOperation_ToGoal(goalNode,operation_nodes,origin_outp
 
   for(var i = 0 ; i < origin_last_operation_output.length ; i++){
     for(var j = 0 ; j < origin_output.length ; j++){
-          if (origin_output[j].ontology_resource_id.trim().toUpperCase() ===
-              origin_last_operation_output[i].ontology_resource_id.trim().toUpperCase()){
-            common_label.push(origin_output[j].ontology_resource_id)
+          if (origin_output[j].resource_ontology_id.trim().toUpperCase() ===
+              origin_last_operation_output[i].resource_ontology_id.trim().toUpperCase()){
+            common_label.push(origin_output[j].resource_ontology_id)
           }
     }
   }

@@ -3,15 +3,15 @@
     "input" : [
       {
         "name" : "Free Format of Text",
-        "ontology_link" : "http://www.cs.nmsu.edu/~epontell/CDAO/cdao.owl#free_text",
-        "ontology_resource_id" : "free_text"
+        "resource_ontology_uri" : "http://www.cs.nmsu.edu/~epontell/CDAO/cdao.owl#free_text",
+        "resource_ontology_id" : "free_text"
       }
     ],
     "output" : [
       {
         "name" : "Species Tree",
-        "ontology_link" : "http://www.cs.nmsu.edu/~epontell/CDAO/cdao.owl#cdao_species_tree",
-        "ontology_resource_id" : "cdao_species_tree"
+        "resource_ontology_uri" : "http://www.cs.nmsu.edu/~epontell/CDAO/cdao.owl#cdao_species_tree",
+        "resource_ontology_id" : "cdao_species_tree"
       }
     ]
   },

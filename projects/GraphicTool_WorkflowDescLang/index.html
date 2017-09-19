@@ -19,12 +19,13 @@
 		<script src="./scripts/edge.js"></script>
 		<script src="./scripts/planning.js"></script>
 
-    <script src="./scripts/workflow_plan_des_lang.js"></script>
+        <script src="./scripts/workflow_plan_des_lang.js"></script>
 		<script src="./scripts/connect_api_planning_ontology_engine.js"></script>
 
 		<script src="./scripts/utility.js"></script>
 
 		<link rel="stylesheet" type="text/css" href="./css/workflow.css">
+		<link rel="stylesheet" type="text/css" href="./css/loading.css">
 		<link href="./css/cytoscape-context-menus.css" rel="stylesheet" type="text/css" />
 		<link href="./css/jquery.mobile-1.4.5.min.css" rel="stylesheet" type="text/css" />
 		<link href="./css/modal.css" rel="stylesheet" type="text/css" />
@@ -51,10 +52,10 @@
 		<div class="header">
 			<h1>Web Services Composition - Workflow Description Graphical Tool</h1>
 			<fieldset>
-		    <button id="btnDisplayWF" onclick="DisplayWorkflow_Graphic();">Display Workflow from Source</button>
-				<button id="btnExecutePlanner" onclick="executePlanner_toGet_WorkFlow();">Execute Planning Engine (via Web Service API)</button>
-				<button id="btnGenWF" onclick="GenerateWorkflow();">Re-Generate Workflow</button>
-				<button id="btnClearData" onclick="clearData();">Clear data</button>
+		    
+			<button id="btnExecutePlanner" onclick="executePlanner_toGet_WorkFlow();">Execute Planning Engine (via Web Service API)</button>
+			<button id="btnGenWF" onclick="GenerateWorkflow();">Re-Generate Workflow</button>
+			<button id="btnClearData" onclick="clearData();">Clear data</button>
 			</fieldset>
 
 			<!-- Modal for Edge Adding tool -->
@@ -172,7 +173,42 @@
 					<button id="save" onclick="saveAddOperationClass_Modal();">Add</button>
 			  	</div>
 			</div>
+
+
+			<!-- Modal for Operation Class Hierarchy Adding tool -->
+			<div id="addInitialStateModal_Hierarchy" class="modal">
+				<!-- Modal content -->
+			  	<div class="modal-content">
+			  		<span class="close" onclick="closeAddInitialState_Modal_Hierarchy();">&times;</span>
+			  		<p>Resources root class</p>
+
+			  		<div id="divDisplayInitialState_ResourcesClassHierarchy">
+			  		    
+					</div>	
+					<br/>
+					<br/>
+					<button id="save" onclick="saveAddInitialState_Modal_Hierarchy();">Add</button>
+			  	</div>
+			</div>
+
+			<!-- Modal for Operation Class Hierarchy Adding tool -->
+			<div id="addGoalStateModal_Hierarchy" class="modal">
+				<!-- Modal content -->
+			  	<div class="modal-content">
+			  		<span class="close" onclick="closeAddGoalState_Modal_Hierarchy();">&times;</span>
+			  		<p>Resources root class</p>
+
+			  		<div id="divDisplayGoalState_ResourcesClassHierarchy">
+			  		    
+					</div>	
+					<br/>
+					<br/>
+					<button id="save" onclick="saveAddGoalState_Modal_Hierarchy();">Add</button>
+			  	</div>
+			</div>
 		</div>
+
 		<div id="cy"></div>
+		<div class="modal_2" id="idLoading"><!-- Place at bottom of page --></div>
 	</body>
 </html>

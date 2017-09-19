@@ -49,7 +49,7 @@ function getResourceID_FromOWLLink(owl_resource_link){
   }
 }
 function isEmpty(data){
-  if (data === "" || data === "undefined" || data === null || data === "UNDEFINED"){
+  if (data === "" || data === "undefined" || data === null || data === "UNDEFINED" ) {
     return true
   } else {
     return false

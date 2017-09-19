@@ -28,10 +28,10 @@ function setUpInitialState_From_WorkFlow(GLOBAL_WORKFLOW_PLAN_DATA){
   var type = "initial_state_node"
   for(var i = 0 ; i < requestInput.length ; i++){
     if (i < requestInput.length - 1) {
-       id += requestInput[i].ontology_resource_id + "_"
+       id += requestInput[i].resource_ontology_id + "_"
        name += requestInput[i].name + ","
     } else {
-       id = requestInput[i].ontology_resource_id
+       id = requestInput[i].resource_ontology_id
        name += requestInput[i].name
     }
   }
@@ -51,10 +51,10 @@ function setUpGoalState_From_WorkFlow(GLOBAL_WORKFLOW_PLAN_DATA){
   var type = "goal_state_node"
   for(var i = 0 ; i < requestOutput.length ; i++){
     if (i < requestOutput.length - 1) {
-       id += requestOutput[i].ontology_resource_id + "_"
+       id += requestOutput[i].resource_ontology_id + "_"
        name += requestOutput[i].name + ","
     } else {
-       id = requestOutput[i].ontology_resource_id
+       id = requestOutput[i].resource_ontology_id
        name += requestOutput[i].name
     }
   }

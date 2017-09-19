@@ -11,11 +11,13 @@ function clearData(){
   GLOBAL_GOAL_STATE_ONTOLOTY = {};
   CONSIDER_ADDED_OPERATION_CLASS = {};
 
+  GLOBAL_INITIAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE = {}
+  GLOBAL_GOAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE = {}
 
-  GLOBAL_HIERARCHY_CLASSES_STRUCTURE_ROOTED = {}
-  GLOBAL_LIST_RESOURCES_ONTOLOGY = []
-  
+  //GLOBAL_HIERARCHY_CLASSES_STRUCTURE_ROOTED = {}
+  //GLOBAL_LIST_RESOURCES_ONTOLOGY = []
   //GLOBAL_WORKFLOW_PLAN_DATA = {};
+
   document.getElementById('cy').style.visibility = "visible";
   initGraphicFrame();
   console.log("Clear")
@@ -32,24 +34,6 @@ function setOperationNodeData_FromOWL(selectOperationOWLObject){
     document.getElementById('txtOntologyResourceID_Node').value = GLOBAL_NO_ONTOLOGY_DATA
   }
 
-  /* MAke ontology API request to fill Input and Output forms */
-  /*
-  $.ajax({
-        type: "GET",
-        url: "http://128.123.177.21:8080/query?version=0.2&action=get&object=landcover_landinfo&recorder_name=phihuongthanh@gmail.com&quantity=100",
-        dataType: "json",
-        async:false,
-        data: JSON.stringify({ version: '0.2.1', action: 'get', object:'landcover_landinfo',recorder_name:'phihuongthanh@gmail.com', quantity:100 }),
-        contentType: "application/json; charset=utf-8",
-        success: function (data) {
-              console.log(data)
-        },
-        error: function (textStatus, errorThrown) {
-                console.log(textStatus)
-        }
-
-  });
-  */
   if (!isEmpty(owl_resource_link)){
     var input_data = TEST_OPERATION_API_JSON.operation_parameters.input
     var output_data = TEST_OPERATION_API_JSON.operation_parameters.output
@@ -60,6 +44,7 @@ function setOperationNodeData_FromOWL(selectOperationOWLObject){
     generateOutputPartData("")
   }
 }
+
 function generateOutputPartData(output_data){
   var html = ""
   if (!isEmpty(output_data)){
@@ -80,6 +65,7 @@ function generateOutputPartData(output_data){
   }
   document.getElementById('divOutputParams').innerHTML = html
 }
+
 function generateInputPartData(input_data){
   if (!isEmpty(input_data)){
     var html = "<p>Operation input params</p>"
@@ -110,6 +96,9 @@ function addArrayRecursive(ARRAY,SUB){
   if (isEmpty(SUB) || SUB.length <= 0){
     return
   } else {
+
+    //console.log(ARRAY)
+
     for(var i = 0 ; i < SUB.length ; i++){
       var operation_object = {}
       operation_object["parent_class_uri"] = SUB[i].parent_class_uri
@@ -121,6 +110,7 @@ function addArrayRecursive(ARRAY,SUB){
       if (isEmpty(SUB.subclasses) || SUB.subclasses <= 0){
         continue
       } else {
+        //console.log(i)
         addArrayRecursive(ARRAY,SUB[i].subclasses)
       }
     }
@@ -159,6 +149,92 @@ function saveAddOperationClass_Modal(){
     alert("You should select class of operation want to add")
     return
   }
+}
+
+function openAddGoalState_FromOntology_Modal_Hierarchy(){
+    /* Set up view model for operation class hierarchy */
+    var divDisplayGoalState_ResourcesClassHierarchy = document.getElementById("divDisplayGoalState_ResourcesClassHierarchy")
+    /* Fix - should has in API */
+    var numberOfLevel = 10
+    var stringInnerHtml = ""
+    for(var i = 0 ; i < numberOfLevel; i++){
+      stringInnerHtml += '<div id="div_goal_resource_level_' + i + '"></div>'
+    }
+    divDisplayGoalState_ResourcesClassHierarchy.innerHTML = stringInnerHtml
+
+    /* Add all operation class object to a flat array */
+    ARRAY_RESOURCES_CLASSES_FLAT = []
+    var resource_object = {}
+    resource_object["parent_class_uri"] = "OWL::THING"
+    resource_object["parent_class_name"] = "OWL::THING"
+    resource_object["class_ontology_name"] = GLOBAL_HIERARCHY_CLASSES_RESOURCE.class_ontology_name
+    resource_object["class_ontology_uri"] = GLOBAL_HIERARCHY_CLASSES_RESOURCE.class_ontology_uri
+    resource_object["level"] = 0
+    ARRAY_RESOURCES_CLASSES_FLAT.push(resource_object)
+    addArrayRecursive(ARRAY_RESOURCES_CLASSES_FLAT,GLOBAL_HIERARCHY_CLASSES_RESOURCE.subclasses)
+  
+
+    //console.log(ARRAY_RESOURCES_CLASSES_FLAT) 
+    /* Display operation class for level 0 */
+    var div_goal_resource_level_0 = document.getElementById("div_goal_resource_level_0")
+    stringHTML = '<select id="select_goal_resource_level_0" onchange="updateFollow_Resouces_Goal_ClassBy(this,0);">'
+    stringHTML += '<option value=""></option>'
+    for(var i = 0 ; i < ARRAY_RESOURCES_CLASSES_FLAT.length ; i++){
+      var considerResourceObj = ARRAY_RESOURCES_CLASSES_FLAT[i]
+      if (considerResourceObj.level == 0 || considerResourceObj.parent_class_uri === "OWL::THING"){  
+        stringHTML += '<option value="' + considerResourceObj.class_ontology_uri + '">' + considerResourceObj.class_ontology_uri +'</option>'
+      }
+    }
+    stringHTML += '</select>'
+    div_goal_resource_level_0.innerHTML = stringHTML
+
+    /* End to feed */
+    document.getElementById('cy').style.visibility = "hidden";
+    var addInitialStateModal_Hierarchy = document.getElementById('addGoalStateModal_Hierarchy');
+    addInitialStateModal_Hierarchy.style.display = "block";
+}
+
+function openAddInitialState_FromOntology_Modal_Hierarchy(){
+    /* Set up view model for operation class hierarchy */
+    var divDisplayInitialState_ResourcesClassHierarchy = document.getElementById("divDisplayInitialState_ResourcesClassHierarchy")
+    /* Fix - should has in API */
+    var numberOfLevel = 10
+    var stringInnerHtml = ""
+    for(var i = 0 ; i < numberOfLevel; i++){
+      stringInnerHtml += '<div id="div_initial_resource_level_' + i + '"></div>'
+    }
+    divDisplayInitialState_ResourcesClassHierarchy.innerHTML = stringInnerHtml
+
+    /* Add all operation class object to a flat array */
+    ARRAY_RESOURCES_CLASSES_FLAT = []
+    var resource_object = {}
+    resource_object["parent_class_uri"] = "OWL::THING"
+    resource_object["parent_class_name"] = "OWL::THING"
+    resource_object["class_ontology_name"] = GLOBAL_HIERARCHY_CLASSES_RESOURCE.class_ontology_name
+    resource_object["class_ontology_uri"] = GLOBAL_HIERARCHY_CLASSES_RESOURCE.class_ontology_uri
+    resource_object["level"] = 0
+    ARRAY_RESOURCES_CLASSES_FLAT.push(resource_object)
+    addArrayRecursive(ARRAY_RESOURCES_CLASSES_FLAT,GLOBAL_HIERARCHY_CLASSES_RESOURCE.subclasses)
+  
+
+    //console.log(ARRAY_RESOURCES_CLASSES_FLAT) 
+    /* Display operation class for level 0 */
+    var div_initial_resource_level_0 = document.getElementById("div_initial_resource_level_0")
+    stringHTML = '<select id="select_initial_resource_level_0" onchange="updateFollow_Resouces_ClassBy(this,0);">'
+    stringHTML += '<option value=""></option>'
+    for(var i = 0 ; i < ARRAY_RESOURCES_CLASSES_FLAT.length ; i++){
+      var considerResourceObj = ARRAY_RESOURCES_CLASSES_FLAT[i]
+      if (considerResourceObj.level == 0 || considerResourceObj.parent_class_uri === "OWL::THING"){  
+        stringHTML += '<option value="' + considerResourceObj.class_ontology_uri + '">' + considerResourceObj.class_ontology_uri +'</option>'
+      }
+    }
+    stringHTML += '</select>'
+    div_initial_resource_level_0.innerHTML = stringHTML
+
+    /* End to feed */
+    document.getElementById('cy').style.visibility = "hidden";
+    var addInitialStateModal_Hierarchy = document.getElementById('addInitialStateModal_Hierarchy');
+    addInitialStateModal_Hierarchy.style.display = "block";
 }
 
 function openAddOperationClassData_Modal(){
@@ -203,6 +279,78 @@ function openAddOperationClassData_Modal(){
     addOperationClass_modal.style.display = "block"; 
 }
 
+function updateFollow_Resouces_Goal_ClassBy(resourcesClassObj,level){
+    level = level + 1
+
+    checkData = false
+    var div_display_resource_class_level_current = document.getElementById("div_goal_resource_level_" + level)
+
+    CONSIDER_ADDED_RESOURCE_CLASS.class_ontology_uri = resourcesClassObj.value
+
+    /* update for lower classes */
+    
+    for(var i = level; i < 10 ; i++){
+      //console.log("Clear from " + level)
+      document.getElementById("div_goal_resource_level_" + level).innerHTML = ""
+    }
+
+    stringHTML = '<p>Ontology Sub-Class Level ' + level +'</p>'
+    stringHTML += '<select id="select_goal_resource_level_"' + level + ' onchange="updateFollow_Resouces_Goal_ClassBy(this,'+ level +');">'
+    stringHTML += '<option value=""></option>'
+    for(var i = 0 ; i < ARRAY_RESOURCES_CLASSES_FLAT.length ; i++){
+      var considerResourceObj = ARRAY_RESOURCES_CLASSES_FLAT[i]
+      if (considerResourceObj.parent_class_uri.trim().toUpperCase() === resourcesClassObj.value.trim().toUpperCase()){  
+        checkData = true
+        stringHTML += '<option value="' + considerResourceObj.class_ontology_uri + '">' + considerResourceObj.class_ontology_uri +'</option>'
+      }
+    }
+    stringHTML += '</select>'
+    stringHTML += '<br/>'
+
+    if (checkData==true){
+      div_display_resource_class_level_current.innerHTML = stringHTML  
+    } else {
+      div_display_resource_class_level_current.innerHTML = ""
+    }
+}
+
+function updateFollow_Resouces_ClassBy(resourcesClassObj,level){
+    level = level + 1
+
+    checkData = false
+    var div_display_resource_class_level_current = document.getElementById("div_initial_resource_level_" + level)
+
+    CONSIDER_ADDED_RESOURCE_CLASS.class_ontology_uri = resourcesClassObj.value
+
+    /* update for lower classes */
+    
+    for(var i = level; i < 10 ; i++){
+      //console.log("Clear from " + level)
+      document.getElementById("div_initial_resource_level_" + level).innerHTML = ""
+    }
+
+    stringHTML = '<p>Ontology Sub-Class Level ' + level +'</p>'
+    stringHTML += '<select id="select_initial_resource_level_"' + level + ' onchange="updateFollow_Resouces_ClassBy(this,'+ level +');">'
+    stringHTML += '<option value=""></option>'
+    for(var i = 0 ; i < ARRAY_RESOURCES_CLASSES_FLAT.length ; i++){
+      var considerResourceObj = ARRAY_RESOURCES_CLASSES_FLAT[i]
+      if (considerResourceObj.parent_class_uri.trim().toUpperCase() === resourcesClassObj.value.trim().toUpperCase()){  
+        checkData = true
+        stringHTML += '<option value="' + considerResourceObj.class_ontology_uri + '">' + considerResourceObj.class_ontology_uri +'</option>'
+      }
+    }
+    stringHTML += '</select>'
+    stringHTML += '<br/>'
+
+    if (checkData==true){
+      div_display_resource_class_level_current.innerHTML = stringHTML  
+    } else {
+      div_display_resource_class_level_current.innerHTML = ""
+    }
+
+    
+}
+
 function updateFollowClassBy(operationClassObj,level){
     level = level + 1
 
@@ -235,9 +383,7 @@ function updateFollowClassBy(operationClassObj,level){
       div_display_operation_class_level_current.innerHTML = stringHTML  
     } else {
       div_display_operation_class_level_current.innerHTML = ""
-    }
-
-    
+    }    
 }
 
 function closeAddOperationNodeData_Modal(){
@@ -250,6 +396,20 @@ function closeAddOperationNodeData_Modal(){
 function closeAddOperationClass_Modal(){
   var addOperationClass_modal = document.getElementById('addOperationClassModal');
   addOperationClass_modal.style.display = "none";
+  document.getElementById('cy').style.visibility = "visible";
+  return;
+}
+
+function closeAddGoalState_Modal_Hierarchy(){
+  var addGoalStateModal_Hierarchy = document.getElementById('addGoalStateModal_Hierarchy');
+  addGoalStateModal_Hierarchy.style.display = "none";
+  document.getElementById('cy').style.visibility = "visible";
+  return;
+}
+
+function closeAddInitialState_Modal_Hierarchy(){
+  var addInitialState_modal_Hierarchy = document.getElementById('addInitialStateModal_Hierarchy');
+  addInitialState_modal_Hierarchy.style.display = "none";
   document.getElementById('cy').style.visibility = "visible";
   return;
 }
@@ -392,6 +552,8 @@ function openAddInitialState_FromOntology_Modal(){
   var addInitialState_modal = document.getElementById('addInitialStateModal');
   addInitialState_modal.style.display = "block";
 }
+
+
 
 function closeAddInitialState_FromOntology_Modal(){
   var addInitialState_modal = document.getElementById('addInitialStateModal');
@@ -549,8 +711,13 @@ function DisplayWorkflow_Graphic(){
   var first_edge = setUpEdge_FromInit_ToFirstOperation(initNode,operation_nodes,ORIGIN_INIT_INPUT,ORIGIN_FIRST_OPERATION)
   GLOBAL_EDGES_DATA.push(first_edge)
 
+  
+
   var last_edge = setUpEdge_FromLastOperation_ToGoal(goalNode,operation_nodes,ORIGIN_GOAL_OUTPUT,ORIGIN_LAST_OPERATION)
   GLOBAL_EDGES_DATA.push(last_edge)
+
+  
+
 
   initGraphicFrame()
 }
@@ -583,6 +750,120 @@ function saveGoalState_From_Ontology(){
   document.getElementById('cy').style.visibility = "visible";
 }
 
+function saveAddGoalState_Modal_Hierarchy(){
+   if(!isEmpty(CONSIDER_ADDED_RESOURCE_CLASS.class_ontology_uri)){
+      var addGoalStateModal_Hierarchy = document.getElementById('addGoalStateModal_Hierarchy');
+      addGoalStateModal_Hierarchy.style.display = "none";
+      document.getElementById('cy').style.visibility = "visible";
+      //console.log(CONSIDER_ADDED_RESOURCE_CLASS.class_ontology_uri)
+      /* Make API to get all instances of this class */
+      document.getElementById("idLoading").style.visible = "block"
+      document.getElementById('addGoalStateModal_Hierarchy').style.visible = "none"
+      $.ajax({
+        type: "GET",
+        url: "http://127.0.0.1:8000/query",
+        dataType: "application/x-www-urlencoded",
+        async:false,
+        data: { 
+            request : REQUEST_TYPE_GET_INSTANCES_OF_CLASS,
+            parser_engine : 1,
+            owl_class_uri : CONSIDER_ADDED_RESOURCE_CLASS.class_ontology_uri
+              },
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            jsonData = JSON.parse(data.responseText)
+            LIST_CURRENT_RESOURCE_INSTANCES  = jsonData.list_instances
+
+            var goal_state_node = {}
+            goal_state_node.components = LIST_CURRENT_RESOURCE_INSTANCES
+            CONSIDER_ADDED_RESOURCE_CLASS = {}
+           
+            displayGoalState_From_Ontology(goal_state_node)
+            document.getElementById("idLoading").style.visible = "none"
+        },
+        error: function (textStatus, errorThrown) {
+           if (textStatus.status = 200){
+            jsonData = JSON.parse(textStatus.responseText)
+            LIST_CURRENT_RESOURCE_INSTANCES  = jsonData.list_instances
+
+            var goal_state_node = {}
+            goal_state_node.components = LIST_CURRENT_RESOURCE_INSTANCES
+            CONSIDER_ADDED_RESOURCE_CLASS = {}
+           
+            displayGoalState_From_Ontology(goal_state_node)
+            document.getElementById("idLoading").style.visible = "none"
+           } else {
+            LIST_CURRENT_RESOURCE_INSTANCES  = []
+            document.getElementById("idLoading").style.visible = "none"
+           }
+              
+        }
+
+      });
+     
+  } else {
+    alert("You should select class of resource want to add")
+    return
+  }
+}
+
+function saveAddInitialState_Modal_Hierarchy(){
+  if(!isEmpty(CONSIDER_ADDED_RESOURCE_CLASS.class_ontology_uri)){
+      var addInitialStateModal_Hierarchy = document.getElementById('addInitialStateModal_Hierarchy');
+      addInitialStateModal_Hierarchy.style.display = "none";
+      document.getElementById('cy').style.visibility = "visible";
+      console.log(CONSIDER_ADDED_RESOURCE_CLASS.class_ontology_uri)
+      /* Make API to get all instances of this class */
+      document.getElementById("idLoading").style.visible = "block"
+      document.getElementById('addInitialStateModal_Hierarchy').style.visible = "none"
+      $.ajax({
+        type: "GET",
+        url: "http://127.0.0.1:8000/query",
+        dataType: "application/x-www-urlencoded",
+        async:false,
+        data: { 
+            request : REQUEST_TYPE_GET_INSTANCES_OF_CLASS,
+            parser_engine : 1,
+            owl_class_uri : CONSIDER_ADDED_RESOURCE_CLASS.class_ontology_uri
+              },
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            jsonData = JSON.parse(data.responseText)
+            LIST_CURRENT_RESOURCE_INSTANCES  = jsonData.list_instances
+
+            var initial_state_node = {}
+            initial_state_node.components = LIST_CURRENT_RESOURCE_INSTANCES
+            CONSIDER_ADDED_RESOURCE_CLASS = {}
+            displayInitialState_From_Ontology(initial_state_node)
+
+            document.getElementById("idLoading").style.visible = "none"
+        },
+        error: function (textStatus, errorThrown) {
+           if (textStatus.status = 200){
+            jsonData = JSON.parse(textStatus.responseText)
+            LIST_CURRENT_RESOURCE_INSTANCES  = jsonData.list_instances
+            console.log(LIST_CURRENT_RESOURCE_INSTANCES)
+            var initial_state_node = {}
+            initial_state_node.components = LIST_CURRENT_RESOURCE_INSTANCES
+            CONSIDER_ADDED_RESOURCE_CLASS = {}
+            displayInitialState_From_Ontology(initial_state_node)
+
+            document.getElementById("idLoading").style.visible = "none"
+           } else {
+            LIST_CURRENT_RESOURCE_INSTANCES  = []
+            document.getElementById("idLoading").style.visible = "none"
+           }
+              
+        }
+
+      });
+     
+  } else {
+    alert("You should select class of resource want to add")
+    return
+  }
+}
+
 function saveInitialState_From_Ontology(){
   var selected_components_links = document.getElementsByName('initialState_Component')
   if (!isEmpty(selected_components_links) && selected_components_links.length > 0){
@@ -601,9 +882,17 @@ function saveInitialState_From_Ontology(){
 
     console.log(components)
 
-    var initial_state_node = {}
-    initial_state_node.components = components
-    //initial_state_node.components.push(component)
+    //if (isEmpty(GLOBAL_INITIAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE)
+    //    || jQuery.isEmptyObject(GLOBAL_INITIAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE)){
+    //  console.log("Vao 1")
+      var initial_state_node = {}
+      initial_state_node.components = components
+      //initial_state_node.components.push(component)
+    //} else {
+    //  console.log("Vao 2")
+    //  initial_state_node = GLOBAL_INITIAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE
+    //  initial_state_node.components.push.apply(initial_state_node.components,components)
+    //}  
 
     displayInitialState_From_Ontology(initial_state_node)
   }
@@ -637,6 +926,8 @@ function update_Components_for_InitialState(htmlSelectNumberOfComponents_Initial
 
   }
 }
+
+
 
 function update_Components_for_GoalState(htmlSelectNumberOfComponents_GoalState){
   var numberOfComponents = parseInt(htmlSelectNumberOfComponents_GoalState.value)
@@ -749,7 +1040,7 @@ function initGraphicFrame(){
               }
             },
              {
-              id: 'add-node-operation',
+              id: 'add-node-operation-class',
               title: 'Add operation class',
               coreAsWell: true,
               onClickFunction: function (event) {
@@ -769,11 +1060,31 @@ function initGraphicFrame(){
               }
             },
             {
+              id: 'add-node-initial-state-hierarchy',
+              title: 'Add Inital State Node (Hierarchy)',
+              coreAsWell: true,
+              onClickFunction: function (event) {
+                openAddInitialState_FromOntology_Modal_Hierarchy();
+                CURRENT_X = event.cyPosition.x;
+                CURRENT_Y = event.cyPosition.y;
+              }
+            },
+            {
               id: 'add-node-goal-state',
               title: 'Add Goal State Node',
               coreAsWell: true,
               onClickFunction: function (event) {
                 openAddGoalState_FromOntology_Modal();
+                CURRENT_X = event.cyPosition.x;
+                CURRENT_Y = event.cyPosition.y;
+              }
+            },
+             {
+              id: 'add-node-goal-state-hierarchy',
+              title: 'Add Goal State Node (Hierarchy)',
+              coreAsWell: true,
+              onClickFunction: function (event) {
+                openAddGoalState_FromOntology_Modal_Hierarchy();
                 CURRENT_X = event.cyPosition.x;
                 CURRENT_Y = event.cyPosition.y;
               }
@@ -793,8 +1104,12 @@ function initGraphicFrame(){
 }
 
 $(function(){
+
   console.log("Make API to get list of resources ontology - For Initial/Goal State Description")
   request_PlanningOntologyEngine_List_Of_All_Resources()
+
+  console.log("Make API to get list of hierarchy of phylotastic resources class ")
+  request_HierarchyClasses_Of_Class("http://www.cs.nmsu.edu/~epontell/CDAO/cdao.owl#phylotastic_resources");
 
   console.log("Make API to get hierarchy classes of operation classification class for add Operation class")
   /* Make API to get hierarchy of class of operationClassification class */
@@ -802,4 +1117,8 @@ $(function(){
 
   console.log("Ready to Go")
   initGraphicFrame();
+
+
 });
+
+
