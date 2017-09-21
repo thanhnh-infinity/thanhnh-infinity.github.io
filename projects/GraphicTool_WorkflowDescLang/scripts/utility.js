@@ -40,6 +40,21 @@ function initOperationNode_Ontology(){
     }
   };
 }
+
+function removeNodeByType(type){
+  if (objectIsEmpty(GLOBAL_NODES_DATA) || GLOBAL_NODES_DATA.length <= 0){
+    return 
+  } else {
+    for(var i = 0 ; i < GLOBAL_NODES_DATA.length ; i++){
+       var node = GLOBAL_NODES_DATA[i]
+       if (node.data.type === type) {
+           GLOBAL_NODES_DATA.splice(i,1)
+       }
+    }
+    return 
+  }
+}
+
 function getResourceID_FromOWLLink(owl_resource_link){
   if (!isEmpty(owl_resource_link) && owl_resource_link.indexOf("#") > 0){
     var index = owl_resource_link.indexOf("#")
@@ -48,8 +63,11 @@ function getResourceID_FromOWLLink(owl_resource_link){
     return null
   }
 }
+function objectIsEmpty(data){
+  return jQuery.isEmptyObject(data)
+}
 function isEmpty(data){
-  if (data === "" || data === "undefined" || data === null || data === "UNDEFINED" ) {
+  if (data === "" || data === "undefined" || data === null || data === "UNDEFINED") {
     return true
   } else {
     return false

@@ -36,6 +36,8 @@ function executePlanner_toGet_WorkFlow(){
     input_object.name = initial_state_data.components[i].local_name
     input_object.resource_ontology_uri = initial_state_data.components[i].uri
     input_object.resource_ontology_id = initial_state_data.components[i].local_name
+    input_object.resource_data_format_id = initial_state_data.components[i].data_format
+    input_object.resource_data_format_uri = PREFIX_URI_ONTOLOGY + initial_state_data.components[i].data_format
     input_array_object.push(input_object)
   }
   console.log("Send API POST planning Engine Goal State :")
@@ -54,6 +56,8 @@ function executePlanner_toGet_WorkFlow(){
     output_object.name = goal_state_data.components[i].local_name
     output_object.resource_ontology_uri = goal_state_data.components[i].uri
     output_object.resource_ontology_id = goal_state_data.components[i].local_name
+    output_object.resource_data_format_id = goal_state_data.components[i].data_format
+    output_object.resource_data_format_uri = PREFIX_URI_ONTOLOGY + goal_state_data.components[i].data_format
     output_array_object.push(output_object)
   }
   /* Step 3 : Retrive Plan as JSON format from planning_ontology_server:8080 */
@@ -68,11 +72,17 @@ function executePlanner_toGet_WorkFlow(){
                    }
                  };
 
-  
+  console.log(request_data)
   var result_workflow = {}
   string_request_data = JSON.stringify(request_data)
   console.log(string_request_data.length)
   document.getElementById("idLoading").style.display = "block";
+
+  /* Simulate data - Read from file */
+  document.getElementById("idLoading").style.display = "none";
+  DisplayWorkflow_Graphic_From_Source(TEST_ABSTRACT_CONCRETE_WORKFLOW_PLAN_DATA)
+
+  /*
   $.ajax({
         method: "POST",
         url: "http://127.0.0.1:8000/planningEngine/generateWorkflow",
@@ -113,5 +123,6 @@ function executePlanner_toGet_WorkFlow(){
            document.getElementById("idLoading").style.display = "none";
         }
 
-  }); 
+  });
+  */
 }

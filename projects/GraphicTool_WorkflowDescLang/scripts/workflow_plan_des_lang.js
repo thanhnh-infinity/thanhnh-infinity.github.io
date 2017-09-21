@@ -125,18 +125,20 @@ function saveAddOperationClass_Modal(){
 
      var data = {
          group: 'nodes',
-         id: CONSIDER_ADDED_OPERATION_CLASS.class_ontology_uri,
-         name: "Operation class : " + getResourceID_FromOWLLink(CONSIDER_ADDED_OPERATION_CLASS.class_ontology_uri),
-         type:'operation_class',
-         faveShape:'roundrectangle'
+         id: getResourceID_FromOWLLink(CONSIDER_ADDED_OPERATION_CLASS.class_ontology_uri),
+         name: getResourceID_FromOWLLink(CONSIDER_ADDED_OPERATION_CLASS.class_ontology_uri),
+         type:'service_class_node',
+         faveShape:'ellipse'
      };
 
+     
      var new_node = {}
-     new_node.id = CONSIDER_ADDED_OPERATION_CLASS.class_ontology_uri
-     new_node.name = getResourceID_FromOWLLink(CONSIDER_ADDED_OPERATION_CLASS.class_ontology_uri)
-     new_node.shape = 'roundrectangle'
-     new_node.type = 'operation_node_class'
+     new_node.id = getResourceID_FromOWLLink(CONSIDER_ADDED_OPERATION_CLASS.class_ontology_uri),
+     new_node.name = getResourceID_FromOWLLink(CONSIDER_ADDED_OPERATION_CLASS.class_ontology_uri),
+     new_node.shape = 'ellipse'
+     new_node.type = 'service_class_node'
      GLOBAL_NODES_DATA.push(initNode_forGraphic(new_node))
+     
 
      cy.add({
          data: data,
@@ -237,7 +239,7 @@ function openAddInitialState_FromOntology_Modal_Hierarchy(){
     addInitialStateModal_Hierarchy.style.display = "block";
 }
 
-function openAddOperationClassData_Modal(){
+function openAdd_ServiceClassData_Modal(){
     /* Set up view model for operation class hierarchy */
     var div_display_operation_class = document.getElementById("divDisplayOperationClassHierarchy")
     /* Fix - should has in API */
@@ -658,17 +660,20 @@ function DisplayWorkflow_Graphic_From_Source(PLAN_DATA){
   GLOBAL_NODES_DATA.push(goalNode)
 
   /* Set up action */
-  var operation_nodes = setUpAllOperationNodes_From_WorkFlow(PLAN_DATA)
-  for(var i = 0 ; i < operation_nodes.length ; i++){
-    GLOBAL_NODES_DATA.push(operation_nodes[i])
+  var service_class_nodes = setUpAll_ServiceClassNodes_From_WorkFlow(PLAN_DATA)
+  for(var i = 0 ; i < service_class_nodes.length ; i++){
+    GLOBAL_NODES_DATA.push(service_class_nodes[i])
   }
 
   /* Set up all edge for operation nodes */
-  var operation_nodes_edges = setUpAllEdgesForOperationNodes_From_WorkFlow(operation_nodes,PLAN_DATA.workflow_plan[0].plan)
-  for(var i = 0 ; i < operation_nodes_edges.length ; i++){
-    GLOBAL_EDGES_DATA.push(operation_nodes_edges[i])
+  
+  var service_class_edges = setUpAllEdgesFor_ServiceClassNodes_From_WorkFlow(service_class_nodes,PLAN_DATA.workflow_plan[0].abstract_plan,initNode,goalNode)
+  for(var i = 0 ; i < service_class_edges.length ; i++){
+    GLOBAL_EDGES_DATA.push(service_class_edges[i])
   }
+  
 
+  /*
   var first_edge = setUpEdge_FromInit_ToFirstOperation(initNode,operation_nodes,
               PLAN_DATA.request_parameters.input,
               PLAN_DATA.workflow_plan[0].plan[0])
@@ -679,7 +684,7 @@ function DisplayWorkflow_Graphic_From_Source(PLAN_DATA){
                                                      PLAN_DATA.request_parameters.output,
                                   PLAN_DATA.workflow_plan[0].plan[PLAN_DATA.workflow_plan[0].plan.length - 1])
   GLOBAL_EDGES_DATA.push(last_edge)
-
+  */
   initGraphicFrame()
 }
 
@@ -697,28 +702,16 @@ function DisplayWorkflow_Graphic(){
   GLOBAL_NODES_DATA.push(goalNode)
 
   /* Set up action */
-  var operation_nodes = setUpAllOperationNodes_From_WorkFlow(GLOBAL_WORKFLOW_PLAN_DATA)
-  for(var i = 0 ; i < operation_nodes.length ; i++){
-    GLOBAL_NODES_DATA.push(operation_nodes[i])
+  var service_class_nodes = setUpAll_ServiceClassNodes_From_WorkFlow(GLOBAL_WORKFLOW_PLAN_DATA)
+  for(var i = 0 ; i < service_class_nodes.length ; i++){
+    GLOBAL_NODES_DATA.push(service_class_nodes[i])
   }
 
   /* Set up all edge for operation nodes */
-  var operation_nodes_edges = setUpAllEdgesForOperationNodes_From_WorkFlow(operation_nodes,GLOBAL_WORKFLOW_PLAN_DATA.workflow_plan[0].plan)
-  for(var i = 0 ; i < operation_nodes_edges.length ; i++){
-    GLOBAL_EDGES_DATA.push(operation_nodes_edges[i])
+  var service_class_edges = setUpAllEdgesFor_ServiceClassNodes_From_WorkFlow(service_class_edges,GLOBAL_WORKFLOW_PLAN_DATA.workflow_plan[0].abstract_plan,initNode,goalNode)
+  for(var i = 0 ; i < service_class_edges.length ; i++){
+    GLOBAL_EDGES_DATA.push(service_class_edges[i])
   }
-
-  var first_edge = setUpEdge_FromInit_ToFirstOperation(initNode,operation_nodes,ORIGIN_INIT_INPUT,ORIGIN_FIRST_OPERATION)
-  GLOBAL_EDGES_DATA.push(first_edge)
-
-  
-
-  var last_edge = setUpEdge_FromLastOperation_ToGoal(goalNode,operation_nodes,ORIGIN_GOAL_OUTPUT,ORIGIN_LAST_OPERATION)
-  GLOBAL_EDGES_DATA.push(last_edge)
-
-  
-
-
   initGraphicFrame()
 }
 
@@ -755,51 +748,31 @@ function saveAddGoalState_Modal_Hierarchy(){
       var addGoalStateModal_Hierarchy = document.getElementById('addGoalStateModal_Hierarchy');
       addGoalStateModal_Hierarchy.style.display = "none";
       document.getElementById('cy').style.visibility = "visible";
-      //console.log(CONSIDER_ADDED_RESOURCE_CLASS.class_ontology_uri)
-      /* Make API to get all instances of this class */
-      document.getElementById("idLoading").style.visible = "block"
       document.getElementById('addGoalStateModal_Hierarchy').style.visible = "none"
-      $.ajax({
-        type: "GET",
-        url: "http://127.0.0.1:8000/query",
-        dataType: "application/x-www-urlencoded",
-        async:false,
-        data: { 
-            request : REQUEST_TYPE_GET_INSTANCES_OF_CLASS,
-            parser_engine : 1,
-            owl_class_uri : CONSIDER_ADDED_RESOURCE_CLASS.class_ontology_uri
-              },
-        contentType: "application/json; charset=utf-8",
-        success: function (data) {
-            jsonData = JSON.parse(data.responseText)
-            LIST_CURRENT_RESOURCE_INSTANCES  = jsonData.list_instances
+      
+      var goal_state_node = {}
+      //console.log(GLOBAL_INITIAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE)
+      if (!isEmpty(GLOBAL_GOAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE)
+          && !objectIsEmpty(GLOBAL_GOAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE)
+          && (GLOBAL_GOAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE.components.length > 0)){
+         goal_state_node = GLOBAL_GOAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE
+      } else {
+         goal_state_node.components = []
+      } 
 
-            var goal_state_node = {}
-            goal_state_node.components = LIST_CURRENT_RESOURCE_INSTANCES
-            CONSIDER_ADDED_RESOURCE_CLASS = {}
-           
-            displayGoalState_From_Ontology(goal_state_node)
-            document.getElementById("idLoading").style.visible = "none"
-        },
-        error: function (textStatus, errorThrown) {
-           if (textStatus.status = 200){
-            jsonData = JSON.parse(textStatus.responseText)
-            LIST_CURRENT_RESOURCE_INSTANCES  = jsonData.list_instances
+      var e =  document.getElementById("selectGoalState_DataFormatClasses");
+      var selected_data_format = e.options[e.selectedIndex].value
+      if (isEmpty(selected_data_format)){
+        selected_data_format = "unknown"
+      }
+      
+      var an_goal_component = {"local_name":getResourceID_FromOWLLink(CONSIDER_ADDED_RESOURCE_CLASS.class_ontology_uri),"uri":CONSIDER_ADDED_RESOURCE_CLASS.class_ontology_uri,"data_format":selected_data_format}
+      
+      goal_state_node.components.push(an_goal_component)
 
-            var goal_state_node = {}
-            goal_state_node.components = LIST_CURRENT_RESOURCE_INSTANCES
-            CONSIDER_ADDED_RESOURCE_CLASS = {}
-           
-            displayGoalState_From_Ontology(goal_state_node)
-            document.getElementById("idLoading").style.visible = "none"
-           } else {
-            LIST_CURRENT_RESOURCE_INSTANCES  = []
-            document.getElementById("idLoading").style.visible = "none"
-           }
-              
-        }
-
-      });
+      CONSIDER_ADDED_RESOURCE_CLASS = {}
+      
+      displayGoalState_From_Ontology(goal_state_node)
      
   } else {
     alert("You should select class of resource want to add")
@@ -811,53 +784,33 @@ function saveAddInitialState_Modal_Hierarchy(){
   if(!isEmpty(CONSIDER_ADDED_RESOURCE_CLASS.class_ontology_uri)){
       var addInitialStateModal_Hierarchy = document.getElementById('addInitialStateModal_Hierarchy');
       addInitialStateModal_Hierarchy.style.display = "none";
+      //console.log(CONSIDER_ADDED_RESOURCE_CLASS)
       document.getElementById('cy').style.visibility = "visible";
-      console.log(CONSIDER_ADDED_RESOURCE_CLASS.class_ontology_uri)
-      /* Make API to get all instances of this class */
-      document.getElementById("idLoading").style.visible = "block"
       document.getElementById('addInitialStateModal_Hierarchy').style.visible = "none"
-      $.ajax({
-        type: "GET",
-        url: "http://127.0.0.1:8000/query",
-        dataType: "application/x-www-urlencoded",
-        async:false,
-        data: { 
-            request : REQUEST_TYPE_GET_INSTANCES_OF_CLASS,
-            parser_engine : 1,
-            owl_class_uri : CONSIDER_ADDED_RESOURCE_CLASS.class_ontology_uri
-              },
-        contentType: "application/json; charset=utf-8",
-        success: function (data) {
-            jsonData = JSON.parse(data.responseText)
-            LIST_CURRENT_RESOURCE_INSTANCES  = jsonData.list_instances
+  
+      var initial_state_node = {}
+      //console.log(GLOBAL_INITIAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE)
+      if (!isEmpty(GLOBAL_INITIAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE)
+          && !objectIsEmpty(GLOBAL_INITIAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE)
+          && (GLOBAL_INITIAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE.components.length > 0)){
+         initial_state_node = GLOBAL_INITIAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE
+      } else {
+         initial_state_node.components = []
+      } 
+      
+      var e =  document.getElementById("selectInitialState_DataFormatClasses");
+      var selected_data_format = e.options[e.selectedIndex].value
+      if (isEmpty(selected_data_format)){
+        selected_data_format = "unknown"
+      }
 
-            var initial_state_node = {}
-            initial_state_node.components = LIST_CURRENT_RESOURCE_INSTANCES
-            CONSIDER_ADDED_RESOURCE_CLASS = {}
-            displayInitialState_From_Ontology(initial_state_node)
+      var an_initial_component = {"local_name":getResourceID_FromOWLLink(CONSIDER_ADDED_RESOURCE_CLASS.class_ontology_uri),"uri":CONSIDER_ADDED_RESOURCE_CLASS.class_ontology_uri,"data_format":selected_data_format}
+      
+      initial_state_node.components.push(an_initial_component)
 
-            document.getElementById("idLoading").style.visible = "none"
-        },
-        error: function (textStatus, errorThrown) {
-           if (textStatus.status = 200){
-            jsonData = JSON.parse(textStatus.responseText)
-            LIST_CURRENT_RESOURCE_INSTANCES  = jsonData.list_instances
-            console.log(LIST_CURRENT_RESOURCE_INSTANCES)
-            var initial_state_node = {}
-            initial_state_node.components = LIST_CURRENT_RESOURCE_INSTANCES
-            CONSIDER_ADDED_RESOURCE_CLASS = {}
-            displayInitialState_From_Ontology(initial_state_node)
-
-            document.getElementById("idLoading").style.visible = "none"
-           } else {
-            LIST_CURRENT_RESOURCE_INSTANCES  = []
-            document.getElementById("idLoading").style.visible = "none"
-           }
-              
-        }
-
-      });
-     
+      CONSIDER_ADDED_RESOURCE_CLASS = {}
+      displayInitialState_From_Ontology(initial_state_node)
+      
   } else {
     alert("You should select class of resource want to add")
     return
@@ -903,7 +856,7 @@ function saveInitialState_From_Ontology(){
 }
 
 function drawGraphicFrame_with_CurrentNodesEdge(){
-  initGraphicFrame()
+  initGraphicFrame()   
 }
 
 function update_Components_for_InitialState(htmlSelectNumberOfComponents_InitialState){
@@ -950,6 +903,47 @@ function update_Components_for_GoalState(htmlSelectNumberOfComponents_GoalState)
   }
 }
 
+function displyInfo_Node(event,node_type){
+   message = ""
+   data = event.cyTarget._private.data
+   if (node_type === "initial_state_node"){
+     message = "----Initial State Node-----\n"
+     message += "---------------------------\n"
+     for(var i = 0 ; i < data.components.length ; i++){
+       message += "-Component : " + data.components[i] + "\n"
+       message += "-Data Format : " + data.data_formats[i] + "\n"
+       message += "---------------------------\n"
+     }
+   } else if (node_type === "goal_state_node"){
+     message = "----Goal State Node-----\n"
+     message += "---------------------------\n"
+     for(var i = 0 ; i < data.components.length ; i++){
+       message += "-Component : " + data.components[i] + "\n"
+       message += "-Data Format : " + data.data_formats[i] + "\n"
+       message += "---------------------------\n"
+     }
+   } else if (node_type === "service_class_node"){
+     message = "----A Class of Service-----\n"
+     message += "- Name : " + data.id + "\n"
+     message += "---------------------------\n"
+     message += "--------INPUT--------------\n"
+     for(var i = 0 ; i < data.inputs.length ; i++){
+       message += "- Component : " + data.inputs[i].resource_id + "\n"
+       message += "- Map with : " + data.inputs[i].map_to_resource_id  + " of service class " + data.inputs[i].map_from_service_class +"\n"
+       message += "----------\n"
+     }
+     message += "---------------------------\n"
+     message += "--------OUPUT--------------\n"
+     for(var i = 0 ; i < data.outputs.length ; i++){
+       message += "- Component : " + data.outputs[i] + "\n"
+       message += "----------\n"
+     }
+   }
+   alert(message)
+}
+
+
+
 function initGraphicFrame(){
   cy = window.cy = cytoscape({
     container: document.getElementById('cy'),
@@ -968,6 +962,7 @@ function initGraphicFrame(){
           'text-opacity': 3,
           'text-valign': 'top',
           'text-halign': 'center',
+          'font-size':6,
           'background-color': '#11479e'
         }
       },
@@ -975,14 +970,14 @@ function initGraphicFrame(){
       {
         selector: 'edge',
         style: {
-          'width': 3,
+          'width': 1,
           'label' : 'data(label)',
           'target-arrow-shape': 'triangle',
           'line-color': '#ad1a66',
           'target-arrow-color': '#ad1a66',
           'curve-style': 'bezier',
           'edge-text-rotation': 'autorotate',
-          'font-size' : 12
+          'font-size' : 7
         }
       }
 
@@ -1014,8 +1009,14 @@ function initGraphicFrame(){
                title: 'Info node',
                selector: 'node',
                onClickFunction: function (event) {
-                 //event.cyTarget.remove();
-                 console.log("Info node")
+                   console.log(event)
+                   if (event.cyTarget._private.data.type === "initial_state_node"){
+                     displyInfo_Node(event,"initial_state_node")
+                   } else if (event.cyTarget._private.data.type === "goal_state_node"){
+                     displyInfo_Node(event,"goal_state_node")
+                   } else {
+                     displyInfo_Node(event,"service_class_node")
+                   }
                },
                hasTrailingDivider: true
             },
@@ -1041,14 +1042,15 @@ function initGraphicFrame(){
             },
              {
               id: 'add-node-operation-class',
-              title: 'Add operation class',
+              title: 'Add a Class of Service Node',
               coreAsWell: true,
               onClickFunction: function (event) {
-                openAddOperationClassData_Modal();
+                openAdd_ServiceClassData_Modal();
                 CURRENT_X = event.cyPosition.x;
                 CURRENT_Y = event.cyPosition.y;
               }
             },
+            /*
             {
               id: 'add-node-initial-state',
               title: 'Add Inital State Node',
@@ -1059,9 +1061,10 @@ function initGraphicFrame(){
                 CURRENT_Y = event.cyPosition.y;
               }
             },
+            */
             {
               id: 'add-node-initial-state-hierarchy',
-              title: 'Add Inital State Node (Hierarchy)',
+              title: 'Add Inital State Node Data (Hierarchy Classes)',
               coreAsWell: true,
               onClickFunction: function (event) {
                 openAddInitialState_FromOntology_Modal_Hierarchy();
@@ -1069,6 +1072,7 @@ function initGraphicFrame(){
                 CURRENT_Y = event.cyPosition.y;
               }
             },
+            /*
             {
               id: 'add-node-goal-state',
               title: 'Add Goal State Node',
@@ -1079,9 +1083,10 @@ function initGraphicFrame(){
                 CURRENT_Y = event.cyPosition.y;
               }
             },
+            */
              {
               id: 'add-node-goal-state-hierarchy',
-              title: 'Add Goal State Node (Hierarchy)',
+              title: 'Add Goal State Node Data (Hierarchy Classes)',
               coreAsWell: true,
               onClickFunction: function (event) {
                 openAddGoalState_FromOntology_Modal_Hierarchy();
@@ -1105,14 +1110,10 @@ function initGraphicFrame(){
 
 $(function(){
 
-  console.log("Make API to get list of resources ontology - For Initial/Goal State Description")
-  request_PlanningOntologyEngine_List_Of_All_Resources()
-
   console.log("Make API to get list of hierarchy of phylotastic resources class ")
   request_HierarchyClasses_Of_Class("http://www.cs.nmsu.edu/~epontell/CDAO/cdao.owl#phylotastic_resources");
 
   console.log("Make API to get hierarchy classes of operation classification class for add Operation class")
-  /* Make API to get hierarchy of class of operationClassification class */
   request_HierarchyClasses_Of_Class("");
 
   console.log("Ready to Go")
