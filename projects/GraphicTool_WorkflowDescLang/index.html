@@ -1,6 +1,8 @@
 <html>
 	<head>
-		<title>Web Service Composition - Workflow Description Language</title>
+		<title>
+		    Web Service Composition - Workflow Description Language
+		</title>
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
 		<script src="./libs/jquery/jquery-2.0.3.min.js"></script>
 		<!-- <script src="./libs/jquery/jquery.mobile-1.4.5.min.js"></script> -->
@@ -10,7 +12,8 @@
 		<script src="./libs/cytospace/cytoscape-context-menus.js"></script>
 		<!-- Demo -->
 		<script src="./sources/workflow_plan.js"></script>
-		<script src="./sources/demo_resources_ontology_list.js"></script>
+		<script src="./sources/workflow_plan_abstract_concrete.js"></script>
+		
 		<!-- End Demo -->
 		<script src="./scripts/configuration.js"></script>
 
@@ -19,12 +22,13 @@
 		<script src="./scripts/edge.js"></script>
 		<script src="./scripts/planning.js"></script>
 
-    <script src="./scripts/workflow_plan_des_lang.js"></script>
+        <script src="./scripts/workflow_plan_des_lang.js"></script>
 		<script src="./scripts/connect_api_planning_ontology_engine.js"></script>
 
 		<script src="./scripts/utility.js"></script>
 
 		<link rel="stylesheet" type="text/css" href="./css/workflow.css">
+		<link rel="stylesheet" type="text/css" href="./css/loading.css">
 		<link href="./css/cytoscape-context-menus.css" rel="stylesheet" type="text/css" />
 		<link href="./css/jquery.mobile-1.4.5.min.css" rel="stylesheet" type="text/css" />
 		<link href="./css/modal.css" rel="stylesheet" type="text/css" />
@@ -51,10 +55,10 @@
 		<div class="header">
 			<h1>Web Services Composition - Workflow Description Graphical Tool</h1>
 			<fieldset>
-		    <button id="btnDisplayWF" onclick="DisplayWorkflow_Graphic();">Display Workflow from Source</button>
-				<button id="btnExecutePlanner" onclick="executePlanner_toGet_WorkFlow();">Execute Planning Engine (via Web Service API)</button>
-				<button id="btnGenWF" onclick="GenerateWorkflow();">Re-Generate Workflow</button>
-				<button id="btnClearData" onclick="clearData();">Clear data</button>
+		    
+			<button id="btnExecutePlanner" onclick="executePlanner_toGet_WorkFlow();">Execute Planning Engine (via Web Service API)</button>
+			<button id="btnGenWF" onclick="GenerateWorkflow();">Re-Generate Workflow</button>
+			<button id="btnClearData" onclick="clearData();">Clear data</button>
 			</fieldset>
 
 			<!-- Modal for Edge Adding tool -->
@@ -172,7 +176,129 @@
 					<button id="save" onclick="saveAddOperationClass_Modal();">Add</button>
 			  	</div>
 			</div>
+
+
+			<!-- Modal for Operation Class Hierarchy Adding tool -->
+			<div id="addInitialStateModal_Hierarchy" class="modal">
+				<!-- Modal content -->
+			  	<div class="modal-content">
+			  		<span class="close" onclick="closeAddInitialState_Modal_Hierarchy();">&times;</span>
+			  		<p>Provide components in Initial State</p>
+			  		<p>Resources root class</p>
+			  		<div id="divDisplayInitialState_ResourcesClassHierarchy">  
+					</div>	
+					<br/>
+					<br/>
+					<p>Data format of selected resource</p>
+					<div id="divDisplayInitialState_DataFormatClasses">
+					   <select id="selectInitialState_DataFormatClasses">
+					      <option value=""></option>
+					      <option value="list_of_things">list_of_things</option>
+					      <option value="list_of_strings">list_of_strings</option>
+					      <option value="number">number</option>
+					      <option value="double">double</option>
+					      <option value="integer">integer</option>
+					      <option value="http_url">http_url</option>
+					      <option value="uri">uri</option>
+					      <option value="string">string</option>
+					      <option value="data_format_A">data_format_A</option>
+					      <option value="data_format_B">data_format_B</option>
+					      <option value="data_format_C">data_format_C</option>
+					      <option value="data_format_D">data_format_D</option>
+					      <option value="data_format_E">data_format_E</option>
+					      <option value="data_format_F">data_format_F</option>
+					      <option value="plain_text">plain_text</option>
+					      <option value="data_format_A_1">data_format_A_1</option>
+					      <option value="data_format_A_2">data_format_A_2</option>
+					      <option value="data_format_A_3">data_format_A_3</option>
+					      <option value="names_format_1">names_format_1</option>
+					      <option value="names_format_2">names_format_2</option>
+					      <option value="names_format_3">names_format_3</option>
+					      <option value="names_format_4">names_format_4</option>
+					      <option value="names_format_5">names_format_5</option>
+					      <option value="names_format_6">names_format_6</option>
+					      <option value="names_format_resolved_GNR">names_format_resolved_GNR</option>
+					      <option value="names_format_resolved_OT">names_format_resolved_OT</option>
+					      <option value="data_format_C_1">data_format_C_1</option>
+					      <option value="data_format_C_2">data_format_C_2</option>
+					      <option value="tree_format_1">tree_format_1</option>
+					      <option value="tree_format_2">tree_format_2</option>
+					      <option value="tree_format_3">tree_format_3</option>
+					      <option value="tree_format_4">tree_format_4</option>
+					      <option value="newickTree">newickTree</option>
+					      <option value="phyloXML">phyloXML</option>
+					      <option value="phylo4Tree">phylo4Tree</option>		
+					   </select>  
+					</div>
+					<br/>
+					<br/>
+					<button id="save" onclick="saveAddInitialState_Modal_Hierarchy();">Add</button>
+			  	</div>
+			</div>
+
+			<!-- Modal for Operation Class Hierarchy Adding tool -->
+			<div id="addGoalStateModal_Hierarchy" class="modal">
+				<!-- Modal content -->
+			  	<div class="modal-content">
+			  		<span class="close" onclick="closeAddGoalState_Modal_Hierarchy();">&times;</span>
+			  		<p>Provide components in Goal State</p>
+			  		<p>Resources root class</p>
+
+			  		<div id="divDisplayGoalState_ResourcesClassHierarchy">
+			  		    
+					</div>
+					<br/>
+					<br/>	
+					<p>Data format of selected resource</p>
+					<div id="divDisplayGoalState_DataFormatClasses">
+					   <select id="selectGoalState_DataFormatClasses">
+					      <option value=""></option>
+					      <option value="list_of_things">list_of_things</option>
+					      <option value="list_of_strings">list_of_strings</option>
+					      <option value="number">number</option>
+					      <option value="double">double</option>
+					      <option value="integer">integer</option>
+					      <option value="http_url">http_url</option>
+					      <option value="uri">uri</option>
+					      <option value="string">string</option>
+					      <option value="data_format_A">data_format_A</option>
+					      <option value="data_format_B">data_format_B</option>
+					      <option value="data_format_C">data_format_C</option>
+					      <option value="data_format_D">data_format_D</option>
+					      <option value="data_format_E">data_format_E</option>
+					      <option value="data_format_F">data_format_F</option>
+					      <option value="plain_text">plain_text</option>
+					      <option value="data_format_A_1">data_format_A_1</option>
+					      <option value="data_format_A_2">data_format_A_2</option>
+					      <option value="data_format_A_3">data_format_A_3</option>
+					      <option value="names_format_1">names_format_1</option>
+					      <option value="names_format_2">names_format_2</option>
+					      <option value="names_format_3">names_format_3</option>
+					      <option value="names_format_4">names_format_4</option>
+					      <option value="names_format_5">names_format_5</option>
+					      <option value="names_format_6">names_format_6</option>
+					      <option value="names_format_resolved_GNR">names_format_resolved_GNR</option>
+					      <option value="names_format_resolved_OT">names_format_resolved_OT</option>
+					      <option value="data_format_C_1">data_format_C_1</option>
+					      <option value="data_format_C_2">data_format_C_2</option>
+					      <option value="tree_format_1">tree_format_1</option>
+					      <option value="tree_format_2">tree_format_2</option>
+					      <option value="tree_format_3">tree_format_3</option>
+					      <option value="tree_format_4">tree_format_4</option>
+					      <option value="newickTree">newickTree</option>
+					      <option value="phyloXML">phyloXML</option>
+					      <option value="phylo4Tree">phylo4Tree</option>	
+					   </select>  
+					</div>
+					
+					<br/>
+					<br/>
+					<button id="save" onclick="saveAddGoalState_Modal_Hierarchy();">Add</button>
+			  	</div>
+			</div>
 		</div>
+
 		<div id="cy"></div>
+		<div class="modal_2" id="idLoading"><!-- Place at bottom of page --></div>
 	</body>
 </html>

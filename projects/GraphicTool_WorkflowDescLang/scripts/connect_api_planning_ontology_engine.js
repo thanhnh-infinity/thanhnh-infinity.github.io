@@ -4,11 +4,10 @@
  * Date : 25-Feb-2017
  **/
 
-
 function request_PlanningOntologyEngine_List_Of_All_Resources(){
   $.ajax({
         type: "GET",
-        url: "http://phylo.cs.nmsu.edu:8000/query",
+        url: "http://127.0.0.1:8000/query",
         dataType: "application/x-www-urlencoded",
         async:false,
         data: { 
@@ -38,11 +37,20 @@ function request_PlanningOntologyEngine_List_Of_All_Resources(){
 function request_HierarchyClasses_Of_Class(str_owl_class_uri){
 	if (isEmpty(str_owl_class_uri)){
 		str_owl_class_uri = "http://www.cs.nmsu.edu/~epontell/Ontologies/phylogenetic_methods.owl#operationClassification";
+        GLOBAL_HIERARCHY_CLASSES_STRUCTURE_ROOTED = {}
 	}
-	GLOBAL_HIERARCHY_CLASSES_STRUCTURE_ROOTED = {}
+
+    if (str_owl_class_uri === "http://www.cs.nmsu.edu/~epontell/Ontologies/phylogenetic_methods.owl#operationClassification"){
+        GLOBAL_HIERARCHY_CLASSES_STRUCTURE_ROOTED = {}   
+    } else if (str_owl_class_uri === "http://www.cs.nmsu.edu/~epontell/CDAO/cdao.owl#phylotastic_resources"){
+        GLOBAL_HIERARCHY_CLASSES_RESOURCE = {}
+    } else {
+        GLOBAL_HIERARCHY_CLASSES_STRUCTURE_ROOTED = {} 
+    }
+	
 	$.ajax({
         type: "GET",
-        url: "http://phylo.cs.nmsu.edu:8000/query",
+        url: "http://127.0.0.1:8000/query",
         dataType: "application/x-www-urlencoded",
         async:false,
         data: { 
@@ -53,15 +61,24 @@ function request_HierarchyClasses_Of_Class(str_owl_class_uri){
         contentType: "application/json; charset=utf-8",
         success: function (data) {
         	  jsonData = JSON.parse(data.responseText)
-              GLOBAL_HIERARCHY_CLASSES_STRUCTURE_ROOTED = jsonData
+              if (str_owl_class_uri === "http://www.cs.nmsu.edu/~epontell/Ontologies/phylogenetic_methods.owl#operationClassification"){
+                GLOBAL_HIERARCHY_CLASSES_STRUCTURE_ROOTED = jsonData
+              } else if (str_owl_class_uri === "http://www.cs.nmsu.edu/~epontell/CDAO/cdao.owl#phylotastic_resources") {
+                GLOBAL_HIERARCHY_CLASSES_RESOURCE = jsonData
+              }
         },
         error: function (textStatus, errorThrown) {
         	 if (textStatus.status = 200){
         	 	jsonData = JSON.parse(textStatus.responseText)
         	 	console.log(JSON.parse(textStatus.responseText))
-        	 	GLOBAL_HIERARCHY_CLASSES_STRUCTURE_ROOTED = jsonData
+        	 	if (str_owl_class_uri === "http://www.cs.nmsu.edu/~epontell/Ontologies/phylogenetic_methods.owl#operationClassification"){
+                    GLOBAL_HIERARCHY_CLASSES_STRUCTURE_ROOTED = jsonData
+                } else if (str_owl_class_uri === "http://www.cs.nmsu.edu/~epontell/CDAO/cdao.owl#phylotastic_resources") {
+                    GLOBAL_HIERARCHY_CLASSES_RESOURCE = jsonData
+                }
         	 } else {
         	 	GLOBAL_HIERARCHY_CLASSES_STRUCTURE_ROOTED = {}
+                GLOBAL_HIERARCHY_CLASSES_RESOURCE = {}
         	 }
 
         	 //console.log("Du lieu class")

@@ -20,16 +20,25 @@ var ADDED_OPERATION_NODES_LIST = []
 var GLOBAL_INITIAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE = {}
 var GLOBAL_GOAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE = {}
 var GLOBAL_LIST_RESOURCES_ONTOLOGY = []
+var LIST_CURRENT_RESOURCE_INSTANCES = []
+
+var PREFIX_URI_ONTOLOGY = "http://www.cs.nmsu.edu/~epontell/CDAO/cdao.owl#"
+
 var GLOBAL_HIERARCHY_CLASSES_STRUCTURE_ROOTED = {}
+var GLOBAL_HIERARCHY_CLASSES_RESOURCE = {}
 
 var ONTOLOGY_API_ENGINE_ROOT_MATERIAL = "http://phylo.cs.nmsu.edu:8000/query"
 var ONTOLOGY_API_ENGINE_ROOT_TRIPLE = "http://phylo.cs.nmsu.edu:8000/getTriples"
 var ONTOLOGY_API_ENGINE_ROOT_GRAPH = "http://phylo.cs.nmsu.edu:8000/buildGraph"
 
+var PLANNING_ENGINE_API_ROOT = "http://127.0.0.1:8000/planningEngine/generateWorkflow"
+
+
 var REQUEST_TYPE_GET_INSTANCES_OF_CLASS = "get_all_instances_of_a_class"
 var REQUEST_TYPE_GET_HIERARCHY_SUBCLASS_OF_CLASS = "get_hierarchy_subclasses_of_a_class"
 
 var CONSIDER_ADDED_OPERATION_CLASS = {}
+var CONSIDER_ADDED_RESOURCE_CLASS = {}
 
 var GLOBAL_NO_ONTOLOGY_DATA = "NO_ONTOLOGY_DATA"
 var WS_COMPOSITION_ONTOLOGY_API = "http://thanhnh-infinity.github.io/projects/GraphicTool_WorkflowDescLang/sources/"

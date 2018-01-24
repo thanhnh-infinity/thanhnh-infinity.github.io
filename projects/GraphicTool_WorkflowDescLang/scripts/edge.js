@@ -9,35 +9,118 @@ function initEdge_forGraphic(edge){
   return {data: { source: edge.source, target: edge.target, label:edge.label} }
 }
 
-function setUpAllEdgesForOperationNodes_From_WorkFlow(operation_nodes,plan){
-  var operation_nodes_edges = []
-  var edge_temp = {}
-  for(var i = 0 ; i < operation_nodes.length ; i++){
-    if (i < operation_nodes.length - 1){
-      edge_temp = {}
-      edge_temp.source = operation_nodes[i].data.id
-      edge_temp.target = operation_nodes[i+1].data.id
+function findSourcesOfServiceClassNode(consider_node, list_of_nodes,init_node,goal_node){
+  list_of_sources = []
+  
+  for (var j = 0 ; j < consider_node.data.inputs.length ; j++){
+    if (consider_node.data.inputs[j].map_from_service_class === "initial_state"){
+        list_of_sources.push(init_node) 
+    }
+  }
+  
+  for(var i = 0 ; i < list_of_nodes.length ; i++){
+    if (consider_node.data.id !== list_of_nodes[i].data.id){
+      var check_node = list_of_nodes[i]
+      for (var j = 0 ; j < consider_node.data.inputs.length ; j++){
 
-      var common_label = []
-      var operation_i = plan[i]
-      var operation_iplus1 = plan[i+1]
-      for(var k = 0 ; k < operation_i.operation_parameters.output.components.length ; k++){
-        for(var h = 0 ; h < operation_iplus1.operation_parameters.input.components.length ; h++){
-          var consider_out_op_1 = operation_i.operation_parameters.output.components[k]
-          var consider_in_op_2 = operation_iplus1.operation_parameters.input.components[h]
-          if (consider_out_op_1.ontology_resource_id.trim().toUpperCase()
-              === consider_in_op_2.ontology_resource_id.trim().toUpperCase()){
-              common_label.push(consider_out_op_1.ontology_resource_id)
+        if (consider_node.data.inputs[j].map_from_service_class === check_node.data.id){
+           list_of_sources.push(check_node)
+        }
+        
+      }
+    }
+  }
+  return list_of_sources
+}
+
+function findCommonResource(service_class_node_source, service_class_nodes_destination){
+  commons = []
+  if (service_class_nodes_destination.data.type === "service_class_node"){
+    for(var i = 0 ; i < service_class_nodes_destination.data.inputs.length ; i++){
+      if (service_class_node_source.data.type === "service_class_node") {
+         for(var j = 0 ; j < service_class_node_source.data.outputs.length; j++){
+            if (service_class_nodes_destination.data.inputs[i].resource_id === service_class_node_source.data.outputs[j]){
+              if (commons.indexOf(service_class_nodes_destination.data.inputs[i].resource_id) == -1){
+                commons.push(service_class_nodes_destination.data.inputs[i].resource_id)  
+              }
+              
+            } else if (service_class_nodes_destination.data.inputs[i].map_to_resource_id === service_class_node_source.data.outputs[j]){
+              if (commons.indexOf(service_class_nodes_destination.data.inputs[i].map_to_resource_id) == -1){
+                commons.push(service_class_nodes_destination.data.inputs[i].map_to_resource_id)  
+              }
+            }
+         }
+      } else if (service_class_node_source.data.type === "initial_state_node"){
+         for(var j = 0 ; j < service_class_node_source.data.components.length; j++){
+            if (service_class_nodes_destination.data.inputs[i].resource_id === service_class_node_source.data.components[j]){
+              if (commons.indexOf(service_class_nodes_destination.data.inputs[i].resource_id) == -1){
+                commons.push(service_class_nodes_destination.data.inputs[i].resource_id)  
+              }
+            } else if (service_class_nodes_destination.data.inputs[i].map_to_resource_id === service_class_node_source.data.components[j]){
+              if (commons.indexOf(service_class_nodes_destination.data.inputs[i].map_to_resource_id) == -1){
+                commons.push(service_class_nodes_destination.data.inputs[i].map_to_resource_id)  
+              }
+            }
+         }
+      } 
+    }
+  } else if (service_class_nodes_destination.data.type === "goal_state_node"){
+    for(var j = 0 ; j < service_class_nodes_destination.data.components.length; j++){
+        for(var i = 0 ; i < service_class_node_source.data.outputs.length; i++){
+          if (service_class_node_source.data.outputs[i] === service_class_nodes_destination.data.components[j]){
+            if (commons.indexOf(service_class_nodes_destination.data.components[j]) == -1){
+              commons.push(service_class_nodes_destination.data.components[j])  
+            }   
           }
+        }
+     }
+  }
+  return commons
+}
+
+function setUpAllEdgesFor_ServiceClassNodes_From_WorkFlow(service_class_nodes,plan,init_node,goal_node){
+  //console.log("All Classes")
+  //console.log(service_class_nodes)
+  var service_class_nodes_edges = []
+  var edge_temp = {}
+  for(var i = 0 ; i < service_class_nodes.length ; i++){
+      var consider_service_class_node = {}
+      consider_service_class_node = service_class_nodes[i]
+      //console.log(consider_service_class_node)
+      var service_class_nodes_sources = findSourcesOfServiceClassNode(consider_service_class_node,service_class_nodes,init_node,goal_node)
+      //console.log("Souce of " + consider_service_class_node.data.id)
+      //console.log(service_class_nodes_sources)
+      if (!objectIsEmpty(service_class_nodes_sources) && service_class_nodes_sources.length > 0){
+        for(var j = 0 ; j < service_class_nodes_sources.length ; j++){
+          edge_temp = {}
+          edge_temp.target = consider_service_class_node.data.id
+          edge_temp.source = service_class_nodes_sources[j].data.id
+          var commons = findCommonResource(service_class_nodes_sources[j],consider_service_class_node)
+          edge_temp.label = commons.toString()
+          var edge = initEdge_forGraphic(edge_temp)
+          service_class_nodes_edges.push(edge)
         }
       }
 
-      edge_temp.label = common_label.toString()
-      var edge = initEdge_forGraphic(edge_temp)
-      operation_nodes_edges.push(edge)
+  
+  }
+  
+  console.log(goal_node)
+
+  for(var i = 0 ; i < goal_node.data.maps.length ; i++){
+    for(var j = 0 ; j < service_class_nodes.length; j++){
+      if (goal_node.data.maps[i].map_from_service_class === service_class_nodes[j].data.id){
+          edge_temp = {}
+          edge_temp.target = goal_node.data.id
+          edge_temp.source = service_class_nodes[j].data.id
+          edge_temp.label = findCommonResource(service_class_nodes[j],goal_node)
+          var edge = initEdge_forGraphic(edge_temp)
+          service_class_nodes_edges.push(edge)
+      }
     }
   }
-  return operation_nodes_edges
+
+  return service_class_nodes_edges
 }
 
 function setUpEdge_FromInit_ToFirstOperation(initNode,operation_nodes,origin_input,origin_first_operation){
@@ -49,11 +132,12 @@ function setUpEdge_FromInit_ToFirstOperation(initNode,operation_nodes,origin_inp
   var added_label = ""
   var origin_first_operation_input = origin_first_operation.operation_parameters.input.components
 
+  
   for(var i = 0 ; i < origin_first_operation_input.length ; i++){
     for(var j = 0 ; j < origin_input.length ; j++){
-          if (origin_input[j].ontology_resource_id.trim().toUpperCase() ===
-              origin_first_operation_input[i].ontology_resource_id.trim().toUpperCase()){
-            common_label.push(origin_input[j].ontology_resource_id)
+          if (origin_input[j].resource_ontology_id.trim().toUpperCase() ===
+              origin_first_operation_input[i].resource_ontology_id.trim().toUpperCase()){
+            common_label.push(origin_input[j].resource_ontology_id)
           }
     }
   }
@@ -74,9 +158,9 @@ function setUpEdge_FromLastOperation_ToGoal(goalNode,operation_nodes,origin_outp
 
   for(var i = 0 ; i < origin_last_operation_output.length ; i++){
     for(var j = 0 ; j < origin_output.length ; j++){
-          if (origin_output[j].ontology_resource_id.trim().toUpperCase() ===
-              origin_last_operation_output[i].ontology_resource_id.trim().toUpperCase()){
-            common_label.push(origin_output[j].ontology_resource_id)
+          if (origin_output[j].resource_ontology_id.trim().toUpperCase() ===
+              origin_last_operation_output[i].resource_ontology_id.trim().toUpperCase()){
+            common_label.push(origin_output[j].resource_ontology_id)
           }
     }
   }

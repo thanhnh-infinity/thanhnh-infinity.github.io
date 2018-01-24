@@ -1,4 +1,4 @@
-{
+var GLOBAL_WORKFLOW_PLAN_DATA = {
   "request_parameters" : {
     "input" : [
       {
@@ -123,7 +123,7 @@
           },
           {
             "operation_id" : 3,
-            "operation_name" : "getPhylogeneticTree_TreeBase_GET",
+            "operation_name" : "getPhylogeneticTree_OT_GET",
             "operation_of_web_service" : "phylotastic_webservice",
             "operation_owlref" : "http://www.cs.nmsu.edu/~epontell/CDAO/cdao.owl#phylotastic_GetPhylogeneticTree_OT_GET",
             "operation_parameters" :
@@ -169,4 +169,4 @@
 
      }
   ]
-}
+};
