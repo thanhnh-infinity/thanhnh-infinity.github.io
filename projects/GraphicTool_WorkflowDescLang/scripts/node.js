@@ -7,42 +7,44 @@
 
 /* Set up Nodes (Operation Node and Initial + Goal) FROM WORKFLOW DATA */
 function initNode_forGraphic(node){
-  return {data : {id : node.id, name : node.name, faveShape: node.shape, type:node.type, components:node.components, data_formats:node.data_formats, inputs:node.inputs,outputs:node.outputs,maps:node.maps}}
+  return {data : 
+           {id : node.id, name : node.name, description: node.description ,faveShape: node.shape, type:node.type, components:node.components, data_formats:node.data_formats, inputs:node.inputs,outputs:node.outputs,maps:node.maps}}
 }
 
-function setUpOneServiceClassNode(service_class){
-  var service_class_node_temp = {}
-  service_class_node_temp.id = service_class.service_class_name
-  service_class_node_temp.name = service_class.service_class_name
-  service_class_node_temp.type = "service_class_node"
-  service_class_node_temp.shape = "ellipse"
+function setUpOneServiceNode(service){
+  var service_node_temp = {}
+  service_node_temp.id = service.service_name
+  service_node_temp.name = service.service_name
+  service_node_temp.type = "service_node"
+  service_node_temp.shape = "ellipse"
+  service_node_temp.description = service.service_description
 
-  service_class_node_temp.inputs = []
-  raw_input_components = service_class.service_class_parameters.input.components
+  service_node_temp.inputs = []
+  raw_input_components = service.service_parameters.input.components
   if (!objectIsEmpty(raw_input_components) && raw_input_components.length > 0){
     for(var i = 0 ; i < raw_input_components.length ; i++){
        input_object = {}
        input_object.resource_id = raw_input_components[i].resource_ontology_id
+       input_object.data_format_id = raw_input_components[i].resource_data_format
        input_object.map_to_resource_id = raw_input_components[i].map.resource_ontology_id
-       input_object.map_from_service_class = raw_input_components[i].map.from
-       service_class_node_temp.inputs.push(input_object)
+       input_object.map_from_service = raw_input_components[i].map.from_service
+       input_object.map_to_resource_data_format = raw_input_components[i].map.resource_data_format
+       service_node_temp.inputs.push(input_object)
     }
   }
 
-  service_class_node_temp.outputs = []
-  raw_output_components = service_class.service_class_parameters.output.components
+  service_node_temp.outputs = []
+  raw_output_components = service.service_parameters.output.components
   if (!objectIsEmpty(raw_output_components) && raw_output_components.length > 0){
     for(var i = 0 ; i < raw_output_components.length ; i++){
-      service_class_node_temp.outputs.push(raw_output_components[i].resource_ontology_id)
+      service_node_temp.outputs.push(raw_output_components[i].resource_ontology_id)
     }
   }
-  //console.log("Temp")
-  //console.log(service_class_node_temp)
-  var service_class_node = initNode_forGraphic(service_class_node_temp)
-  service_class_node.data.type = "service_class_node"
-  //console.log("Thayt")
-  //console.log(service_class_node)
-  return service_class_node
+  
+  var service_node = initNode_forGraphic(service_node_temp)
+  service_node.data.type = "service_node"
+  
+  return service_node
 }
 
 function setUpInitialState_From_WorkFlow(GLOBAL_WORKFLOW_PLAN_DATA){
@@ -72,6 +74,7 @@ function setUpInitialState_From_WorkFlow(GLOBAL_WORKFLOW_PLAN_DATA){
   initialState_Node_Temp.shape = "triangle"
   initialState_Node_Temp.components = components
   initialState_Node_Temp.data_formats = data_formats
+  initialState_Node_Temp.description = "Initial State"
   var initialState_Node = initNode_forGraphic(initialState_Node_Temp)
   //console.log(initialState_Node)
   return initialState_Node
@@ -79,6 +82,7 @@ function setUpInitialState_From_WorkFlow(GLOBAL_WORKFLOW_PLAN_DATA){
 
 function setUpGoalState_From_WorkFlow(GLOBAL_WORKFLOW_PLAN_DATA){
   var requestOutput = GLOBAL_WORKFLOW_PLAN_DATA.request_parameters.output
+  var list_services = GLOBAL_WORKFLOW_PLAN_DATA.workflow_plan[0].full_plan
   var goalState_Node_Temp = {}
   var id = ""
   var name = "Goal State : "
@@ -89,8 +93,8 @@ function setUpGoalState_From_WorkFlow(GLOBAL_WORKFLOW_PLAN_DATA){
     if (i < requestOutput.length - 1) {
        id += requestOutput[i].resource_ontology_id + "_"
        name += requestOutput[i].resource_ontology_id + ","
-       components.push(requestInput[i].resource_ontology_id)
-       data_formats.push(requestInput[i].resource_data_format_id)
+       components.push(requestOutput[i].resource_ontology_id)
+       data_formats.push(requestOutput[i].resource_data_format_id)
     } else {
        id += requestOutput[i].resource_ontology_id
        name += requestOutput[i].resource_ontology_id
@@ -104,14 +108,27 @@ function setUpGoalState_From_WorkFlow(GLOBAL_WORKFLOW_PLAN_DATA){
   goalState_Node_Temp.shape = "triangle"
   goalState_Node_Temp.components = components
   goalState_Node_Temp.data_formats = data_formats
-
+  goalState_Node_Temp.description = "Goal State"
   goalState_Node_Temp.maps = []
   if (!objectIsEmpty(requestOutput) && requestOutput.length > 0){
     for(var i = 0 ; i < requestOutput.length ; i++){
        output_object = {}
        output_object.resource_id = requestOutput[i].resource_ontology_id
-       output_object.map_to_resource_id = requestOutput[i].map.resource_ontology_id
-       output_object.map_from_service_class = requestOutput[i].map.from
+       for(var j = 0 ; j < list_services.length ; j++){
+          var consider_service = list_services[j]
+          var output_comps = consider_service.service_parameters.output.components
+          for(var k = 0 ; k < output_comps.length ; k++){
+             if ((output_comps[k].resource_ontology_id.trim().toUpperCase() === requestOutput[i].resource_ontology_id.trim().toUpperCase()) 
+                 && (output_comps[k].resource_data_format.trim().toUpperCase() === requestOutput[i].resource_data_format_id.trim().toUpperCase())){
+                output_object.map_to_resource_id = output_comps[k].resource_ontology_id
+                output_object.map_to_data_format = output_comps[k].resource_data_format
+                output_object.map_from_service = consider_service.service_name
+             }
+          }
+            
+
+       }
+         
        goalState_Node_Temp.maps.push(output_object)
     }
   }  
@@ -121,16 +138,15 @@ function setUpGoalState_From_WorkFlow(GLOBAL_WORKFLOW_PLAN_DATA){
 
 }
 
-function setUpAll_ServiceClassNodes_From_WorkFlow(GLOBAL_WORKFLOW_PLAN_DATA){
-   var abstract_plan = GLOBAL_WORKFLOW_PLAN_DATA.workflow_plan[0].abstract_plan
-   var service_class_nodes = []
-   for(var i = 0 ; i < abstract_plan.length ; i++){
-     var service_class_node = setUpOneServiceClassNode(abstract_plan[i])
-     service_class_nodes.push(service_class_node)
+function setUpAll_ServiceNodes_From_WorkFlow(GLOBAL_WORKFLOW_PLAN_DATA){
+   var workflow_plan = GLOBAL_WORKFLOW_PLAN_DATA.workflow_plan[0].full_plan
+   var service_nodes = []
+   for(var i = 0 ; i < workflow_plan.length ; i++){
+     var service_node = setUpOneServiceNode(workflow_plan[i])
+     service_nodes.push(service_node)
    }
-   //console.log("A1")
-   //console.log(service_class_nodes)
-   return service_class_nodes
+   //console.log(service_nodes)
+   return service_nodes
 }
 
 function getFullNodeData_FromNodeID(node_id,origin_operations_nodes,added_operations_nodes){
@@ -171,15 +187,13 @@ function setUpInitialState_From_Ontology(initial_state_node){
        data_formats.push(initial_state_node.components[i].data_format)
     }
   }
-  //console.log(id)
-  //console.log(name)
   initialState_Node_Temp.id = id
   initialState_Node_Temp.name = name
   initialState_Node_Temp.type = type
   initialState_Node_Temp.shape = "triangle"
   initialState_Node_Temp.components = components
   initialState_Node_Temp.data_formats = data_formats
-
+  initialState_Node_Temp.description = "Initial State"
   var initialState_Node = initNode_forGraphic(initialState_Node_Temp)
   //console.log(initialState_Node)
   return initialState_Node
@@ -222,7 +236,7 @@ function setUpGoalState_From_Ontology(goal_state_node){
   goalState_Node_Temp.shape = "triangle"
   goalState_Node_Temp.components = components
   goalState_Node_Temp.data_formats = data_formats
-
+  goalState_Node_Temp.description = "Goal State"
   var goalState_Node = initNode_forGraphic(goalState_Node_Temp)
   return goalState_Node
 }

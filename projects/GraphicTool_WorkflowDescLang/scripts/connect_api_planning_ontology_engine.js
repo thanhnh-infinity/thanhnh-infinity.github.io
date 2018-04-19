@@ -80,9 +80,6 @@ function request_HierarchyClasses_Of_Class(str_owl_class_uri){
         	 	GLOBAL_HIERARCHY_CLASSES_STRUCTURE_ROOTED = {}
                 GLOBAL_HIERARCHY_CLASSES_RESOURCE = {}
         	 }
-
-        	 //console.log("Du lieu class")
-        	 //console.log(GLOBAL_HIERARCHY_CLASSES_STRUCTURE_ROOTED)     
         }
   });
 }

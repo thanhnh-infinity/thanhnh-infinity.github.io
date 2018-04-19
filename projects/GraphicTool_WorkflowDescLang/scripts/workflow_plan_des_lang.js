@@ -14,9 +14,7 @@ function clearData(){
   GLOBAL_INITIAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE = {}
   GLOBAL_GOAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE = {}
 
-  //GLOBAL_HIERARCHY_CLASSES_STRUCTURE_ROOTED = {}
-  //GLOBAL_LIST_RESOURCES_ONTOLOGY = []
-  //GLOBAL_WORKFLOW_PLAN_DATA = {};
+  ;
 
   document.getElementById('cy').style.visibility = "visible";
   initGraphicFrame();
@@ -55,10 +53,10 @@ function generateOutputPartData(output_data){
         var component = output_data.components[i]
         html += "<p>Output Param component " + (i+1) + "</p>"
         html += "&nbsp;&nbsp;&nbsp;&nbsp;Name :  <text name='txtOutputComponentName'>" + component.name + "</text><br/>"
-        html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology Resource ID :  <text name='txtOutputComponentOntologyResourceID'>" + component.ontology_resource_id + "</text><br/>"
-        html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology Resource Link :  <text name='txtOutputComponentOntologyResourceLink'>" + component.ontology_resource_link + "</text><br/>"
-        html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology param name :  <text name='txtOutputComponentOntologyParamName'>" + component.ontology_param_name + "</text><br/>"
-        html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology param link :  <text name='txtOutputComponentOntologyParamLink'>" + component.ontology_param_link + "</text><br/>"
+        html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology Resource ID :  <text name='txtOutputComponentOntologyResourceID'>" + component.resource_ontology_id + "</text><br/>"
+        html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology Resource URI :  <text name='txtOutputComponentOntologyResourceLink'>" + component.resource_ontology_uri + "</text><br/>"
+        html += "&nbsp;&nbsp;&nbsp;&nbsp;Data Format ID :  <text name='txtOutputComponentOntologyDataFormatID'>" + component.resource_data_format_id + "</text><br/>"
+        html += "&nbsp;&nbsp;&nbsp;&nbsp;Data Format URI :  <text name='txtOutputComponentOntologyDataFormatURI'>" + component.resource_data_format_uri + "</text><br/>"
       }
   } else {
     html = ""
@@ -76,9 +74,9 @@ function generateInputPartData(input_data){
       html += "<p>Input Param component " + (i+1) + "</p>"
       html += "&nbsp;&nbsp;&nbsp;&nbsp;Name :  <text name='txtInputComponentName'>" + component.name + "</text><br/>"
       html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology Resource ID :  <text name='txtInputComponentOntologyResourceID'>" + component.ontology_resource_id + "</text><br/>"
-      html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology Resource Link :  <text name='txtInputComponentOntologyResourceLink'>" + component.ontology_resource_link + "</text><br/>"
-      html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology param name :  <text name='txtInputComponentOntologyParamName'>" + component.ontology_param_name + "</text><br/>"
-      html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology param link :  <text name='txtInputComponentOntologyParamLink'>" + component.ontology_param_link + "</text><br/>"
+      html += "&nbsp;&nbsp;&nbsp;&nbsp;Ontology Resource URI :  <text name='txtInputComponentOntologyResourceLink'>" + component.resource_ontology_uri + "</text><br/>"
+      html += "&nbsp;&nbsp;&nbsp;&nbsp;Data Format ID :  <text name='txtInputComponentOntologyDataFormatID'>" + component.resource_data_format_id + "</text><br/>"
+      html += "&nbsp;&nbsp;&nbsp;&nbsp;Data Format URI :  <text name='txtInputComponentOntologyDataFormatURI'>" + component.resource_data_format_uri + "</text><br/>"
     }
     document.getElementById('divInputParams').innerHTML = html
   } else {
@@ -96,9 +94,6 @@ function addArrayRecursive(ARRAY,SUB){
   if (isEmpty(SUB) || SUB.length <= 0){
     return
   } else {
-
-    //console.log(ARRAY)
-
     for(var i = 0 ; i < SUB.length ; i++){
       var operation_object = {}
       operation_object["parent_class_uri"] = SUB[i].parent_class_uri
@@ -127,7 +122,7 @@ function saveAddOperationClass_Modal(){
          group: 'nodes',
          id: getResourceID_FromOWLLink(CONSIDER_ADDED_OPERATION_CLASS.class_ontology_uri),
          name: getResourceID_FromOWLLink(CONSIDER_ADDED_OPERATION_CLASS.class_ontology_uri),
-         type:'service_class_node',
+         type:'service_node',
          faveShape:'ellipse'
      };
 
@@ -136,7 +131,7 @@ function saveAddOperationClass_Modal(){
      new_node.id = getResourceID_FromOWLLink(CONSIDER_ADDED_OPERATION_CLASS.class_ontology_uri),
      new_node.name = getResourceID_FromOWLLink(CONSIDER_ADDED_OPERATION_CLASS.class_ontology_uri),
      new_node.shape = 'ellipse'
-     new_node.type = 'service_class_node'
+     new_node.type = 'service_node'
      GLOBAL_NODES_DATA.push(initNode_forGraphic(new_node))
      
 
@@ -176,7 +171,6 @@ function openAddGoalState_FromOntology_Modal_Hierarchy(){
     addArrayRecursive(ARRAY_RESOURCES_CLASSES_FLAT,GLOBAL_HIERARCHY_CLASSES_RESOURCE.subclasses)
   
 
-    //console.log(ARRAY_RESOURCES_CLASSES_FLAT) 
     /* Display operation class for level 0 */
     var div_goal_resource_level_0 = document.getElementById("div_goal_resource_level_0")
     stringHTML = '<select id="select_goal_resource_level_0" onchange="updateFollow_Resouces_Goal_ClassBy(this,0);">'
@@ -349,8 +343,6 @@ function updateFollow_Resouces_ClassBy(resourcesClassObj,level){
     } else {
       div_display_resource_class_level_current.innerHTML = ""
     }
-
-    
 }
 
 function updateFollowClassBy(operationClassObj,level){
@@ -434,8 +426,8 @@ function saveAddOperationNodeData_Modal(){
    //console.log(input_components_names)
    var input_components_resource_ids = document.getElementsByName('txtInputComponentOntologyResourceID')
    var input_components_resource_links = document.getElementsByName('txtInputComponentOntologyResourceLink')
-   var input_components_param_names = document.getElementsByName('txtInputComponentOntologyParamName')
-   var input_components_param_links = document.getElementsByName('txtInputComponentOntologyParamLink')
+   var input_components_param_names = document.getElementsByName('txtInputComponentOntologyDataFormatID')
+   var input_components_param_links = document.getElementsByName('txtInputComponentOntologyDataFormatURI')
 
    var input_components_length = 0
    //console.log(input_components_resource_ids.length )
@@ -649,7 +641,7 @@ function interactiveNode(action,node){
 
 function DisplayWorkflow_Graphic_From_Source(PLAN_DATA){
   GLOBAL_NODES_DATA = []
-  GLOBAL_NODES_DATA = []
+  GLOBAL_EDGES_DATA = []
 
   /* Add node for Input request */
   var initNode = setUpInitialState_From_WorkFlow(PLAN_DATA)
@@ -660,31 +652,20 @@ function DisplayWorkflow_Graphic_From_Source(PLAN_DATA){
   GLOBAL_NODES_DATA.push(goalNode)
 
   /* Set up action */
-  var service_class_nodes = setUpAll_ServiceClassNodes_From_WorkFlow(PLAN_DATA)
-  for(var i = 0 ; i < service_class_nodes.length ; i++){
-    GLOBAL_NODES_DATA.push(service_class_nodes[i])
+  var service_nodes = setUpAll_ServiceNodes_From_WorkFlow(PLAN_DATA)
+  //console.log(service_nodes)
+  for(var i = 0 ; i < service_nodes.length ; i++){
+    GLOBAL_NODES_DATA.push(service_nodes[i])
   }
 
   /* Set up all edge for operation nodes */
   
-  var service_class_edges = setUpAllEdgesFor_ServiceClassNodes_From_WorkFlow(service_class_nodes,PLAN_DATA.workflow_plan[0].abstract_plan,initNode,goalNode)
-  for(var i = 0 ; i < service_class_edges.length ; i++){
-    GLOBAL_EDGES_DATA.push(service_class_edges[i])
+  var service_edges = setUpAllEdgesFor_ServiceNodes_From_WorkFlow(service_nodes,PLAN_DATA.workflow_plan[0].full_plan,initNode,goalNode)
+  for(var i = 0 ; i < service_edges.length ; i++){
+    GLOBAL_EDGES_DATA.push(service_edges[i])
   }
   
 
-  /*
-  var first_edge = setUpEdge_FromInit_ToFirstOperation(initNode,operation_nodes,
-              PLAN_DATA.request_parameters.input,
-              PLAN_DATA.workflow_plan[0].plan[0])
-  GLOBAL_EDGES_DATA.push(first_edge)
-
-  var last_edge = setUpEdge_FromLastOperation_ToGoal(goalNode,
-                                                     operation_nodes,
-                                                     PLAN_DATA.request_parameters.output,
-                                  PLAN_DATA.workflow_plan[0].plan[PLAN_DATA.workflow_plan[0].plan.length - 1])
-  GLOBAL_EDGES_DATA.push(last_edge)
-  */
   initGraphicFrame()
 }
 
@@ -702,15 +683,15 @@ function DisplayWorkflow_Graphic(){
   GLOBAL_NODES_DATA.push(goalNode)
 
   /* Set up action */
-  var service_class_nodes = setUpAll_ServiceClassNodes_From_WorkFlow(GLOBAL_WORKFLOW_PLAN_DATA)
-  for(var i = 0 ; i < service_class_nodes.length ; i++){
-    GLOBAL_NODES_DATA.push(service_class_nodes[i])
+  var service_nodes = setUpAll_ServiceNodes_From_WorkFlow(GLOBAL_WORKFLOW_PLAN_DATA)
+  for(var i = 0 ; i < service_nodes.length ; i++){
+    GLOBAL_NODES_DATA.push(service_nodes[i])
   }
 
   /* Set up all edge for operation nodes */
-  var service_class_edges = setUpAllEdgesFor_ServiceClassNodes_From_WorkFlow(service_class_edges,GLOBAL_WORKFLOW_PLAN_DATA.workflow_plan[0].abstract_plan,initNode,goalNode)
-  for(var i = 0 ; i < service_class_edges.length ; i++){
-    GLOBAL_EDGES_DATA.push(service_class_edges[i])
+  var service_edges = setUpAllEdgesFor_ServiceNodes_From_WorkFlow(service_edges,GLOBAL_WORKFLOW_PLAN_DATA.workflow_plan[0].full_plan,initNode,goalNode)
+  for(var i = 0 ; i < service_edges.length ; i++){
+    GLOBAL_EDGES_DATA.push(service_edges[i])
   }
   initGraphicFrame()
 }
@@ -880,8 +861,6 @@ function update_Components_for_InitialState(htmlSelectNumberOfComponents_Initial
   }
 }
 
-
-
 function update_Components_for_GoalState(htmlSelectNumberOfComponents_GoalState){
   var numberOfComponents = parseInt(htmlSelectNumberOfComponents_GoalState.value)
   var divGoalStateComponents = document.getElementById('divGoalStateComponents')
@@ -922,20 +901,22 @@ function displyInfo_Node(event,node_type){
        message += "-Data Format : " + data.data_formats[i] + "\n"
        message += "---------------------------\n"
      }
-   } else if (node_type === "service_class_node"){
+   } else if (node_type === "service_node"){
      message = "----A Class of Service-----\n"
      message += "- Name : " + data.id + "\n"
      message += "---------------------------\n"
      message += "--------INPUT--------------\n"
      for(var i = 0 ; i < data.inputs.length ; i++){
        message += "- Component : " + data.inputs[i].resource_id + "\n"
-       message += "- Map with : " + data.inputs[i].map_to_resource_id  + " of service class " + data.inputs[i].map_from_service_class +"\n"
+       message += "- Data Format : " + data.inputs[i].data_format_id + "\n"
+       message += "- Map with : " + data.inputs[i].map_to_resource_id  + " of service operation " + data.inputs[i].map_from_service +"\n"
        message += "----------\n"
      }
      message += "---------------------------\n"
      message += "--------OUPUT--------------\n"
      for(var i = 0 ; i < data.outputs.length ; i++){
        message += "- Component : " + data.outputs[i] + "\n"
+       message += "- Data Format : " + data.outputs[i].data_format_id + "\n"
        message += "----------\n"
      }
    }
@@ -945,6 +926,9 @@ function displyInfo_Node(event,node_type){
 
 
 function initGraphicFrame(){
+
+ 
+
   cy = window.cy = cytoscape({
     container: document.getElementById('cy'),
     boxSelectionEnabled: false,
@@ -976,6 +960,7 @@ function initGraphicFrame(){
           'line-color': '#ad1a66',
           'target-arrow-color': '#ad1a66',
           'curve-style': 'bezier',
+          'text-valign': 'top',
           'edge-text-rotation': 'autorotate',
           'font-size' : 7
         }
@@ -1015,7 +1000,7 @@ function initGraphicFrame(){
                    } else if (event.cyTarget._private.data.type === "goal_state_node"){
                      displyInfo_Node(event,"goal_state_node")
                    } else {
-                     displyInfo_Node(event,"service_class_node")
+                     displyInfo_Node(event,"service_node")
                    }
                },
                hasTrailingDivider: true
@@ -1032,7 +1017,7 @@ function initGraphicFrame(){
             },
             {
               id: 'add-node-operation',
-              title: 'Add concrete operation node',
+              title: 'Add Concrete Service Node',
               coreAsWell: true,
               onClickFunction: function (event) {
                 openAddOperationNodeData_Modal();
@@ -1040,7 +1025,8 @@ function initGraphicFrame(){
                 CURRENT_Y = event.cyPosition.y;
               }
             },
-             {
+            /*
+            {
               id: 'add-node-operation-class',
               title: 'Add a Class of Service Node',
               coreAsWell: true,
@@ -1050,21 +1036,10 @@ function initGraphicFrame(){
                 CURRENT_Y = event.cyPosition.y;
               }
             },
-            /*
-            {
-              id: 'add-node-initial-state',
-              title: 'Add Inital State Node',
-              coreAsWell: true,
-              onClickFunction: function (event) {
-                openAddInitialState_FromOntology_Modal();
-                CURRENT_X = event.cyPosition.x;
-                CURRENT_Y = event.cyPosition.y;
-              }
-            },
             */
             {
               id: 'add-node-initial-state-hierarchy',
-              title: 'Add Inital State Node Data (Hierarchy Classes)',
+              title: 'Add/Update Inital State Node Data',
               coreAsWell: true,
               onClickFunction: function (event) {
                 openAddInitialState_FromOntology_Modal_Hierarchy();
@@ -1072,21 +1047,10 @@ function initGraphicFrame(){
                 CURRENT_Y = event.cyPosition.y;
               }
             },
-            /*
-            {
-              id: 'add-node-goal-state',
-              title: 'Add Goal State Node',
-              coreAsWell: true,
-              onClickFunction: function (event) {
-                openAddGoalState_FromOntology_Modal();
-                CURRENT_X = event.cyPosition.x;
-                CURRENT_Y = event.cyPosition.y;
-              }
-            },
-            */
+            
              {
               id: 'add-node-goal-state-hierarchy',
-              title: 'Add Goal State Node Data (Hierarchy Classes)',
+              title: 'Add/Update Goal State Node Data',
               coreAsWell: true,
               onClickFunction: function (event) {
                 openAddGoalState_FromOntology_Modal_Hierarchy();

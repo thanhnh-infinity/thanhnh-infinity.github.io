@@ -33,22 +33,22 @@
 		<link href="./css/jquery.mobile-1.4.5.min.css" rel="stylesheet" type="text/css" />
 		<link href="./css/modal.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript">
-        $(window).scroll(function () {
-            if ($(window).scrollTop() > 226) {
-                $(".header").addClass("fixed");
-            } else {
-                $(".header").removeClass("fixed");
-            }
-        });
-    </script>
-    <style type="text/css">
-        .fixed {
-		        position:fixed;
-		        width:100%;
-		        top:0;
-		        left:0;
-    		}
-    </style>
+	        $(window).scroll(function () {
+	            if ($(window).scrollTop() > 226) {
+	                $(".header").addClass("fixed");
+	            } else {
+	                $(".header").removeClass("fixed");
+	            }
+	        });
+	    </script>
+	    <style type="text/css">
+	        .fixed {
+			        position:fixed;
+			        width:100%;
+			        top:0;
+			        left:0;
+	    		}
+	    </style>
 	</head>
 
 	<body>
@@ -56,8 +56,9 @@
 			<h1>Web Services Composition - Workflow Description Graphical Tool</h1>
 			<fieldset>
 		    
-			<button id="btnExecutePlanner" onclick="executePlanner_toGet_WorkFlow();">Execute Planning Engine (via Web Service API)</button>
-			<button id="btnGenWF" onclick="GenerateWorkflow();">Re-Generate Workflow</button>
+			<button id="btnExecutePlanner" onclick="executePlanner_toGet_WorkFlow();">Generate Workflow - Planning Engine</button>
+			<button id="btnGenWF" onclick="recomposite_get_simWorkflow();">Generate Workflow - Recomposite</button>
+			<button id="btnGenWF" onclick="executeWorkflow();">Execute Workflow</button>
 			<button id="btnClearData" onclick="clearData();">Clear data</button>
 			</fieldset>
 
