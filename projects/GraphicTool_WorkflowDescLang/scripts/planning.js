@@ -12,7 +12,7 @@ function recomposite_get_simWorkflow(){
   goal_state_data =   GLOBAL_GOAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE
 
   /* Step 2 : Send POST METHOD API
-     http:<planning_ontology_server:8080>/getPlanningWorkflow (Python + CherryPy)
+     http://<planning_ontology_server:8080>/getPlanningWorkflow (Python + CherryPy)
      Input : Initial State, Goal State, Condition, etx
      Output: plan - workflow in JSON format
      POST METHOD with Initial State Data and Goal State Data - All Step about Create LP files and
@@ -85,7 +85,7 @@ function recomposite_get_simWorkflow(){
   
   $.ajax({
         method: "POST",
-        url: "http://127.0.0.1:8000/planningEngine/recomposite",
+        url: RE_PLANNING_ENGINE_API_ROOT,
         dataType: "json",
         //async:false,
         //processData: false,
@@ -208,7 +208,7 @@ function executePlanner_toGet_WorkFlow(){
   
   $.ajax({
         method: "POST",
-        url: "http://127.0.0.1:8000/planningEngine/generateWorkflow",
+        url: PLANNING_ENGINE_API_ROOT,
         dataType: "json",
         //async:false,
         //processData: false,

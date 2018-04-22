@@ -11,10 +11,8 @@ function clearData(){
   GLOBAL_GOAL_STATE_ONTOLOTY = {};
   CONSIDER_ADDED_OPERATION_CLASS = {};
 
-  GLOBAL_INITIAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE = {}
-  GLOBAL_GOAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE = {}
-
-  ;
+  GLOBAL_INITIAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE = {};
+  GLOBAL_GOAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE = {};
 
   document.getElementById('cy').style.visibility = "visible";
   initGraphicFrame();
@@ -882,6 +880,57 @@ function update_Components_for_GoalState(htmlSelectNumberOfComponents_GoalState)
   }
 }
 
+function displayInfo_Node_V2(event, node_type){
+  data = event.cyTarget._private.data
+  message = ""
+  info = ""
+  if (node_type === "initial_state_node"){
+     info = "Initial State Node"
+     message = "There are " + data.components.length + " components in initial state<br/>"
+     message += "<hr/>"
+     for(var i = 0 ; i < data.components.length ; i++){
+       message += "<i>ID</i> : <b>" + data.components[i] + "</b><br/>"
+       message += "<i>Format</i> : <b>" + data.data_formats[i] + "</b><br/>"
+       message += "<hr/>"
+     }
+  } else if (node_type === "goal_state_node"){
+     info = "Goal State Node"
+     message = "There are " + data.components.length + " components in goal state<br/>"
+     message += "<hr/>"
+     for(var i = 0 ; i < data.components.length ; i++){
+       message += "<i>ID</i> : <b>" + data.components[i] + "</b><br/>"
+       message += "<i>Format</i> : <b>" + data.data_formats[i] + "</b><br/>"
+       message += "<hr/>"
+     }
+   } else if (node_type === "service_node"){
+     info = "Concrete Service Node"
+     message += "<br/><i>Name</i> : <b>" + data.id + "</b><br/>"
+     message += "<hr/>"
+     message += "<b>INPUT COMPONENTS (" + data.inputs.length +")</b><br/>"
+     message += "<hr/>"
+     for(var i = 0 ; i < data.inputs.length ; i++){
+       message += "&nbsp;&nbsp;&nbsp;&nbsp;<i>ID</i> : <b>" + data.inputs[i].resource_id + "</b><br/>"
+       message += "&nbsp;&nbsp;&nbsp;&nbsp;<i>Format</i> : <b>" + data.inputs[i].data_format_id + "</b><br/>"
+       message += "&nbsp;&nbsp;&nbsp;&nbsp;<i>Map with</i> : <b>" + data.inputs[i].map_to_resource_id  + "</b> of service operation <b>" + data.inputs[i].map_from_service +"</b><br/>"
+       message += "<hr/>"
+     }
+
+    message += "<b>OUTPUT COMPONENTS (" + data.outputs.length + ")<br/></b>"
+    message += "<hr/>"
+    for(var i = 0 ; i < data.outputs.length ; i++){
+       message += "&nbsp;&nbsp;&nbsp;&nbsp;<i>ID</i> : <b>" + data.outputs[i] + "</b><br/>"
+       message += "&nbsp;&nbsp;&nbsp;&nbsp;<i>Format</i> : <b>" + data.outputs[i].data_format_id + "</b><br/>"
+       message += "<hr/>"
+    }
+   }
+
+
+  $.msgBox({
+    title:info,
+    content:message
+   }); 
+}
+
 function displyInfo_Node(event,node_type){
    message = ""
    data = event.cyTarget._private.data
@@ -920,7 +969,13 @@ function displyInfo_Node(event,node_type){
        message += "----------\n"
      }
    }
-   alert(message)
+   //alert(message)
+   /*
+   $.msgBox({
+    title:"Information",
+    content:message
+   });
+   */
 }
 
 
@@ -934,7 +989,10 @@ function initGraphicFrame(){
     boxSelectionEnabled: false,
     autounselectify: true,
     layout: {
-      name: 'dagre'
+      name: 'dagre',
+      rankDir:'LR',
+      ranker:'network-simplex'
+      //name:'preset'
     },
     style: [
       {
@@ -947,7 +1005,9 @@ function initGraphicFrame(){
           'text-valign': 'top',
           'text-halign': 'center',
           'font-size':6,
-          'background-color': '#11479e'
+          'background-color': '#11479e',
+          'color' : 'blue',
+          'font-weight':'bold'
         }
       },
 
@@ -960,9 +1020,12 @@ function initGraphicFrame(){
           'line-color': '#ad1a66',
           'target-arrow-color': '#ad1a66',
           'curve-style': 'bezier',
-          'text-valign': 'top',
+          'text-margin-y': 7,
+          'text-margin-x' : 5,
+          'text-halign':'center',
           'edge-text-rotation': 'autorotate',
-          'font-size' : 7
+          'font-size' : 5,
+          'color':'#ad1a66'
         }
       }
 
@@ -977,6 +1040,7 @@ function initGraphicFrame(){
       var node = evt.cyTarget;
       interactiveNode('tap',node)
   });
+
   /* Traditonal Right Click Context Menus */
   cy.contextMenus({
     menuItems: [
@@ -996,11 +1060,11 @@ function initGraphicFrame(){
                onClickFunction: function (event) {
                    console.log(event)
                    if (event.cyTarget._private.data.type === "initial_state_node"){
-                     displyInfo_Node(event,"initial_state_node")
+                     displayInfo_Node_V2(event,"initial_state_node")
                    } else if (event.cyTarget._private.data.type === "goal_state_node"){
-                     displyInfo_Node(event,"goal_state_node")
+                     displayInfo_Node_V2(event,"goal_state_node")
                    } else {
-                     displyInfo_Node(event,"service_node")
+                     displayInfo_Node_V2(event,"service_node")
                    }
                },
                hasTrailingDivider: true
