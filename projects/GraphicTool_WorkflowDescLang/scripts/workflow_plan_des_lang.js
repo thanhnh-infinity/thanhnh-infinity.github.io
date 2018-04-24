@@ -4,6 +4,12 @@
  * Date : 25-Feb-2017
  **/
 
+function reload(){
+   console.log("Re-focus")
+   cy.center()
+   cy.fit()
+}
+
 function clearData(){
   GLOBAL_NODES_DATA = [];
   GLOBAL_EDGES_DATA = [];
@@ -927,7 +933,8 @@ function displayInfo_Node_V2(event, node_type){
 
   $.msgBox({
     title:info,
-    content:message
+    content:message,
+    type:"info"
    }); 
 }
 
@@ -969,7 +976,7 @@ function displyInfo_Node(event,node_type){
        message += "----------\n"
      }
    }
-   //alert(message)
+   alert(message)
    /*
    $.msgBox({
     title:"Information",
@@ -978,12 +985,7 @@ function displyInfo_Node(event,node_type){
    */
 }
 
-
-
 function initGraphicFrame(){
-
- 
-
   cy = window.cy = cytoscape({
     container: document.getElementById('cy'),
     boxSelectionEnabled: false,
@@ -1005,8 +1007,9 @@ function initGraphicFrame(){
           'text-valign': 'top',
           'text-halign': 'center',
           'font-size':6,
-          'background-color': '#11479e',
-          'color' : 'blue',
+          //'background-color': '#11479e',
+          'background-color': 'data(color)',
+          'color' : 'data(text_color)',
           'font-weight':'bold'
         }
       },
@@ -1039,6 +1042,16 @@ function initGraphicFrame(){
   cy.on('tap', 'node', function(evt){
       var node = evt.cyTarget;
       interactiveNode('tap',node)
+  });
+
+  cy.on('taphold','node',function(event){
+      if (event.cyTarget._private.data.type === "initial_state_node"){
+       displayInfo_Node_V2(event,"initial_state_node")
+     } else if (event.cyTarget._private.data.type === "goal_state_node"){
+       displayInfo_Node_V2(event,"goal_state_node")
+     } else {
+       displayInfo_Node_V2(event,"service_node")
+     }
   });
 
   /* Traditonal Right Click Context Menus */

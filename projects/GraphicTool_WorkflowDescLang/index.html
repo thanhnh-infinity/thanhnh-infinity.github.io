@@ -4,6 +4,7 @@
 		    Web Service Composition - Workflow Description Language
 		</title>
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+		<link rel="shortcut icon" href="./images/favicon.ico">
 		<script src="./libs/jquery/jquery-2.0.3.min.js"></script>
 		<script src="./libs/jquery/jquery-ui.js"></script>
 		<script src="./libs/jquery/jquery.msgBox.js"></script>
@@ -12,6 +13,7 @@
 		<script src="./libs/cytospace/dagre.min.js"></script>
 		<script src="./libs/cytospace/cytoscape-dagre.js"></script>
 		<script src="./libs/cytospace/cytoscape-context-menus.js"></script>
+		<script type="text/javascript" src="./libs/jquery/menu.js"></script>
 		<!-- Demo -->
 		<script src="./sources/workflow_plan.js"></script>
 		<script src="./sources/workflow_plan_abstract_concrete.js"></script>
@@ -24,7 +26,7 @@
 		<script src="./scripts/edge.js"></script>
 		<script src="./scripts/planning.js"></script>
 
-        <script src="./scripts/workflow_plan_des_lang.js"></script>
+    <script src="./scripts/workflow_plan_des_lang.js"></script>
 		<script src="./scripts/connect_api_planning_ontology_engine.js"></script>
 
 		<script src="./scripts/utility.js"></script>
@@ -36,6 +38,10 @@
 		<link href="./css/jquery-ui.min.css" rel="stylesheet" type="text/css" />
 		<link href="./css/modal.css" rel="stylesheet" type="text/css" />
 		<link href="./css/msgBoxLight.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	  <link rel="stylesheet" type="text/css" href="css/menu.css">
+	  <!--
 		<script type="text/javascript">
 	        $(window).scroll(function () {
 	            if ($(window).scrollTop() > 226) {
@@ -53,19 +59,105 @@
 			        left:0;
 	    		}
 	    </style>
+	-->    
 	</head>
 
 	<body>
+
+		<!-- <div style="background:#0099cc; font-size:22px; text-align:center; color:#FFF; font-weight:bold; height:100px; padding-top:50px;">Workflow Configuration Tool</div> -->
+	 
+	  <div id="wrap">
+			<header>
+				<div class="inner relative">
+					<a class="logo" href="#"> <img src="images/phylotastic_logo.png" alt="fresh design web"></a>
+					<a id="menu-toggle" class="button dark" href="#"><i class="icon-reorder"></i></a>
+					<nav id="navigation">
+						<ul id="main-menu">
+							<li class="current-menu-item"><a href="http://www.freshdesignweb.com">Home</a></li>
+							<li class="parent">
+								<a href="#"><i class="icon-wrench"></i> Configuration</a>
+								<ul class="sub-menu">
+									<li><a href="#" onclick="openAddInitialState_FromOntology_Modal_Hierarchy();"><i class="fa fa-sign-in"></i> Initial State</a></li>
+									<li><a href="#" onclick="openAddGoalState_FromOntology_Modal_Hierarchy();"><i class="fa fa-sign-out"></i>  Goal State</a></li>
+									<li>
+									   <a class="parent" href="#"><i class="fa fa-edit"></i>  Refine current Workflow</a>
+									   <ul class="sub-menu">
+											 <li><a href="#"><i class="fa fa-user-times"></i> Avoidance services</a></li>
+											 <li><a href="#"><i class="fa fa-user-plus"></i> Inclusion services</a></li>
+											 <li><a href="#"><i class="fa fa-users"></i> Insertion services</a></li>
+										</ul>
+									</li>
+									<!-- <li><a href="#"><i class="icon-gift"></i> Icons</a></li> -->
+									<!--
+									<li>
+										<a class="parent" href="#"><i class="icon-file-alt"></i> Pages</a>
+										<ul class="sub-menu">
+											<li><a href="http://www.freshdesignweb.com/responsive-drop-down-menu-jquery-css3-using-icon-symbol.html">Full Width</a></li>
+											<li><a href="http://www.freshdesignweb.com/responsive-drop-down-menu-jquery-css3-using-icon-symbol.html">Left Sidebar</a></li>
+											<li><a href="http://www.freshdesignweb.com/responsive-drop-down-menu-jquery-css3-using-icon-symbol.html">Right Sidebar</a></li>
+											<li><a href="http://www.freshdesignweb.com/responsive-drop-down-menu-jquery-css3-using-icon-symbol.html">Double Sidebar</a></li>
+										</ul>
+									</li>
+								  -->	
+								</ul>
+							</li>
+							<!-- <li><a href="http://www.freshdesignweb.com/responsive-drop-down-menu-jquery-css3-using-icon-symbol.html">Portfolio</a></li> -->
+							<!--	
+							<li class="parent">
+								<a href="#">Engine Functions</a>
+								<ul class="sub-menu">
+								    <li>
+											<a class="parent" href="#"><i class="icon-file-alt"></i> Services Composition</a>
+											<ul class="sub-menu">
+												<li><a href="#" onclick="executePlanner_toGet_WorkFlow();">Generate Workflow</a></li>
+												<li><a href="#" onclick="recomposite_get_simWorkflow();">Re-Compostion Workflow</a></li>
+											</ul>
+										</li>
+										<li>
+											<a class="parent" href="#"><i class="icon-file-alt"></i> Workflow Execution</a>
+											<ul class="sub-menu">
+												<li><a href="#">a</a></li>
+												<li><a href="#">b</a></li>
+											</ul>
+										</li>	
+								</ul>		
+							</li>
+							-->
+							<li class="parent">
+								<a href="#"><i class="fa fa-gears"></i> Services Composition</a>
+								<ul class="sub-menu">
+									<li><a href="#" onclick="executePlanner_toGet_WorkFlow();"><i class="fa fa-rocket"></i> Generate Workflow  <i class="fa fa-play-circle"></i></a></li>
+									<li><a href="#" onclick="recomposite_get_simWorkflow();"><i class="fa fa-retweet"></i> Re-Compostion Workflow  <i class="fa fa-play-circle-o"></i></a></li>
+								</ul>		
+							</li>
+							<li class="parent">
+								<a href="#"><i class="fa fa-legal"></i> Tools</a>
+								<ul class="sub-menu">
+									<li><a href="#" onclick="clearData();"><i class="fa fa-trash"></i> Clear Workstation Data</a></li>
+									<li><a href="#" onclick="reload();"><i class="fa fa-bullseye"></i> Focus view</a></li>
+								</ul>
+							</li>
+
+							
+							<li><a href="#">Help</a></li>
+						</ul>
+					</nav>
+					<div class="clear"></div>
+				</div>
+			</header>	
+		</div> 
+	 
 		<div class="header">
+		  <!--
 			<h1>Web Services Composition - Workflow Description Graphical Tool</h1>
 			<fieldset>
-		    
-			<button id="btnExecutePlanner" onclick="executePlanner_toGet_WorkFlow();">Generate Workflow - Planning Engine</button>
-			<button id="btnGenWF" onclick="recomposite_get_simWorkflow();">Generate Workflow - Recomposite</button>
-			<button id="btnGenWF" onclick="executeWorkflow();">Execute Workflow</button>
-			<button id="btnClearData" onclick="clearData();">Clear data</button>
+				<button id="btnExecutePlanner" onclick="executePlanner_toGet_WorkFlow();">Generate Workflow - Planning Engine</button>
+				<button id="btnGenWF" onclick="recomposite_get_simWorkflow();">Generate Workflow - Recomposite</button>
+				<button id="btnGenWF" onclick="executeWorkflow();">Execute Workflow</button>
+				<button id="btnClearData" onclick="clearData();">Clear data</button>
 			</fieldset>
-
+			-->
+			
 			<!-- Modal for Edge Adding tool -->
 			<div id="addEdgeDataModal" class="modal">
 			  <!-- Modal content -->

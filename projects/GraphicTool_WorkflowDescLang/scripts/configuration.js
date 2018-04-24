@@ -89,3 +89,17 @@ var TEST_OPERATION_API_JSON = {
     }
   }
 };
+
+
+var SERIVE_NODE_CONFIG = {
+  "color" : "#3333ff",
+  "shape" : "ellipse",
+  "type" : "service_node",
+  "text_color" : "#000000"
+}
+
+var INIT_GOAL_NODE_CONFIG = {
+  "color" : "#ff0066",
+  "shape" : "triangle",
+  "text_color" : "#0000ff"
+}

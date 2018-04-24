@@ -24,7 +24,13 @@ function recomposite_get_simWorkflow(){
       || isEmpty(initial_state_data) 
       || (isEmpty(initial_state_data.components)) 
       || (initial_state_data.components.length <= 0)){
-    alert("No Initial State")
+    //alert("No Initial State")
+
+     $.msgBox({
+      title:"Warning",
+      content:"Please define Initial State"
+      //type:"error"
+     }); 
     return;
   }
 
@@ -45,7 +51,13 @@ function recomposite_get_simWorkflow(){
       || isEmpty(goal_state_data) 
       || (isEmpty(goal_state_data.components)) 
       || (goal_state_data.components.length <= 0)){
-    alert("No Goal State")
+    //alert("No Goal State")
+
+     $.msgBox({
+      title:"Warning",
+      content:"Please define Goal State"
+      //type:"error"
+     }); 
     return;
   }
   output_array_object = []
@@ -148,7 +160,14 @@ function executePlanner_toGet_WorkFlow(){
       || isEmpty(initial_state_data) 
       || (isEmpty(initial_state_data.components)) 
       || (initial_state_data.components.length <= 0)){
-    alert("No Initial State")
+    //alert("No Initial State")
+
+     $.msgBox({
+      title:"Warning",
+      content:"Please define Initial State"
+      //type:"error"
+     }); 
+
     return;
   }
 
@@ -169,7 +188,12 @@ function executePlanner_toGet_WorkFlow(){
       || isEmpty(goal_state_data) 
       || (isEmpty(goal_state_data.components)) 
       || (goal_state_data.components.length <= 0)){
-    alert("No Goal State")
+    //alert("No Goal State")
+    $.msgBox({
+      title:"Warning",
+      content:"Please define Goal State"
+      //type:"error"
+     }); 
     return;
   }
   output_array_object = []
@@ -229,7 +253,12 @@ function executePlanner_toGet_WorkFlow(){
         error: function (textStatus, errorThrown) {
            if (textStatus.status = 200){
                if (isEmpty(data)){
-                 alert("No planning found")
+                
+                 $.msgBox({
+                  title:"Error",
+                  content:"No plan is found",
+                  type:"error"
+                 }); 
                  document.getElementById("idLoading").style.display = "none";
                  return;
                }

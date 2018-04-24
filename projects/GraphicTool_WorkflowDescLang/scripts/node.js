@@ -8,7 +8,7 @@
 /* Set up Nodes (Operation Node and Initial + Goal) FROM WORKFLOW DATA */
 function initNode_forGraphic(node){
   return {data : 
-           {id : node.id, name : node.name, description: node.description ,faveShape: node.shape, type:node.type, components:node.components, data_formats:node.data_formats, inputs:node.inputs,outputs:node.outputs,maps:node.maps}}
+           {id : node.id, name : node.name, description: node.description ,faveShape: node.shape, type:node.type, color:node.color,text_color:node.text_color,components:node.components, data_formats:node.data_formats, inputs:node.inputs,outputs:node.outputs,maps:node.maps}}
 }
 
 function setUpOneServiceNode(service){
@@ -16,7 +16,9 @@ function setUpOneServiceNode(service){
   service_node_temp.id = service.service_name
   service_node_temp.name = service.service_name
   service_node_temp.type = "service_node"
-  service_node_temp.shape = "ellipse"
+  service_node_temp.shape = SERIVE_NODE_CONFIG.shape
+  service_node_temp.color = SERIVE_NODE_CONFIG.color
+  service_node_temp.text_color = SERIVE_NODE_CONFIG.text_color
   service_node_temp.description = service.service_description
 
   service_node_temp.inputs = []
@@ -71,12 +73,14 @@ function setUpInitialState_From_WorkFlow(GLOBAL_WORKFLOW_PLAN_DATA){
   initialState_Node_Temp.id = id
   initialState_Node_Temp.name = name
   initialState_Node_Temp.type = type
-  initialState_Node_Temp.shape = "triangle"
+  initialState_Node_Temp.shape = INIT_GOAL_NODE_CONFIG.shape
+  initialState_Node_Temp.color = INIT_GOAL_NODE_CONFIG.color
+  initialState_Node_Temp.text_color = INIT_GOAL_NODE_CONFIG.text_color
   initialState_Node_Temp.components = components
   initialState_Node_Temp.data_formats = data_formats
   initialState_Node_Temp.description = "Initial State"
   var initialState_Node = initNode_forGraphic(initialState_Node_Temp)
-  //console.log(initialState_Node)
+  console.log(initialState_Node)
   return initialState_Node
 }
 
@@ -105,7 +109,9 @@ function setUpGoalState_From_WorkFlow(GLOBAL_WORKFLOW_PLAN_DATA){
   goalState_Node_Temp.id = id
   goalState_Node_Temp.name = name
   goalState_Node_Temp.type = type
-  goalState_Node_Temp.shape = "triangle"
+  goalState_Node_Temp.shape = INIT_GOAL_NODE_CONFIG.shape
+  goalState_Node_Temp.color = INIT_GOAL_NODE_CONFIG.color
+  goalState_Node_Temp.text_color = INIT_GOAL_NODE_CONFIG.text_color
   goalState_Node_Temp.components = components
   goalState_Node_Temp.data_formats = data_formats
   goalState_Node_Temp.description = "Goal State"
@@ -190,7 +196,9 @@ function setUpInitialState_From_Ontology(initial_state_node){
   initialState_Node_Temp.id = id
   initialState_Node_Temp.name = name
   initialState_Node_Temp.type = type
-  initialState_Node_Temp.shape = "triangle"
+  initialState_Node_Temp.shape = INIT_GOAL_NODE_CONFIG.shape
+  initialState_Node_Temp.color = INIT_GOAL_NODE_CONFIG.color
+  initialState_Node_Temp.text_color = INIT_GOAL_NODE_CONFIG.text_color
   initialState_Node_Temp.components = components
   initialState_Node_Temp.data_formats = data_formats
   initialState_Node_Temp.description = "Initial State"
@@ -201,6 +209,7 @@ function setUpInitialState_From_Ontology(initial_state_node){
 
 function displayInitialState_From_Ontology(initial_state_node){
   var graphic_initial_state_node = setUpInitialState_From_Ontology(initial_state_node)
+
   /* Save initial state data for Planning purpose */
   GLOBAL_INITIAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE = initial_state_node
   /* remove old initial state node */
@@ -233,7 +242,9 @@ function setUpGoalState_From_Ontology(goal_state_node){
   goalState_Node_Temp.id = id
   goalState_Node_Temp.name = name
   goalState_Node_Temp.type = type
-  goalState_Node_Temp.shape = "triangle"
+  goalState_Node_Temp.shape = INIT_GOAL_NODE_CONFIG.shape
+  goalState_Node_Temp.color = INIT_GOAL_NODE_CONFIG.color
+  goalState_Node_Temp.text_color = INIT_GOAL_NODE_CONFIG.text_color
   goalState_Node_Temp.components = components
   goalState_Node_Temp.data_formats = data_formats
   goalState_Node_Temp.description = "Goal State"
