@@ -553,18 +553,6 @@ function openAddInitialState_FromOntology_Modal(){
 
 
 
-function closeAddInitialState_FromOntology_Modal(){
-  var addInitialState_modal = document.getElementById('addInitialStateModal');
-  addInitialState_modal.style.display = "none";
-  document.getElementById('cy').style.visibility = "visible";
-}
-
-function closeAddGoalState_FromOntology_Modal(){
-  var addGoalState_modal = document.getElementById('addGoalStateModal');
-  addGoalState_modal.style.display = "none";
-  document.getElementById('cy').style.visibility = "visible";
-}
-
 function saveAddNewEdgeData_Modal(){
   //console.log("Vao day")
   var addEdgeData_Modal = document.getElementById('addEdgeDataModal');
@@ -700,33 +688,6 @@ function DisplayWorkflow_Graphic(){
   initGraphicFrame()
 }
 
-function saveGoalState_From_Ontology(){
-  var selected_components_links = document.getElementsByName('goalState_Component')
-  if (!isEmpty(selected_components_links) && selected_components_links.length > 0){
-    var components= []
-
-    if (!isEmpty(GLOBAL_LIST_RESOURCES_ONTOLOGY) && GLOBAL_LIST_RESOURCES_ONTOLOGY.length > 0){
-      for(var i = 0 ; i < selected_components_links.length ; i++){
-        var resource_uri = selected_components_links[i].value
-        for(var j = 0 ; j < GLOBAL_LIST_RESOURCES_ONTOLOGY.length; j++){
-          if (resource_uri.trim().toUpperCase() === GLOBAL_LIST_RESOURCES_ONTOLOGY[j].uri.trim().toUpperCase()){
-            components.push(GLOBAL_LIST_RESOURCES_ONTOLOGY[j])
-          }
-        }
-      }
-    }
-
-    /* End similator */
-    var goal_state_node = {}
-    goal_state_node.components = components
-
-    displayGoalState_From_Ontology(goal_state_node)
-  }
-
-  var addGoalStateModal_modal = document.getElementById('addGoalStateModal');
-  addGoalStateModal_modal.style.display = "none";
-  document.getElementById('cy').style.visibility = "visible";
-}
 
 function saveAddGoalState_Modal_Hierarchy(){
    if(!isEmpty(CONSIDER_ADDED_RESOURCE_CLASS.class_ontology_uri)){
@@ -802,89 +763,12 @@ function saveAddInitialState_Modal_Hierarchy(){
   }
 }
 
-function saveInitialState_From_Ontology(){
-  var selected_components_links = document.getElementsByName('initialState_Component')
-  if (!isEmpty(selected_components_links) && selected_components_links.length > 0){
-    var components= []
-
-    if (!isEmpty(GLOBAL_LIST_RESOURCES_ONTOLOGY) && GLOBAL_LIST_RESOURCES_ONTOLOGY.length > 0){
-      for(var i = 0 ; i < selected_components_links.length ; i++){
-        var resource_uri = selected_components_links[i].value
-        for(var j = 0 ; j < GLOBAL_LIST_RESOURCES_ONTOLOGY.length; j++){
-          if (resource_uri.trim().toUpperCase() === GLOBAL_LIST_RESOURCES_ONTOLOGY[j].uri.trim().toUpperCase()){
-            components.push(GLOBAL_LIST_RESOURCES_ONTOLOGY[j])
-          }
-        }
-      }
-    }
-
-    console.log(components)
-
-    //if (isEmpty(GLOBAL_INITIAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE)
-    //    || jQuery.isEmptyObject(GLOBAL_INITIAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE)){
-    //  console.log("Vao 1")
-      var initial_state_node = {}
-      initial_state_node.components = components
-      //initial_state_node.components.push(component)
-    //} else {
-    //  console.log("Vao 2")
-    //  initial_state_node = GLOBAL_INITIAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE
-    //  initial_state_node.components.push.apply(initial_state_node.components,components)
-    //}  
-
-    displayInitialState_From_Ontology(initial_state_node)
-  }
-
-  var addInitialStateModal_modal = document.getElementById('addInitialStateModal');
-  addInitialStateModal_modal.style.display = "none";
-  document.getElementById('cy').style.visibility = "visible";
-}
 
 function drawGraphicFrame_with_CurrentNodesEdge(){
   initGraphicFrame()   
 }
 
-function update_Components_for_InitialState(htmlSelectNumberOfComponents_InitialState){
-  var numberOfComponents = parseInt(htmlSelectNumberOfComponents_InitialState.value)
-  var divInitialStateComponents = document.getElementById('divInitialStateComponents')
-  divInitialStateComponents.innerHTML = ""
-  for(var i = 0 ; i < numberOfComponents ; i++){
-    var index_select = i + 1
-    var innerHTMLString = '<p>Resource/Component '+ index_select +' : </p>'
-    innerHTMLString += '<select name="initialState_Component">'
-    innerHTMLString += '<option value=""></option>'
-    if (!isEmpty(GLOBAL_LIST_RESOURCES_ONTOLOGY) && GLOBAL_LIST_RESOURCES_ONTOLOGY.length > 0){
-      for(var j = 0 ; j < GLOBAL_LIST_RESOURCES_ONTOLOGY.length ; j++){
-        innerHTMLString += '<option value="' + GLOBAL_LIST_RESOURCES_ONTOLOGY[j].uri +'">' +  GLOBAL_LIST_RESOURCES_ONTOLOGY[j].uri +'</option>'
-      }
-    }
 
-    innerHTMLString += '</select>'
-    divInitialStateComponents.innerHTML += innerHTMLString
-
-  }
-}
-
-function update_Components_for_GoalState(htmlSelectNumberOfComponents_GoalState){
-  var numberOfComponents = parseInt(htmlSelectNumberOfComponents_GoalState.value)
-  var divGoalStateComponents = document.getElementById('divGoalStateComponents')
-  divGoalStateComponents.innerHTML = ""
-  for(var i = 0 ; i < numberOfComponents ; i++){
-    var index_select = i + 1
-    var innerHTMLString = '<p>Resource/Component '+ index_select +' : </p>'
-    innerHTMLString += '<select name="goalState_Component">'
-    innerHTMLString += '<option value=""></option>'
-    if (!isEmpty(GLOBAL_LIST_RESOURCES_ONTOLOGY) && GLOBAL_LIST_RESOURCES_ONTOLOGY.length > 0){
-      for(var j = 0 ; j < GLOBAL_LIST_RESOURCES_ONTOLOGY.length ; j++){
-        innerHTMLString += '<option value="' + GLOBAL_LIST_RESOURCES_ONTOLOGY[j].uri +'">' +  GLOBAL_LIST_RESOURCES_ONTOLOGY[j].uri +'</option>'
-      }
-    }
-
-    innerHTMLString += '</select>'
-    divGoalStateComponents.innerHTML += innerHTMLString
-
-  }
-}
 
 function displayInfo_Node_V2(event, node_type){
   data = event.cyTarget._private.data
@@ -1124,6 +1008,17 @@ function initGraphicFrame(){
                 CURRENT_Y = event.cyPosition.y;
               }
             },
+
+            {
+              id: 'add-node-initial-state-tree-view',
+              title: 'Add/Update Inital State Node Data (TreeView)',
+              coreAsWell: true,
+              onClickFunction: function (event) {
+                openAddInitialState_FromOntology_Modal_TreeView();
+                CURRENT_X = event.cyPosition.x;
+                CURRENT_Y = event.cyPosition.y;
+              }
+            },
             
              {
               id: 'add-node-goal-state-hierarchy',
@@ -1135,6 +1030,18 @@ function initGraphicFrame(){
                 CURRENT_Y = event.cyPosition.y;
               }
             },
+
+            {
+              id: 'add-node-initial-state-tree-view',
+              title: 'Add/Update Inital State Node Data (TreeView)',
+              coreAsWell: true,
+              onClickFunction: function (event) {
+                openAddGoalState_FromOntology_Modal_TreeView();
+                CURRENT_X = event.cyPosition.x;
+                CURRENT_Y = event.cyPosition.y;
+              }
+            },
+
             {
               id: 'add-edge',
               title: 'Add edge',
@@ -1156,6 +1063,9 @@ $(function(){
 
   console.log("Make API to get hierarchy classes of operation classification class for add Operation class")
   request_HierarchyClasses_Of_Class("");
+
+  console.log("Build up data for model");
+  buildUpTreeView_Resources();
 
   console.log("Ready to Go")
   initGraphicFrame();

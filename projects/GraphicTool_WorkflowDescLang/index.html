@@ -13,6 +13,7 @@
 		<script src="./libs/cytospace/dagre.min.js"></script>
 		<script src="./libs/cytospace/cytoscape-dagre.js"></script>
 		<script src="./libs/cytospace/cytoscape-context-menus.js"></script>
+		<script src="./libs/jquery/bootstrap-treeview.js"></script>
 		<script type="text/javascript" src="./libs/jquery/menu.js"></script>
 		<!-- Demo -->
 		<script src="./sources/workflow_plan.js"></script>
@@ -27,17 +28,21 @@
 		<script src="./scripts/planning.js"></script>
 
     <script src="./scripts/workflow_plan_des_lang.js"></script>
+    <script src="./scripts/treeview.js"></script>
 		<script src="./scripts/connect_api_planning_ontology_engine.js"></script>
 
 		<script src="./scripts/utility.js"></script>
 
+
 		<link rel="stylesheet" type="text/css" href="./css/workflow.css">
 		<link rel="stylesheet" type="text/css" href="./css/loading.css">
+		<link href="./css/bootstrap.css" rel="stylesheet" type="text/css" />
 		<link href="./css/cytoscape-context-menus.css" rel="stylesheet" type="text/css" />
 		<link href="./css/jquery.mobile-1.4.5.min.css" rel="stylesheet" type="text/css" />
 		<link href="./css/jquery-ui.min.css" rel="stylesheet" type="text/css" />
 		<link href="./css/modal.css" rel="stylesheet" type="text/css" />
 		<link href="./css/msgBoxLight.css" rel="stylesheet" type="text/css" />
+		<link href="./css/bootstrap-treeview.css" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" type="text/css" href="css/font-awesome.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	  <link rel="stylesheet" type="text/css" href="css/menu.css">
@@ -87,42 +92,8 @@
 											 <li><a href="#"><i class="fa fa-users"></i> Insertion services</a></li>
 										</ul>
 									</li>
-									<!-- <li><a href="#"><i class="icon-gift"></i> Icons</a></li> -->
-									<!--
-									<li>
-										<a class="parent" href="#"><i class="icon-file-alt"></i> Pages</a>
-										<ul class="sub-menu">
-											<li><a href="http://www.freshdesignweb.com/responsive-drop-down-menu-jquery-css3-using-icon-symbol.html">Full Width</a></li>
-											<li><a href="http://www.freshdesignweb.com/responsive-drop-down-menu-jquery-css3-using-icon-symbol.html">Left Sidebar</a></li>
-											<li><a href="http://www.freshdesignweb.com/responsive-drop-down-menu-jquery-css3-using-icon-symbol.html">Right Sidebar</a></li>
-											<li><a href="http://www.freshdesignweb.com/responsive-drop-down-menu-jquery-css3-using-icon-symbol.html">Double Sidebar</a></li>
-										</ul>
-									</li>
-								  -->	
 								</ul>
 							</li>
-							<!-- <li><a href="http://www.freshdesignweb.com/responsive-drop-down-menu-jquery-css3-using-icon-symbol.html">Portfolio</a></li> -->
-							<!--	
-							<li class="parent">
-								<a href="#">Engine Functions</a>
-								<ul class="sub-menu">
-								    <li>
-											<a class="parent" href="#"><i class="icon-file-alt"></i> Services Composition</a>
-											<ul class="sub-menu">
-												<li><a href="#" onclick="executePlanner_toGet_WorkFlow();">Generate Workflow</a></li>
-												<li><a href="#" onclick="recomposite_get_simWorkflow();">Re-Compostion Workflow</a></li>
-											</ul>
-										</li>
-										<li>
-											<a class="parent" href="#"><i class="icon-file-alt"></i> Workflow Execution</a>
-											<ul class="sub-menu">
-												<li><a href="#">a</a></li>
-												<li><a href="#">b</a></li>
-											</ul>
-										</li>	
-								</ul>		
-							</li>
-							-->
 							<li class="parent">
 								<a href="#"><i class="fa fa-gears"></i> Services Composition</a>
 								<ul class="sub-menu">
@@ -137,8 +108,6 @@
 									<li><a href="#" onclick="reload();"><i class="fa fa-bullseye"></i> Focus view</a></li>
 								</ul>
 							</li>
-
-							
 							<li><a href="#">Help</a></li>
 						</ul>
 					</nav>
@@ -148,16 +117,6 @@
 		</div> 
 	 
 		<div class="header">
-		  <!--
-			<h1>Web Services Composition - Workflow Description Graphical Tool</h1>
-			<fieldset>
-				<button id="btnExecutePlanner" onclick="executePlanner_toGet_WorkFlow();">Generate Workflow - Planning Engine</button>
-				<button id="btnGenWF" onclick="recomposite_get_simWorkflow();">Generate Workflow - Recomposite</button>
-				<button id="btnGenWF" onclick="executeWorkflow();">Execute Workflow</button>
-				<button id="btnClearData" onclick="clearData();">Clear data</button>
-			</fieldset>
-			-->
-			
 			<!-- Modal for Edge Adding tool -->
 			<div id="addEdgeDataModal" class="modal">
 			  <!-- Modal content -->
@@ -178,54 +137,7 @@
 			  </div>
 			</div>
 
-			<!-- Modal for Initial State Adding tool -->
-			<div id="addInitialStateModal" class="modal">
-				<!-- Modal content -->
-				 <div class="modal-content">
-					<span class="close" onclick="closeAddInitialState_FromOntology_Modal();">&times;</span>
-					<p>Provide compomnents, resources data in Initial State</p>
-
-					<p>Number of components/resources</p>
-					<select id="numberOfComponents_InitialState" onchange="update_Components_for_InitialState(this);">
-							<option value="0" default>0</option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-					</select>
-					<p>Components : </p>
-					<div id="divInitialStateComponents">
-						
-					</div>
-				 <br/><br/>
-					 <button id="btnSaveInitialState" onclick="saveInitialState_From_Ontology();">Save</button>
-				 </div>
-			</div>
-
-			<!-- Modal for Goal State Adding tool -->
-			<div id="addGoalStateModal" class="modal">
-				<!-- Modal content -->
-				 <div class="modal-content">
-					<span class="close" onclick="closeAddGoalState_FromOntology_Modal();">&times;</span>
-					<p>Provide compomnents, resources data in Goal State</p>
-					<p>Number of components</p>
-					<select id="numberOfComponent_GoalState" onchange="update_Components_for_GoalState(this);">
-						<option value="0" default>0</option>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
-					</select>
-					<p>Components : </p>
-					<div id="divGoalStateComponents">
-					</div>
-				 <br/><br/>
-					 <button id="btnSaveGoalState" onclick="saveGoalState_From_Ontology();">Save</button>
-				 </div>
-			</div>
-
+			
 			<!-- Modal for Operation Node Adding tool -->
 			<div id="addOperationNodeDataModal" class="modal">
 			  <!-- Modal content -->
@@ -283,7 +195,7 @@
 			  		<p>Provide components in Initial State</p>
 			  		<p>Resources root class</p>
 			  		<div id="divDisplayInitialState_ResourcesClassHierarchy">  
-					</div>	
+					  </div>	
 					<br/>
 					<br/>
 					<p>Data format of selected resource</p>
@@ -393,9 +305,136 @@
 					<button id="save" onclick="saveAddGoalState_Modal_Hierarchy();">Add</button>
 			  	</div>
 			</div>
+
+		<div id="addInitialStateModal_TreeView" class="modal">
+			   <div class="modal-content">
+			      <span class="close" onclick="closeAddInitialState_Modal_TreeView();">&times;</span>
+			   		<div class="msgBoxTitle">Initial State Definition : Resources and Data Formats</div>
+			   		<br/>
+			   		
+					  <p><span>Resources Tree - Click an item to select</span></p>
+				
+			    	<div id="resource_tree_init"></div>
+			    	<br/>
+					  <p><span>Data format of selected resource</span></p>
+						  
+				    <div id="divDisplayInitialState_DataFormatClasses_TreeView">
+						   <select id="selectInitialState_DataFormatClasses_TreeView">
+						      <option value=""></option>
+						      <option value="list_of_things">list_of_things</option>
+						      <option value="list_of_strings">list_of_strings</option>
+						      <option value="number">number</option>
+						      <option value="double">double</option>
+						      <option value="integer">integer</option>
+						      <option value="http_url">http_url</option>
+						      <option value="uri">uri</option>
+						      <option value="string">string</option>
+						      <option value="data_format_A">data_format_A</option>
+						      <option value="data_format_B">data_format_B</option>
+						      <option value="data_format_C">data_format_C</option>
+						      <option value="data_format_D">data_format_D</option>
+						      <option value="data_format_E">data_format_E</option>
+						      <option value="data_format_F">data_format_F</option>
+						      <option value="plain_text">plain_text</option>
+						      <option value="data_format_A_1">data_format_A_1</option>
+						      <option value="data_format_A_2">data_format_A_2</option>
+						      <option value="data_format_A_3">data_format_A_3</option>
+						      <option value="names_format_1">names_format_1</option>
+						      <option value="names_format_2">names_format_2</option>
+						      <option value="names_format_3">names_format_3</option>
+						      <option value="names_format_4">names_format_4</option>
+						      <option value="names_format_5">names_format_5</option>
+						      <option value="names_format_6">names_format_6</option>
+						      <option value="names_format_resolved_GNR">names_format_resolved_GNR</option>
+						      <option value="names_format_resolved_OT">names_format_resolved_OT</option>
+						      <option value="data_format_C_1">data_format_C_1</option>
+						      <option value="data_format_C_2">data_format_C_2</option>
+						      <option value="tree_format_1">tree_format_1</option>
+						      <option value="tree_format_2">tree_format_2</option>
+						      <option value="tree_format_3">tree_format_3</option>
+						      <option value="tree_format_4">tree_format_4</option>
+						      <option value="newickTree">newickTree</option>
+						      <option value="phyloXML">phyloXML</option>
+						      <option value="phylo4Tree">phylo4Tree</option>		
+						   </select>  
+						</div>
+						 
+			    	<br/>
+					  <br/>
+
+					  <div id="div_Save_InitialState_Comps_TreeView" class="msgBoxButtons">
+					  	<input class="msgButton" type="button" name="Add" value="Add" onclick="saveAddInitialState_Modal_TreeView();" id="btn_Save_InitialState_Comps_TreeView">
+					  	<input class="msgButton" type="button" name="Cancel" value="Cancel" onclick="closeAddInitialState_Modal_TreeView();" id="btn_Cancel_InitialState_Comps_TreeView">
+					  </div>
+					</div>
+	  </div>				
+
+		<div id="addGoalStateModal_TreeView" class="modal">
+			   <div class="modal-content">
+			      <span class="close" onclick="closeAddGoalState_Modal_TreeView();">&times;</span>
+			   		<div class="msgBoxTitle">Goal State Definition : Resources and Data Formats</div>
+			   		<br/>
+			   		
+					  <p><span>Resources Tree - Click an item to select</span></p>
+				
+			    	<div id="resource_tree_goal"></div>
+			    	<br/>
+					  <p><span>Data format of selected resource</span></p>
+					  
+			    	<div id="divDisplayGoalState_DataFormatClasses_TreeView">
+					   <select id="selectGoalState_DataFormatClasses_TreeView">
+					      <option value=""></option>
+					      <option value="list_of_things">list_of_things</option>
+					      <option value="list_of_strings">list_of_strings</option>
+					      <option value="number">number</option>
+					      <option value="double">double</option>
+					      <option value="integer">integer</option>
+					      <option value="http_url">http_url</option>
+					      <option value="uri">uri</option>
+					      <option value="string">string</option>
+					      <option value="data_format_A">data_format_A</option>
+					      <option value="data_format_B">data_format_B</option>
+					      <option value="data_format_C">data_format_C</option>
+					      <option value="data_format_D">data_format_D</option>
+					      <option value="data_format_E">data_format_E</option>
+					      <option value="data_format_F">data_format_F</option>
+					      <option value="plain_text">plain_text</option>
+					      <option value="data_format_A_1">data_format_A_1</option>
+					      <option value="data_format_A_2">data_format_A_2</option>
+					      <option value="data_format_A_3">data_format_A_3</option>
+					      <option value="names_format_1">names_format_1</option>
+					      <option value="names_format_2">names_format_2</option>
+					      <option value="names_format_3">names_format_3</option>
+					      <option value="names_format_4">names_format_4</option>
+					      <option value="names_format_5">names_format_5</option>
+					      <option value="names_format_6">names_format_6</option>
+					      <option value="names_format_resolved_GNR">names_format_resolved_GNR</option>
+					      <option value="names_format_resolved_OT">names_format_resolved_OT</option>
+					      <option value="data_format_C_1">data_format_C_1</option>
+					      <option value="data_format_C_2">data_format_C_2</option>
+					      <option value="tree_format_1">tree_format_1</option>
+					      <option value="tree_format_2">tree_format_2</option>
+					      <option value="tree_format_3">tree_format_3</option>
+					      <option value="tree_format_4">tree_format_4</option>
+					      <option value="newickTree">newickTree</option>
+					      <option value="phyloXML">phyloXML</option>
+					      <option value="phylo4Tree">phylo4Tree</option>		
+					   </select>  
+					</div>
+					 
+		    	<br/>
+				  <br/>
+
+				  <div id="div_Save_GoalState_Comps_TreeView" class="msgBoxButtons">
+				  	<input class="msgButton" type="button" name="Add" value="Add" onclick="saveAddGoalState_Modal_TreeView();" id="btn_Save_GoalState_Comps_TreeView">
+				  	<input class="msgButton" type="button" name="Cancel" value="Cancel" onclick="closeAddGoalState_Modal_TreeView();" id="btn_Cancel_GoalState_Comps_TreeView">
+				  </div>
+			   </div> 
+		
 		</div>
 
 		<div id="cy"></div>
-		<div class="modal_2" id="idLoading"><!-- Place at bottom of page --></div>
+		<div class="modal_2" id="idLoading"></div>
+
 	</body>
 </html>

@@ -63,8 +63,12 @@ function request_HierarchyClasses_Of_Class(str_owl_class_uri){
         	  jsonData = JSON.parse(data.responseText)
               if (str_owl_class_uri === "http://www.cs.nmsu.edu/~epontell/Ontologies/phylogenetic_methods.owl#operationClassification"){
                 GLOBAL_HIERARCHY_CLASSES_STRUCTURE_ROOTED = jsonData
+                console.log(GLOBAL_HIERARCHY_CLASSES_STRUCTURE_ROOTED)
+                window.localStorage.addItem('SERVICES_HIERARCHY_STRUC_CLASSES_INSTANCES_ALL',JSON.stringify(jsonData))
               } else if (str_owl_class_uri === "http://www.cs.nmsu.edu/~epontell/CDAO/cdao.owl#phylotastic_resources") {
                 GLOBAL_HIERARCHY_CLASSES_RESOURCE = jsonData
+                console.log(GLOBAL_HIERARCHY_CLASSES_RESOURCE)
+                window.localStorage.addItem('RESOURCES_CLASSES_STRUC_ALL',JSON.stringify(jsonData))
               }
         },
         error: function (textStatus, errorThrown) {

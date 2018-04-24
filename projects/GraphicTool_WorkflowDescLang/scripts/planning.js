@@ -252,23 +252,21 @@ function executePlanner_toGet_WorkFlow(){
         },
         error: function (textStatus, errorThrown) {
            if (textStatus.status = 200){
-               if (isEmpty(data)){
-                
-                 $.msgBox({
-                  title:"Error",
-                  content:"No plan is found",
-                  type:"error"
-                 }); 
-                 document.getElementById("idLoading").style.display = "none";
-                 return;
-               }
-               console.log(textStatus)
-
-               result_workflow = textStatus
+              
+               $.msgBox({
+                title:"Error",
+                content:"No plan is found",
+                type:"error"
+               }); 
+               document.getElementById("idLoading").style.display = "none";
+               return;
 
            } else {
-               consol.log("sadasd")
-               result_workflow = {}
+               $.msgBox({
+                title:"Error",
+                content:"No plan is found",
+                type:"error"
+               }); 
                document.getElementById("idLoading").style.display = "none";
                return;
            }
