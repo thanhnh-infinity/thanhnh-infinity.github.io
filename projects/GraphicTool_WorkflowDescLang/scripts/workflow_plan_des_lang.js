@@ -20,6 +20,9 @@ function clearData(){
   GLOBAL_INITIAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE = {};
   GLOBAL_GOAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE = {};
 
+  ADDED_OPERATION_NODES_LIST = []
+  AVOIDANCE_OPERATION_NODES_LIST = []
+
   document.getElementById('cy').style.visibility = "visible";
   initGraphicFrame();
   console.log("Clear")
@@ -412,103 +415,7 @@ function closeAddInitialState_Modal_Hierarchy(){
   return;
 }
 
-function saveAddOperationNodeData_Modal(){
-   var addOperationNodeData_modal = document.getElementById('addOperationNodeDataModal');
-   addOperationNodeData_modal.style.display = "none";
-   document.getElementById('cy').style.visibility = "visible";
 
-   var ontology_resource_id = document.getElementById('txtOntologyResourceID_Node').value
-   var ontology_resource_link = document.getElementById('selectOntologyReferenceLink_Node').value
-   //console.log(ontology_resouce_id)
-   var object_type = 'operation_node'
-   var object_shape = 'ellipse'
-   var input_data_format = document.getElementById('txtInputDataFormat').innerText
-   //console.log(input_data_format)
-   var output_data_format = document.getElementById('txtOutputDataFormat').innerText
-   //console.log(output_data_format)
-   var input_components_names = document.getElementsByName('txtInputComponentName')
-   //console.log(input_components_names)
-   var input_components_resource_ids = document.getElementsByName('txtInputComponentOntologyResourceID')
-   var input_components_resource_links = document.getElementsByName('txtInputComponentOntologyResourceLink')
-   var input_components_param_names = document.getElementsByName('txtInputComponentOntologyDataFormatID')
-   var input_components_param_links = document.getElementsByName('txtInputComponentOntologyDataFormatURI')
-
-   var input_components_length = 0
-   //console.log(input_components_resource_ids.length )
-   //if (input_components_names.length == input_components_resource_ids.length == input_components_resource_links.length == input_components_param_names.length == input_components_param_links.length){
-   input_components_length = input_components_resource_ids.length
-   //}
-   //console.log(input_components_length)
-
-   var output_components_names = document.getElementsByName('txtOutputComponentName')
-   //console.log(output_components_names)
-   var output_components_resource_ids = document.getElementsByName('txtOutputComponentOntologyResourceID')
-   var output_components_resource_links = document.getElementsByName('txtOutputComponentOntologyResourceLink')
-   var output_components_param_names = document.getElementsByName('txtOutputComponentOntologyParamName')
-   var output_components_param_links = document.getElementsByName('txtOutputComponentOntologyParamLink')
-
-   var output_components_length = 0
-   //console.log(output_components_resource_ids.length)
-   //if (output_components_names.length == output_components_resource_ids.length == output_components_resource_links.length == output_components_param_names.length == output_components_param_links.length){
-   output_components_length = output_components_resource_ids.length
-   //}
-   //console.log(output_components_length)
-
-   var operation_node_ont_data = initOperationNode_Ontology()
-   operation_node_ont_data.operation_name = ontology_resource_id
-   operation_node_ont_data.operation_ontology_link = ontology_resource_link
-   operation_node_ont_data.operation_parameters.input.info.data_format = input_data_format
-   operation_node_ont_data.operation_parameters.output.info.data_format = output_data_format
-   for(var i = 0 ; i < input_components_length ;i++){
-     var component_for_node_ont_data = initComponent_forNode_Ontology()
-     component_for_node_ont_data.name = input_components_names[i].innerText
-     component_for_node_ont_data.ontology_resource_id = input_components_resource_ids[i].innerText
-     component_for_node_ont_data.ontology_resource_link = input_components_resource_links[i].innerText
-     component_for_node_ont_data.ontology_param_name = input_components_param_names[i].innerText
-     component_for_node_ont_data.ontology_param_link = input_components_param_links[i].innerText
-     operation_node_ont_data.operation_parameters.input.components.push(component_for_node_ont_data)
-   }
-   for(var i = 0 ; i < output_components_length ;i++){
-     var component_for_node_ont_data = initComponent_forNode_Ontology()
-     component_for_node_ont_data.name = output_components_names[i].innerText
-     component_for_node_ont_data.ontology_resource_id = output_components_resource_ids[i].innerText
-     component_for_node_ont_data.ontology_resource_link = output_components_resource_links[i].innerText
-     component_for_node_ont_data.ontology_param_name = output_components_param_names[i].innerText
-     component_for_node_ont_data.ontology_param_link = output_components_param_links[i].innerText
-     operation_node_ont_data.operation_parameters.output.components.push(component_for_node_ont_data)
-   }
-
-   //console.log(operation_node_ont_data)
-   ADDED_OPERATION_NODES_LIST.push(operation_node_ont_data)
-
-   if (ontology_resource_id == null) {
-       return;
-   }
-
-   var data = {
-       group: 'nodes',
-       id: ontology_resource_id,
-       name:ontology_resource_id,
-       type:'operation_node',
-       faveShape:'ellipse'
-   };
-
-   var new_node = {}
-   new_node.id = ontology_resource_id
-   new_node.name = ontology_resource_id
-   new_node.shape = 'ellipse'
-   new_node.type = 'operation_node'
-   GLOBAL_NODES_DATA.push(initNode_forGraphic(new_node))
-
-
-   cy.add({
-       data: data,
-       position: {
-           x: CURRENT_X,
-           y: CURRENT_Y
-       }
-   });
-}
 
 function openAddEdgeData_Modal(){
     document.getElementById('cy').style.visibility = "hidden";
@@ -627,7 +534,7 @@ function loadFile() {
 
 function interactiveNode(action,node){
   if (action.trim().toUpperCase() == "TAP"){
-    console.log("Taped " + node.id())
+    //console.log("Taped " + node.id())
   }
 }
 
@@ -822,52 +729,7 @@ function displayInfo_Node_V2(event, node_type){
    }); 
 }
 
-function displyInfo_Node(event,node_type){
-   message = ""
-   data = event.cyTarget._private.data
-   if (node_type === "initial_state_node"){
-     message = "----Initial State Node-----\n"
-     message += "---------------------------\n"
-     for(var i = 0 ; i < data.components.length ; i++){
-       message += "-Component : " + data.components[i] + "\n"
-       message += "-Data Format : " + data.data_formats[i] + "\n"
-       message += "---------------------------\n"
-     }
-   } else if (node_type === "goal_state_node"){
-     message = "----Goal State Node-----\n"
-     message += "---------------------------\n"
-     for(var i = 0 ; i < data.components.length ; i++){
-       message += "-Component : " + data.components[i] + "\n"
-       message += "-Data Format : " + data.data_formats[i] + "\n"
-       message += "---------------------------\n"
-     }
-   } else if (node_type === "service_node"){
-     message = "----A Class of Service-----\n"
-     message += "- Name : " + data.id + "\n"
-     message += "---------------------------\n"
-     message += "--------INPUT--------------\n"
-     for(var i = 0 ; i < data.inputs.length ; i++){
-       message += "- Component : " + data.inputs[i].resource_id + "\n"
-       message += "- Data Format : " + data.inputs[i].data_format_id + "\n"
-       message += "- Map with : " + data.inputs[i].map_to_resource_id  + " of service operation " + data.inputs[i].map_from_service +"\n"
-       message += "----------\n"
-     }
-     message += "---------------------------\n"
-     message += "--------OUPUT--------------\n"
-     for(var i = 0 ; i < data.outputs.length ; i++){
-       message += "- Component : " + data.outputs[i] + "\n"
-       message += "- Data Format : " + data.outputs[i].data_format_id + "\n"
-       message += "----------\n"
-     }
-   }
-   alert(message)
-   /*
-   $.msgBox({
-    title:"Information",
-    content:message
-   });
-   */
-}
+
 
 function initGraphicFrame(){
   cy = window.cy = cytoscape({

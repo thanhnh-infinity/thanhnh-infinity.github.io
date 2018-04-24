@@ -7,7 +7,7 @@ body {
 
 #cy {
   width: 98%;
-  height: 90%;
+  height: 87%;
   position: absolute;
   left: 10;
   top: 90;
@@ -20,4 +20,36 @@ h1 {
   opacity: 0.5;
   font-size: 1em;
 }
+
+
+/* ======= Footer ======= */
+.footer {
+  background: #32383e;
+  color: #fff;
+  padding: 10px 0;
+  position:fixed;
+  bottom:0px;
+  width:100%;
+}
+.footer .copyright {
+  line-height: 1.6;
+  color: #a1aab4;
+  font-size: 14px;
+}
+.footer a {
+  color: #fff;
+}
+.footer .fa-heart {
+  color: #fb866a;
+}
+/* Small devices (tablets, 768px and up) */
+/* Medium devices (desktops, 992px and up) */
+/* Large devices (large desktops, 1200px and up) */
+/* Ex-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1400px) {
+  .container {
+    width: 1360px;
+  }
+}
+
 

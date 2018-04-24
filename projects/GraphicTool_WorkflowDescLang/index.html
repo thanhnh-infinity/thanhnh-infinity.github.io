@@ -40,10 +40,16 @@
 		<!-- <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css" /> -->
 		<link href="./css/cytoscape-context-menus.css" rel="stylesheet" type="text/css" />
 		<link href="./css/jquery.mobile-1.4.5.min.css" rel="stylesheet" type="text/css" />
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href="./css/jquery-ui.min.css" rel="stylesheet" type="text/css" />
 		<link href="./css/modal.css" rel="stylesheet" type="text/css" />
 		<link href="./css/msgBoxLight.css" rel="stylesheet" type="text/css" />
 		<link href="./css/bootstrap-treeview.css" rel="stylesheet" type="text/css" />
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="./css/bootstrap-select.min.css">
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="./libs/bootstrap/bootstrap-select.min.js"></script>
+		<script src="./libs/bootstrap/bootstrap.js" defer></script>
 		<link rel="stylesheet" type="text/css" href="css/font-awesome.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	  <link rel="stylesheet" type="text/css" href="css/menu.css">
@@ -89,9 +95,12 @@
 									   <a class="parent" href="#"><i class="fa fa-edit"></i>  Refine current Workflow</a>
 									   <ul class="sub-menu">
 											 <li><a href="#"><i class="fa fa-user-times"></i> Avoidance services</a></li>
-											 <li><a href="#"><i class="fa fa-user-plus"></i> Inclusion services</a></li>
+											 <li><a href="#" onclick="openAddOperationNodeData_Modal();"><i class="fa fa-user-plus"></i> Inclusion services</a></li>
 											 <li><a href="#"><i class="fa fa-users"></i> Insertion services</a></li>
 										</ul>
+									</li>
+									<li>
+									   <a href="#"><i class="fa fa-sitemap"></i>  Set up Connections (Edges)</a>
 									</li>
 								</ul>
 							</li>
@@ -106,10 +115,25 @@
 								<a href="#"><i class="fa fa-legal"></i> Tools</a>
 								<ul class="sub-menu">
 									<li><a href="#" onclick="clearData();"><i class="fa fa-trash"></i> Clear Workstation Data</a></li>
-									<li><a href="#" onclick="reload();"><i class="fa fa-bullseye"></i> Focus view</a></li>
+									<li><a href="#" onclick="reload();"><i class="material-icons" style="font-size:16px">center_focus_strong</i> Focus view</a></li>
 								</ul>
 							</li>
-							<li><a href="#">Help</a></li>
+							<li class="parent">
+							  <a href="#"><i class="fa fa-institution"></i> More</a>
+							  <ul class="sub-menu">
+									<li><a href="#"><i class="fa fa-info-circle"></i> About Us</a></li>
+									<li><a href="#"><i class="fa fa-question-circle-o"></i> Help</a></li>
+									<li><a href="https://github.com/phylotastic" target="_blank"><i class="fa fa-github-alt"></i> Phylotastic on Github</a></li>
+									<li><a href="#"><i class="fa fa-files-o"></i> Publifications</a></li>
+									<li class="parent">
+									   <a href="#"><i class="fa fa-files-o"></i> Related Web-Sites</a>
+									   <ul class="sub-menu">
+									      <li><a href="#"><i class="fa fa-info-circle" target="_blank"></i> Main Site</a></li>
+									      <li><a href="#"><i class="fa fa-info-circle" target="_blank"></i> Data Portal</a></li>
+									   </ul>
+									</li>
+								</ul>
+							</li>
 						</ul>
 					</nav>
 					<div class="clear"></div>
@@ -141,36 +165,29 @@
 			
 			<!-- Modal for Operation Node Adding tool -->
 			<div id="addOperationNodeDataModal" class="modal">
-			  <!-- Modal content -->
 			  <div class="modal-content">
-			    <span class="close" onclick="closeAddOperationNodeData_Modal();">&times;</span>
-					<p>Ontology Reference Link</p>
-					<!-- <input type="text" id="txtOntologyReferenceLink_Node"></text> -->
-					<select id="selectOntologyReferenceLink_Node" onchange="setOperationNodeData_FromOWL(this);">
-							<!-- for demo -->
-							<option value=""></option>
-						  <option value="http://www.cs.nmsu.edu/~epontell/CDAO/cdao.owl#phylotastic_GetPhylogeneticTree_TreeBase_GET">http://www.cs.nmsu.edu/~epontell/CDAO/cdao.owl#phylotastic_GetPhylogeneticTree_TreeBase_GET</option>
-					</select>
-					<!--
-					<p>Operation name</p>
-					<input type="text" id="txtNewOperationNodeName" style="width:100%" disabled></text>
-				  -->
-					<p>Ontology Resource ID</p>
-					<input type="text" id="txtOntologyResourceID_Node" style="width:50%" disabled></input>
-					<br/>
-					<br/>
-					<hr>
-					<div id="divInputParams">
-					</div>
-					<hr>
-					<br/>
-					<div id="divOutputParams">
-					</div>
-					<br/>
-					<br/>
-					<button id="save" onclick="saveAddOperationNodeData_Modal();">Save</button>
+			      <span class="close" onclick="closeAddOperationNodeData_Modal();">&times;</span>
+			   		<div class="msgBoxTitle">Select concrete service to be included in Workflow</div>
+			   	
+					  <h4><span class="label label-primary">Services Class Tree - Click an item to select</span></h4>
+			    	<div id="service_hierarchy_tree"></div>
+			    	<br/>
+			    	<h4><span class="label label-primary">Select Concrete Service Operation</span></h4>
+					  
+					  <div id="div_concrete_operation_list">
+					  </div>
+
+					  <br/>
+					  <br/>
+
+					  <div id="div_Save_Operations_TreeView" class="msgBoxButtons">
+					  	<input class="msgButton" type="button" name="Add" value="Add" onclick="saveAddOperationNodeData_Modal();" id="btn_Save_Operations_TreeView">
+					  	<input class="msgButton" type="button" name="Cancel" value="Cancel" onclick="closeAddOperationNodeData_Modal();" id="btn_Cancel_Operations_TreeView">
+					  </div>
 			  </div>
 			</div>
+
+
 			<!-- Modal for Operation Class Hierarchy Adding tool -->
 			<div id="addOperationClassModal" class="modal">
 				<!-- Modal content -->
@@ -314,14 +331,14 @@
 			   		<div class="msgBoxTitle">Initial State Definition : Resources and Data Formats</div>
 			   		<br/>
 			   		
-					  <p><span>Resources Tree - Click an item to select</span></p>
-				
+					  <h4><span class="label label-primary">Resources Tree - Click an item to select</span></h4>
+						
 			    	<div id="resource_tree_init"></div>
-			    	<br/>
-					  <p><span>Data format of selected resource</span></p>
+			    	
+			    	<h4><span class="label label-primary">Data format of selected resource</span></h4>
 						  
 				    <div id="divDisplayInitialState_DataFormatClasses_TreeView">
-						   <select id="selectInitialState_DataFormatClasses_TreeView">
+						   <select id="selectInitialState_DataFormatClasses_TreeView" class="selectpicker">
 						      <option value=""></option>
 						      <option value="list_of_things">list_of_things</option>
 						      <option value="list_of_strings">list_of_strings</option>
@@ -377,14 +394,16 @@
 			   		<div class="msgBoxTitle">Goal State Definition : Resources and Data Formats</div>
 			   		<br/>
 			   		
-					  <p><span>Resources Tree - Click an item to select</span></p>
+					  <h4><span class="label label-primary">Resources Tree - Click an item to select</span></h4>
 				
 			    	<div id="resource_tree_goal"></div>
-			    	<br/>
-					  <p><span>Data format of selected resource</span></p>
+			    
+					  <h4><span class="label label-primary">Data format of selected resource</span></h4>
 					  
+					
+
 			    	<div id="divDisplayGoalState_DataFormatClasses_TreeView">
-					   <select id="selectGoalState_DataFormatClasses_TreeView">
+					   <select id="selectGoalState_DataFormatClasses_TreeView" class="selectpicker">
 					      <option value=""></option>
 					      <option value="list_of_things">list_of_things</option>
 					      <option value="list_of_strings">list_of_strings</option>
@@ -438,5 +457,13 @@
 		<div id="cy"></div>
 		<div class="modal_2" id="idLoading"></div>
 
+		<!-- ******FOOTER****** -->
+    
 	</body>
+	<footer class="footer">
+        <div class="container text-center">
+             <small class="copyright">Developed <i class="glyphicon glyphicon-pawn"></i> by <a href="http://thanhnh-infinity.github.io" target="_blank">Thanh H. Nguyen</a> for <a href="http://phylotastic.org" target="_blank">Phylotastic</a> project </small>
+
+        </div>    
+    </footer>
 </html>
