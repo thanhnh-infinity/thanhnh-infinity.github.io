@@ -3,7 +3,7 @@
 		<title>
 		    Web Service Composition - Workflow Description Language
 		</title>
-		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="shortcut icon" href="./images/favicon.ico">
 		<script src="./libs/jquery/jquery-2.0.3.min.js"></script>
 		<script src="./libs/jquery/jquery-ui.js"></script>
@@ -37,6 +37,7 @@
 		<link rel="stylesheet" type="text/css" href="./css/workflow.css">
 		<link rel="stylesheet" type="text/css" href="./css/loading.css">
 		<link href="./css/bootstrap.css" rel="stylesheet" type="text/css" />
+		<!-- <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css" /> -->
 		<link href="./css/cytoscape-context-menus.css" rel="stylesheet" type="text/css" />
 		<link href="./css/jquery.mobile-1.4.5.min.css" rel="stylesheet" type="text/css" />
 		<link href="./css/jquery-ui.min.css" rel="stylesheet" type="text/css" />
@@ -82,8 +83,8 @@
 							<li class="parent">
 								<a href="#"><i class="icon-wrench"></i> Configuration</a>
 								<ul class="sub-menu">
-									<li><a href="#" onclick="openAddInitialState_FromOntology_Modal_Hierarchy();"><i class="fa fa-sign-in"></i> Initial State</a></li>
-									<li><a href="#" onclick="openAddGoalState_FromOntology_Modal_Hierarchy();"><i class="fa fa-sign-out"></i>  Goal State</a></li>
+									<li><a href="#" onclick="openAddInitialState_FromOntology_Modal_TreeView();"><i class="fa fa-sign-in"></i> Initial State</a></li>
+									<li><a href="#" onclick="openAddGoalState_FromOntology_Modal_TreeView();"><i class="fa fa-sign-out"></i>  Goal State</a></li>
 									<li>
 									   <a class="parent" href="#"><i class="fa fa-edit"></i>  Refine current Workflow</a>
 									   <ul class="sub-menu">
@@ -242,6 +243,7 @@
 					<br/>
 					<br/>
 					<button id="save" onclick="saveAddInitialState_Modal_Hierarchy();">Add</button>
+					<button id="save" type="button" class="btn btn-default navbar-btn"  onclick="saveAddInitialState_Modal_Hierarchy();">Add</button>
 			  	</div>
 			</div>
 

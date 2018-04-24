@@ -99,7 +99,7 @@ var SERIVE_NODE_CONFIG = {
 }
 
 var INIT_GOAL_NODE_CONFIG = {
-  "color" : "#ff0066",
+  "color" : "#009933",
   "shape" : "triangle",
   "text_color" : "#0000ff"
 }

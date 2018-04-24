@@ -1009,17 +1009,6 @@ function initGraphicFrame(){
               }
             },
 
-            {
-              id: 'add-node-initial-state-tree-view',
-              title: 'Add/Update Inital State Node Data (TreeView)',
-              coreAsWell: true,
-              onClickFunction: function (event) {
-                openAddInitialState_FromOntology_Modal_TreeView();
-                CURRENT_X = event.cyPosition.x;
-                CURRENT_Y = event.cyPosition.y;
-              }
-            },
-            
              {
               id: 'add-node-goal-state-hierarchy',
               title: 'Add/Update Goal State Node Data',
@@ -1031,16 +1020,7 @@ function initGraphicFrame(){
               }
             },
 
-            {
-              id: 'add-node-initial-state-tree-view',
-              title: 'Add/Update Inital State Node Data (TreeView)',
-              coreAsWell: true,
-              onClickFunction: function (event) {
-                openAddGoalState_FromOntology_Modal_TreeView();
-                CURRENT_X = event.cyPosition.x;
-                CURRENT_Y = event.cyPosition.y;
-              }
-            },
+         
 
             {
               id: 'add-edge',
