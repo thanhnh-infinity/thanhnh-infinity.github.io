@@ -7,8 +7,8 @@ body {
 
 #cy {
   width: 98%;
-  height: 87%;
-  position: absolute;
+  height: 80%;
+  position: fixed;
   left: 10;
   top: 90;
   z-index: 999;
