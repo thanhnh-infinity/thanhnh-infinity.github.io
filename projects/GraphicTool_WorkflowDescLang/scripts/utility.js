@@ -3,6 +3,23 @@
  * Doc : Service composition framework - Workflow Description Tool
  * Date : 25-Feb-2017
  **/
+function isExistedInitGoalComsList(item,list){
+  for(var index = 0 ; index < list.components.length; index++){
+        if (item.trim().toUpperCase() === list.components[index].local_name.trim().toUpperCase()){
+            return true
+        }
+  }
+  return false
+}
+
+function isExistedNormalList(item,list){
+  for(var index = 0 ; index < list.length; index++){
+        if (item.trim().toUpperCase() === list[index].trim().toUpperCase()){
+            return true
+        }
+  }
+  return false
+}
 
 
 function initComponent_forNode_Ontology(){

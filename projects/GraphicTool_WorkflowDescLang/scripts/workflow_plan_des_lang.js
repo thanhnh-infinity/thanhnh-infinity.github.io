@@ -563,6 +563,43 @@ function DisplayWorkflow_Graphic_From_Source(PLAN_DATA){
   for(var i = 0 ; i < service_edges.length ; i++){
     GLOBAL_EDGES_DATA.push(service_edges[i])
   }
+
+  /* Check that an node have to have both at least one in and out edge */
+  var BLACK_LIST_NODE = []
+
+  for(var i = 0 ; i < GLOBAL_NODES_DATA.length ; i++){
+      var considerNode = GLOBAL_NODES_DATA[i]
+      
+      if (considerNode.data.type == "service_node"){
+        var kt_in = false
+        var kt_out = false
+        for(var j = 0 ; j < GLOBAL_EDGES_DATA.length ; j++){
+          
+          var source = GLOBAL_EDGES_DATA[j].data.source
+          var target = GLOBAL_EDGES_DATA[j].data.target
+
+          if (considerNode.data.id.trim().toUpperCase() === source.trim().toUpperCase()){       
+            kt_out = true
+          }
+          if (considerNode.data.id.trim().toUpperCase() === target.trim().toUpperCase()){          
+            kt_in = true
+          }
+        }
+
+        if (!kt_in || !kt_out){
+          BLACK_LIST_NODE.push(considerNode.data.id)
+          GLOBAL_NODES_DATA.splice(i,1)
+        }
+
+        for(var j = 0 ; j < GLOBAL_EDGES_DATA.length ; j++){
+           var target = GLOBAL_EDGES_DATA[j].data.target
+           var dleIndex = BLACK_LIST_NODE.indexOf(target)
+           if (dleIndex > -1){
+               GLOBAL_EDGES_DATA.splice(j,1)
+           }  
+        }
+      }
+  }
   
 
   initGraphicFrame()
@@ -633,6 +670,8 @@ function saveAddGoalState_Modal_Hierarchy(){
   }
 }
 
+
+
 function saveAddInitialState_Modal_Hierarchy(){
   if(!isEmpty(CONSIDER_ADDED_RESOURCE_CLASS.class_ontology_uri)){
       var addInitialStateModal_Hierarchy = document.getElementById('addInitialStateModal_Hierarchy');
@@ -659,6 +698,7 @@ function saveAddInitialState_Modal_Hierarchy(){
 
       var an_initial_component = {"local_name":getResourceID_FromOWLLink(CONSIDER_ADDED_RESOURCE_CLASS.class_ontology_uri),"uri":CONSIDER_ADDED_RESOURCE_CLASS.class_ontology_uri,"data_format":selected_data_format}
       
+    
       initial_state_node.components.push(an_initial_component)
 
       CONSIDER_ADDED_RESOURCE_CLASS = {}
@@ -729,7 +769,15 @@ function displayInfo_Node_V2(event, node_type){
    }); 
 }
 
-
+function removeOperationNode(event){
+    /* Remove out of screen */
+    event.cyTarget.remove();
+    /* if this service is in inclusion list => Remove */
+    var index = ADDED_OPERATION_NODES_LIST.indexOf(event.cyTarget._private.data.id);
+    if (index > -1){
+      ADDED_OPERATION_NODES_LIST.splice(index,1);
+    }
+}
 
 function initGraphicFrame(){
   cy = window.cy = cytoscape({
@@ -808,7 +856,9 @@ function initGraphicFrame(){
               title: 'Remove node or edge',
               selector: 'node, edge',
               onClickFunction: function (event) {
-                event.cyTarget.remove();
+                //event.cyTarget.remove();
+                removeOperationNode(event);
+
               },
               hasTrailingDivider: true
             },

@@ -118,13 +118,9 @@ function recomposite_get_simWorkflow(){
         },
         error: function (textStatus, errorThrown) {
            if (textStatus.status = 200){
-               if (isEmpty(data)){
-                 alert("No planning found")
-                 document.getElementById("idLoading").style.display = "none";
-                 return;
-               }
+              
                console.log(textStatus)
-
+               document.getElementById("idLoading").style.display = "none";
                result_workflow = textStatus
 
            } else {

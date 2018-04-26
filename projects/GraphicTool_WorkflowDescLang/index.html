@@ -28,6 +28,7 @@
 		<script src="./scripts/planning.js"></script>
 
     <script src="./scripts/workflow_plan_des_lang.js"></script>
+    <script src="./sources/ontology.js"></script>
     <script src="./scripts/treeview.js"></script>
 		<script src="./scripts/connect_api_planning_ontology_engine.js"></script>
 
@@ -85,7 +86,7 @@
 					<a id="menu-toggle" class="button dark" href="#"><i class="icon-reorder"></i></a>
 					<nav id="navigation">
 						<ul id="main-menu">
-							<li class="current-menu-item"><a href="http://www.freshdesignweb.com">Home</a></li>
+							<li class="current-menu-item"><a href="#">Home</a></li>
 							<li class="parent">
 								<a href="#"><i class="icon-wrench"></i> Configuration</a>
 								<ul class="sub-menu">
@@ -100,7 +101,7 @@
 										</ul>
 									</li>
 									<li>
-									   <a href="#"><i class="fa fa-sitemap"></i>  Set up Connections (Edges)</a>
+									   <a href="#" onclick="openAddEdgeData_Modal();"><i class="fa fa-sitemap"></i>  Set up Connections (Edges)</a>
 									</li>
 								</ul>
 							</li>
@@ -400,8 +401,6 @@
 			    
 					  <h4><span class="label label-primary">Data format of selected resource</span></h4>
 					  
-					
-
 			    	<div id="divDisplayGoalState_DataFormatClasses_TreeView">
 					   <select id="selectGoalState_DataFormatClasses_TreeView" class="selectpicker">
 					      <option value=""></option>

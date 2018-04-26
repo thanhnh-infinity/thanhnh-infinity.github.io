@@ -47,11 +47,7 @@ function buildUpTreeView_Resources(){
           }
         ];
 
-    operations_depend_classes = [
-       {"local_class_name":"names_resolution_operation","code":200,"list_instances":[{"local_name":"phylotastic_ResolvedScientificNames_GNR_TNRS_GET","uri":"http:\/\/www.cs.nmsu.edu\/~epontell\/CDAO\/cdao.owl#phylotastic_ResolvedScientificNames_GNR_TNRS_GET"},{"local_name":"phylotastic_ResolvedScientificNames_GNR_TNRS_POST","uri":"http:\/\/www.cs.nmsu.edu\/~epontell\/CDAO\/cdao.owl#phylotastic_ResolvedScientificNames_GNR_TNRS_POST"},{"local_name":"phylotastic_ResolvedScientificNames_OT_TNRS_GET","uri":"http:\/\/www.cs.nmsu.edu\/~epontell\/CDAO\/cdao.owl#phylotastic_ResolvedScientificNames_OT_TNRS_GET"},{"local_name":"phylotastic_ResolvedScientificNames_OT_TNRS_POST","uri":"http:\/\/www.cs.nmsu.edu\/~epontell\/CDAO\/cdao.owl#phylotastic_ResolvedScientificNames_OT_TNRS_POST"}],"uri_class_name":"http:\/\/www.cs.nmsu.edu\/~epontell\/CDAO\/cdao.owl#names_resolution_operation","type_object_in_list":"instance","status":"success"},
-       {"local_class_name":"taxonomy_based_extraction","code":200,"list_instances":[{"local_name":"phylotastic_GetPhylogeneticTree_OT_GET","uri":"http:\/\/www.cs.nmsu.edu\/~epontell\/CDAO\/cdao.owl#phylotastic_GetPhylogeneticTree_OT_GET"},{"local_name":"phylotastic_GetPhylogeneticTree_OT_POST","uri":"http:\/\/www.cs.nmsu.edu\/~epontell\/CDAO\/cdao.owl#phylotastic_GetPhylogeneticTree_OT_POST"}],"uri_class_name":"http:\/\/www.cs.nmsu.edu\/~epontell\/CDAO\/cdao.owl#taxonomy_based_extraction","type_object_in_list":"instance","status":"success"},
-       {"local_class_name":"gene_tree_scaling","code":200,"list_instances":[{"local_name":"phylotastic_GeneTree_Scaling","uri":"http:\/\/www.cs.nmsu.edu\/~epontell\/CDAO\/cdao.owl#phylotastic_GeneTree_Scaling"}],"uri_class_name":"http:\/\/www.cs.nmsu.edu\/~epontell\/CDAO\/cdao.owl#gene_tree_scaling","type_object_in_list":"instance","status":"success"}     
-    ]
+    operations_depend_classes = ONTOLOGY_LIST_OF_OPERATION_IN_ALL_SERVICES_CLASSES
 
     var arrTreeData = []
     var treeData = generate_tree_view_data(GLOBAL_HIERARCHY_CLASSES_RESOURCE)
@@ -192,7 +188,19 @@ function saveAddInitialState_Modal_TreeView(){
       }
 
       var an_initial_component = {"local_name":input_componets[0],"uri":input_componets[0],"data_format":selected_data_format}
-      initial_state_node.components.push(an_initial_component)
+
+      if (isExistedInitGoalComsList(input_componets[0],initial_state_node)){
+        for(var i in initial_state_node.components){
+          if (initial_state_node.components[i].local_name.trim().toUpperCase() == input_componets[0].trim().toUpperCase()){
+            initial_state_node.components[i] = an_initial_component
+            break;
+          }
+        }
+      } else {
+        initial_state_node.components.push(an_initial_component)
+      }
+
+      
       displayInitialState_From_Ontology(initial_state_node)
   } else {
     $.msgBox({
@@ -253,7 +261,19 @@ function saveAddGoalState_Modal_TreeView(){
       }
 
       var an_goal_component = {"local_name":output_components[0],"uri":output_components[0],"data_format":selected_data_format}
-      goal_state_node.components.push(an_goal_component)
+
+      if (isExistedInitGoalComsList(output_components[0],goal_state_node)){
+        for(var i in goal_state_node.components){
+          if (goal_state_node.components[i].local_name.trim().toUpperCase() == output_components[0].trim().toUpperCase()){
+            goal_state_node.components[i] = an_goal_component
+            break;
+          }
+        }
+      } else {
+        goal_state_node.components.push(an_goal_component)
+      }
+
+      
       displayGoalState_From_Ontology(goal_state_node)
   } else {
      $.msgBox({
@@ -280,8 +300,9 @@ function saveAddOperationNodeData_Modal(){
    if (selected_op_id == null) {
        return;
    }
-
-   ADDED_OPERATION_NODES_LIST.push(selected_op_id)
+   if (!isExistedNormalList(selected_op_id,ADDED_OPERATION_NODES_LIST)){
+      ADDED_OPERATION_NODES_LIST.push(selected_op_id)
+   }
    var data = {
        group: 'nodes',
        id: selected_op_id,
