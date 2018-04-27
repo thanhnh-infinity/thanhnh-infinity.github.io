@@ -93,9 +93,15 @@ function isEmpty(data){
 function getHTMLdocOption_ListOfNodes(nodes){
   var html = ""
   for(var i = 0 ; i < nodes.length ; i++ ){
-    html += "<option value=" + nodes[i].data.id + ">" + nodes[i].data.id + "</option>";
+    if (nodes[i].data.type === "service_node"){
+      html += "<option value=" + nodes[i].data.id + ">" + nodes[i].data.id + "</option>";
+    } else if (nodes[i].data.type === "initial_state_node"){
+      html += "<option value=" + nodes[i].data.id + "> Init State: " + nodes[i].data.id + "</option>";
+    } else if (nodes[i].data.type === "goal_state_node"){
+      html += "<option value=" + nodes[i].data.id + "> Goal State: " + nodes[i].data.id + "</option>";
+    }  
   }
-  return html
+  return html 
 }
 
 function checkExisted(item, list){

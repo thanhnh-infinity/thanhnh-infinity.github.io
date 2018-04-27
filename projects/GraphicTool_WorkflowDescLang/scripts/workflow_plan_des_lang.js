@@ -424,24 +424,34 @@ function openAddEdgeData_Modal(){
 
     document.getElementById('sourceOperationNode').innerHTML = getHTMLdocOption_ListOfNodes(GLOBAL_NODES_DATA)
     document.getElementById('targetOperationNode').innerHTML = getHTMLdocOption_ListOfNodes(GLOBAL_NODES_DATA)
+
+
 }
 
 function mapCommonComponents(Output_Source_Node, Input_Target_Node){
   try{
         var common = []
 
-        var outputSource_Components = Output_Source_Node.operation_parameters.output.components;
-        var inputTarget_Components = Input_Target_Node.operation_parameters.input.components;
+        console.log(Output_Source_Node)
+        console.log(Input_Target_Node)
+
+        var outputSource_Components = Output_Source_Node.service_parameters.output.components;
+        var inputTarget_Components = Input_Target_Node.service_parameters.input.components;
+
+        console.log(outputSource_Components)
+        console.log(inputTarget_Components)
 
         for(var i = 0 ; i < outputSource_Components.length ; i++){
           for(var j = 0 ; j < inputTarget_Components.length ; j++){
-            if (outputSource_Components[i].ontology_resource_id.trim().toUpperCase() === inputTarget_Components[j].ontology_resource_id.trim().toUpperCase()){
-              common.push(outputSource_Components[i].ontology_resource_id.trim().toUpperCase())
+            if ((outputSource_Components[i].resource_ontology_id.trim().toUpperCase() === inputTarget_Components[j].resource_ontology_id.trim().toUpperCase())
+                && (outputSource_Components[i].resource_data_format.trim().toUpperCase() === inputTarget_Components[j].resource_data_format.trim().toUpperCase())){
+              common.push(outputSource_Components[i].resource_ontology_id.trim().toUpperCase())
             }
           }
         }
         return common
   } catch(ex){
+    console.log(ex)
     return []
   }
 }
@@ -471,18 +481,35 @@ function saveAddNewEdgeData_Modal(){
 
   //console.log(source_node_id)
   //console.log(target_node_id)
+  
   source_node  = getFullNodeData_FromNodeID(source_node_id,ORIGIN_OPERATION_NODE_LIST,ADDED_OPERATION_NODES_LIST)
   target_node  = getFullNodeData_FromNodeID(target_node_id,ORIGIN_OPERATION_NODE_LIST,ADDED_OPERATION_NODES_LIST)
 
+  //console.log(source_node)
+
   var common = mapCommonComponents(source_node,target_node)
 
-  console.log(target_node)
+  console.log(common)
+
   if (!isEmpty(source_node_id) && !isEmpty(target_node_id)){
-    edge_data = { group: "edges", data: { source: source_node_id, target: target_node_id, label:common.toString() } }
-    cy.add(edge_data)
+    if (!isEmpty(common) && common.length > 0){
+      edge_data = { group: "edges", data: { source: source_node_id, target: target_node_id, label:common.toString() } }
+      cy.add(edge_data)
+    } else {
+      $.msgBox({
+        title:"Warning",
+        content:"This connection cannot be set up because no common exchanging resource between 2 nodes",
+        type:"warning"
+       });
+    }
+  } else {
+    $.msgBox({
+      title:"Warning",
+      content:"You have to select source and target service node",
+      type:"warning"
+     }); 
   }
-  //console.log("Tai sao ko vao day????")
-  return
+  
 }
 
 function closeAddEdgeData_Modal(){
@@ -541,6 +568,8 @@ function interactiveNode(action,node){
 function DisplayWorkflow_Graphic_From_Source(PLAN_DATA){
   GLOBAL_NODES_DATA = []
   GLOBAL_EDGES_DATA = []
+
+  ORIGIN_OPERATION_NODE_LIST = PLAN_DATA.workflow_plan[0].full_plan
 
   /* Add node for Input request */
   var initNode = setUpInitialState_From_WorkFlow(PLAN_DATA)
@@ -755,7 +784,7 @@ function displayInfo_Node_V2(event, node_type){
     message += "<b>OUTPUT COMPONENTS (" + data.outputs.length + ")<br/></b>"
     message += "<hr/>"
     for(var i = 0 ; i < data.outputs.length ; i++){
-       message += "&nbsp;&nbsp;&nbsp;&nbsp;<i>ID</i> : <b>" + data.outputs[i] + "</b><br/>"
+       message += "&nbsp;&nbsp;&nbsp;&nbsp;<i>ID</i> : <b>" + data.outputs[i].resource_id + "</b><br/>"
        message += "&nbsp;&nbsp;&nbsp;&nbsp;<i>Format</i> : <b>" + data.outputs[i].data_format_id + "</b><br/>"
        message += "<hr/>"
     }

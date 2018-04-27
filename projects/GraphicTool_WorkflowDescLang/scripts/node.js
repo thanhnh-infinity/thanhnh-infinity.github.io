@@ -12,6 +12,7 @@ function initNode_forGraphic(node){
 }
 
 function setUpOneServiceNode(service){
+  //console.log(service)
   var service_node_temp = {}
   service_node_temp.id = service.service_name
   service_node_temp.name = service.service_name
@@ -39,7 +40,9 @@ function setUpOneServiceNode(service){
   raw_output_components = service.service_parameters.output.components
   if (!objectIsEmpty(raw_output_components) && raw_output_components.length > 0){
     for(var i = 0 ; i < raw_output_components.length ; i++){
-      service_node_temp.outputs.push(raw_output_components[i].resource_ontology_id)
+      var output_object = {"resource_id":raw_output_components[i].resource_ontology_id,"data_format_id":raw_output_components[i].resource_data_format}
+      service_node_temp.outputs.push(output_object)
+      //service_node_temp.outputs.push(raw_output_components[i].resource_ontology_id)
     }
   }
   
@@ -156,14 +159,14 @@ function setUpAll_ServiceNodes_From_WorkFlow(GLOBAL_WORKFLOW_PLAN_DATA){
 }
 
 function getFullNodeData_FromNodeID(node_id,origin_operations_nodes,added_operations_nodes){
-  //console.log(origin_operations_nodes)
+  console.log(origin_operations_nodes)
   for(var i = 0 ; i < origin_operations_nodes.length ; i++){
-    if (node_id.trim().toUpperCase() === origin_operations_nodes[i].operation_name.trim().toUpperCase()){
+    if (node_id.trim().toUpperCase() === origin_operations_nodes[i].service_name.trim().toUpperCase()){
       return origin_operations_nodes[i]
     }
   }
   for(var i = 0 ; i < added_operations_nodes.length ; i++){
-    if (node_id.trim().toUpperCase() === added_operations_nodes[i].operation_name.trim().toUpperCase()){
+    if (node_id.trim().toUpperCase() === added_operations_nodes[i].service_name.trim().toUpperCase()){
       return added_operations_nodes[i]
     }
   }

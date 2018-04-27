@@ -3,7 +3,7 @@
  * Doc : Service composition framework - Workflow Description Tool
  * Date : 25-Feb-2017
  **/
-
+ 
 
 /* Global variable and components */
 var GLOBAL_NODES_DATA = [];
@@ -14,7 +14,7 @@ var GLOBAL_EDGES_DATA = [];
 var ORIGIN_INIT_INPUT = GLOBAL_WORKFLOW_PLAN_DATA.request_parameters.input
 var ORIGIN_GOAL_OUTPUT = GLOBAL_WORKFLOW_PLAN_DATA.request_parameters.output
 var ORIGIN_FIRST_OPERATION = GLOBAL_WORKFLOW_PLAN_DATA.workflow_plan[0].full_plan[0]
-var ORIGIN_OPERATION_NODE_LIST = GLOBAL_WORKFLOW_PLAN_DATA.workflow_plan[0].full_plan
+var ORIGIN_OPERATION_NODE_LIST =[]
 var ORIGIN_LAST_OPERATION = GLOBAL_WORKFLOW_PLAN_DATA.workflow_plan[0].full_plan[GLOBAL_WORKFLOW_PLAN_DATA.workflow_plan[0].full_plan.length - 1]
 var ADDED_OPERATION_NODES_LIST = []
 var AVOIDANCE_OPERATION_NODES_LIST = []

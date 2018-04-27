@@ -145,21 +145,29 @@
 		<div class="header">
 			<!-- Modal for Edge Adding tool -->
 			<div id="addEdgeDataModal" class="modal">
-			  <!-- Modal content -->
 			  <div class="modal-content">
-			    <span class="close" onclick="closeAddEdgeData_Modal();">&times;</span>
-					<p>Source Node</p>
-					<select id="sourceOperationNode">
-						 <!-- for demo -->
-						 <option value=""></option>
-				 </select>
-				 <p>Target Node</p>
-				 <select id="targetOperationNode">
-						<!-- for demo -->
-						<option value=""></option>
-				</select>
-				<br/><br/>
-					<button id="save" onclick="saveAddNewEdgeData_Modal();">Save</button>
+			  		<span class="close" onclick="closeAddEdgeData_Modal();">&times;</span>	
+			  		<div class="msgBoxTitle">Define Connections (Edges) between Services (Nodes)</div>
+			   		<br/>
+
+			     
+					  <h4><span class="label label-primary">Source Service Node</span></h4>
+						  <select id="sourceOperationNode" style="-webkit-appearance: button;-webkit-border-radius: 2px;-webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);-webkit-padding-end: 5px;-webkit-padding-start: 2px;-webkit-user-select: none;background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);background-position: 97% center;background-repeat: no-repeat;border: 1px solid #AAA;color: #555;font-size: 13px;margin: 5px;overflow: hidden;padding: 5px 15px;text-overflow: ellipsis;white-space: nowrap;width: 400px;">
+						  	 <option value=""></option>
+					    </select>
+				    <br/>
+				    <br/>
+				    <h4><span class="label label-primary">Target Service Node</span></h4>
+				    <select id="targetOperationNode" style="-webkit-appearance: button;-webkit-border-radius: 2px;-webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);-webkit-padding-end: 5px;-webkit-padding-start: 2px;-webkit-user-select: none;background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);background-position: 97% center;background-repeat: no-repeat;border: 1px solid #AAA;color: #555;font-size: 13px;margin: 5px;overflow: hidden;padding: 5px 15px;text-overflow: ellipsis;white-space: nowrap;width: 400px;">
+						    <option value=""></option>
+				    </select>
+				    <br/>
+				    <br/>
+						
+						<div id="div_Save_Operations_TreeView" class="msgBoxButtons">
+					  	<input class="msgButton" type="button" name="Add" value="Add" onclick="saveAddNewEdgeData_Modal();" id="btn_Save_Edge_TreeView">
+					  	<input class="msgButton" type="button" name="Cancel" value="Cancel" onclick="closeAddEdgeData_Modal();" id="btn_Cancel_Edge_TreeView">
+					  </div>
 			  </div>
 			</div>
 
@@ -167,6 +175,8 @@
 			<!-- Modal for Operation Node Adding tool -->
 			<div id="addOperationNodeDataModal" class="modal">
 			  <div class="modal-content">
+
+
 			      <span class="close" onclick="closeAddOperationNodeData_Modal();">&times;</span>
 			   		<div class="msgBoxTitle">Select concrete service to be included in Workflow</div>
 			   	

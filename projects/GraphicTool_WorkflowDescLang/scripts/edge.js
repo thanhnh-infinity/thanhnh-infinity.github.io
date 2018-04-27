@@ -39,12 +39,12 @@ function findCommonResource(service_node_source, service_nodes_destination){
     for(var i = 0 ; i < service_nodes_destination.data.inputs.length ; i++){
       if (service_node_source.data.type === "service_node") {
          for(var j = 0 ; j < service_node_source.data.outputs.length; j++){
-            if (service_nodes_destination.data.inputs[i].resource_id === service_node_source.data.outputs[j]){ //nen co them data format 
+            if (service_nodes_destination.data.inputs[i].resource_id === service_node_source.data.outputs[j].resource_id){ //nen co them data format 
               if (commons.indexOf(service_nodes_destination.data.inputs[i].resource_id) == -1){
                 commons.push(service_nodes_destination.data.inputs[i].resource_id)  
               }
               
-            } else if (service_nodes_destination.data.inputs[i].map_to_resource_id === service_node_source.data.outputs[j]){ //nen co them data format
+            } else if (service_nodes_destination.data.inputs[i].map_to_resource_id === service_node_source.data.outputs[j].resource_id){ //nen co them data format
               if (commons.indexOf(service_nodes_destination.data.inputs[i].map_to_resource_id) == -1){
                 commons.push(service_nodes_destination.data.inputs[i].map_to_resource_id)  
               }
@@ -67,7 +67,7 @@ function findCommonResource(service_node_source, service_nodes_destination){
   } else if (service_nodes_destination.data.type === "goal_state_node"){
     for(var j = 0 ; j < service_nodes_destination.data.components.length; j++){
         for(var i = 0 ; i < service_node_source.data.outputs.length; i++){
-          if (service_node_source.data.outputs[i] === service_nodes_destination.data.components[j]){
+          if (service_node_source.data.outputs[i].resource_id === service_nodes_destination.data.components[j]){
             if (commons.indexOf(service_nodes_destination.data.components[j]) == -1){
               commons.push(service_nodes_destination.data.components[j])  
             }   
