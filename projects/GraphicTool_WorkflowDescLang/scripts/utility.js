@@ -123,44 +123,26 @@ function checkExisted_Ontology_Link(item, list){
 }
 
 function seeToast(message, duration, type) {
-    //toastr.remove();
-     if (type === "INCLUSION"){
-        toastr.options = {
+     //toastr.remove();
+     toastr.options = {
           "closeButton": true,
           "debug": false,
           "newestOnTop": false,
           "progressBar": false,
-          "positionClass": "toast-bottom-right",
+          "positionClass": "toast-bottom-center",
           "preventDuplicates": true,
           "onclick": null,
-          "timeOut": "50000",
+          "timeOut": "2500",
           "extendedTimeOut": "0",
           "showEasing": "swing",
           "hideEasing": "linear",
           "showMethod": "fadeIn",
           "hideMethod": "fadeOut"
 
-        };
+     };
+     if (type === "INCLUSION"){
         toastr.success(message); 
      } else if (type="AVOIDANCE"){
-
-        toastr.options = {
-          "closeButton": true,
-          "debug": false,
-          "newestOnTop": false,
-          "progressBar": false,
-          "positionClass": "toast-bottom-left",
-          "preventDuplicates": true,
-          "onclick": null,
-          "timeOut": "50000",
-          "extendedTimeOut": "0",
-          "showEasing": "swing",
-          "hideEasing": "linear",
-          "showMethod": "fadeIn",
-          "hideMethod": "fadeOut"
-
-        };
-
         toastr.warning(message); 
      }
      

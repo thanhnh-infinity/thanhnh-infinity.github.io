@@ -117,8 +117,11 @@
 							<li class="parent">
 								<a href="#"><i class="fa fa-legal"></i> Tools</a>
 								<ul class="sub-menu">
+								  <li><a href="#" onclick="infoWFChangesData();"><i class="fa fa-info-circle"></i>  Workflow Changes Info</a></li>
+								  <li><a href="#" onclick="reload();"><i class="glyphicon glyphicon-screenshot"></i>  Focus view</a></li>
 									<li><a href="#" onclick="clearData();"><i class="fa fa-trash"></i> Clear Workstation Data</a></li>
-									<li><a href="#" onclick="reload();"><!-- <i class="material-icons" style="font-size:16px">center_focus_strong</i>--><i class="glyphicon glyphicon-screenshot"></i>  Focus view</a></li>
+									
+									
 								</ul>
 							</li>
 							<li class="parent">
@@ -468,6 +471,52 @@
 				  <div id="div_Save_GoalState_Comps_TreeView" class="msgBoxButtons">
 				  	<input class="msgButton" type="button" name="Add" value="Add" onclick="saveAddGoalState_Modal_TreeView();" id="btn_Save_GoalState_Comps_TreeView">
 				  	<input class="msgButton" type="button" name="Cancel" value="Cancel" onclick="closeAddGoalState_Modal_TreeView();" id="btn_Cancel_GoalState_Comps_TreeView">
+				  </div>
+			   </div> 
+		
+		</div>
+
+		<div id="displayChangesInformation_Modal" class="modal">
+			   <div class="modal-content">
+			      <span class="close" onclick="closeDisplayChangesInformation_Modal();">&times;</span>
+			   		<div class="msgBoxTitle">Current scenario of Workflow Changes</div>
+			   		<br/>
+			   		
+					  <h4><span class="label label-primary">Inclusion Services</span></h4>
+					  <hr/>
+			  		<div id = "inclusion_grid" class="container-fluid">
+			  		  <!--
+						  <div class="row">
+						    <div class="col-sm-4">.col-sm-4</div>
+						    <div class="col-sm-2">.col-sm-2</div>
+						  </div>
+						  -->
+						</div>
+				
+						<br/>
+					  <h4><span class="label label-primary">Avoidance Services</span></h4>
+					  <hr/>
+					  <div id = "avoidance_grid" class="container-fluid">
+			  		  <!--
+						  <div class="row">
+						    <div class="col-sm-4">.col-sm-4</div>
+						    <div class="col-sm-2">.col-sm-2</div>
+						  </div>
+						  -->
+						</div>
+					  
+					  <br/>
+			    	<h4><span class="label label-primary">Insertion Services</span></h4>
+			    	<hr/>
+					 	
+					 	<br/>
+					 	<h4><span class="label label-primary">Graph Connections</span></h4>
+					 	<hr/>
+		    	<br/>
+				  <br/>
+
+				  <div class="msgBoxButtons">
+				  	<input class="msgButton" type="button" name="OK" value="OK" onclick="closeDisplayChangesInformation_Modal();" id="btn_Cancel_DisplayChangesInformation">
 				  </div>
 			   </div> 
 		
