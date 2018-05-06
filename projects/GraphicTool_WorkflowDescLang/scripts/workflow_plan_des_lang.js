@@ -22,9 +22,10 @@ function clearData(){
 
   ADDED_OPERATION_NODES_LIST = []
   AVOIDANCE_OPERATION_NODES_LIST = []
-
+  
   document.getElementById('cy').style.visibility = "visible";
   initGraphicFrame();
+  toastr.remove();
   console.log("Clear")
 }
 

@@ -300,6 +300,9 @@ function saveAddOperationNodeData_Modal(){
    if (selected_op_id == null) {
        return;
    }
+
+   seeToast(selected_op_id,12000,"INCLUSION")
+
    if (!isExistedNormalList(selected_op_id,ADDED_OPERATION_NODES_LIST)){
       ADDED_OPERATION_NODES_LIST.push(selected_op_id)
    }

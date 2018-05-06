@@ -121,3 +121,47 @@ function checkExisted_Ontology_Link(item, list){
   }
   return false
 }
+
+function seeToast(message, duration, type) {
+    //toastr.remove();
+     if (type === "INCLUSION"){
+        toastr.options = {
+          "closeButton": true,
+          "debug": false,
+          "newestOnTop": false,
+          "progressBar": false,
+          "positionClass": "toast-bottom-right",
+          "preventDuplicates": true,
+          "onclick": null,
+          "timeOut": "50000",
+          "extendedTimeOut": "0",
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "fadeIn",
+          "hideMethod": "fadeOut"
+
+        };
+        toastr.success(message); 
+     } else if (type="AVOIDANCE"){
+
+        toastr.options = {
+          "closeButton": true,
+          "debug": false,
+          "newestOnTop": false,
+          "progressBar": false,
+          "positionClass": "toast-bottom-left",
+          "preventDuplicates": true,
+          "onclick": null,
+          "timeOut": "50000",
+          "extendedTimeOut": "0",
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "fadeIn",
+          "hideMethod": "fadeOut"
+
+        };
+
+        toastr.warning(message); 
+     }
+     
+};
