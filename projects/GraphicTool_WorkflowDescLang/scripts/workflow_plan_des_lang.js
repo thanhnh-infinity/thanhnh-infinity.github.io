@@ -18,7 +18,7 @@ function infoWFChangesData(){
    var divInclusion = document.getElementById('inclusion_grid');
    var htmlDivInc = ""
    for(var index = 0 ; index < ADDED_OPERATION_NODES_LIST.length ; index++){
-     htmlDivInc += '<div class="row"><div class="col-sm-4"><h5><b>' + ADDED_OPERATION_NODES_LIST[index] + '</b></h5></div><div class="col-sm-2"><button type="button" class="btn btn-danger btn-sm" onclick="removeInclusionService(\'' + ADDED_OPERATION_NODES_LIST[index] + '\')">Remove</button></div></div>';
+     htmlDivInc += '<div class="row"><div class="col-sm-5"><h5><b>' + ADDED_OPERATION_NODES_LIST[index] + '</b></h5></div><div class="col-sm-2"><button type="button" class="btn btn-danger btn-sm" onclick="removeInclusionService(\'' + ADDED_OPERATION_NODES_LIST[index] + '\')">Remove</button></div></div>';
    }
    divInclusion.innerHTML = htmlDivInc
 
@@ -26,7 +26,7 @@ function infoWFChangesData(){
    var divAvoidance = document.getElementById('avoidance_grid');
    var htmlDivAvoid = ""
    for(var index = 0 ; index < AVOIDANCE_OPERATION_NODES_LIST.length ; index++){
-     htmlDivAvoid += '<div class="row"><div class="col-sm-4"><h5><b>' + AVOIDANCE_OPERATION_NODES_LIST[index] + '</b></h5></div><div class="col-sm-2"><button type="button" class="btn btn-danger btn-sm" onclick="removeAvoidanceService(\'' + AVOIDANCE_OPERATION_NODES_LIST[index] + '\')">Remove</button></div></div>';
+     htmlDivAvoid += '<div class="row"><div class="col-sm-5"><h5><b>' + AVOIDANCE_OPERATION_NODES_LIST[index] + '</b></h5></div><div class="col-sm-2"><button type="button" class="btn btn-danger btn-sm" onclick="removeAvoidanceService(\'' + AVOIDANCE_OPERATION_NODES_LIST[index] + '\')">Remove</button></div></div>';
    }
    divAvoidance.innerHTML = htmlDivAvoid
 }
@@ -46,7 +46,7 @@ function removeAvoidanceService(item){
                    var divAvoidance = document.getElementById('avoidance_grid');
                    var htmlDivAvoid = ""
                    for(var index = 0 ; index < AVOIDANCE_OPERATION_NODES_LIST.length ; index++){
-                      htmlDivAvoid += '<div class="row"><div class="col-sm-4"><h5><b>' + AVOIDANCE_OPERATION_NODES_LIST[index] + '</b></h5></div><div class="col-sm-2"><button type="button" class="btn btn-danger btn-sm" onclick="removeAvoidanceService(\'' + AVOIDANCE_OPERATION_NODES_LIST[index] + '\')">Remove</button></div></div>';
+                      htmlDivAvoid += '<div class="row"><div class="col-sm-5"><h5><b>' + AVOIDANCE_OPERATION_NODES_LIST[index] + '</b></h5></div><div class="col-sm-2"><button type="button" class="btn btn-danger btn-sm" onclick="removeAvoidanceService(\'' + AVOIDANCE_OPERATION_NODES_LIST[index] + '\')">Remove</button></div></div>';
                    }
                    divAvoidance.innerHTML = htmlDivAvoid
 
@@ -72,7 +72,7 @@ function removeInclusionService(item){
                    var divInclusion = document.getElementById('inclusion_grid');
                    var htmlDivInc = ""
                    for(var index = 0 ; index < ADDED_OPERATION_NODES_LIST.length ; index++){
-                     htmlDivInc += '<div class="row"><div class="col-sm-4"><h5><b>' + ADDED_OPERATION_NODES_LIST[index] + '</b></h5></div><div class="col-sm-2"><button type="button" class="btn btn-danger btn-sm" onclick="removeInclusionService(\'' + ADDED_OPERATION_NODES_LIST[index] + '\')">Remove</button></div></div>';
+                     htmlDivInc += '<div class="row"><div class="col-sm-5"><h5><b>' + ADDED_OPERATION_NODES_LIST[index] + '</b></h5></div><div class="col-sm-2"><button type="button" class="btn btn-danger btn-sm" onclick="removeInclusionService(\'' + ADDED_OPERATION_NODES_LIST[index] + '\')">Remove</button></div></div>';
                    }
                    divInclusion.innerHTML = htmlDivInc
 

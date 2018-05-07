@@ -11,6 +11,7 @@ function recomposite_get_simWorkflow(){
   initial_state_data = GLOBAL_INITIAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE
   goal_state_data =   GLOBAL_GOAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE
   inclusion_data = ADDED_OPERATION_NODES_LIST
+  avoidance_data = AVOIDANCE_OPERATION_NODES_LIST
 
   /* Step 2 : Send POST METHOD API
      http://<planning_ontology_server:8080>/getPlanningWorkflow (Python + CherryPy)
@@ -78,7 +79,7 @@ function recomposite_get_simWorkflow(){
                    {
                       "input" : input_array_object,
                       "output" : output_array_object,
-                      "avoidance" : [],
+                      "avoidance" : avoidance_data,
                       "inclusion" : inclusion_data,
                       "insertion" : [],
                       "original_workflow" : GLOBAL_WORKFLOW_PLAN_DATA_PLANNING.workflow_plan[0].raw_plan,

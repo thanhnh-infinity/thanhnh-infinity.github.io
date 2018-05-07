@@ -358,45 +358,61 @@
 			    	<h4><span class="label label-primary">Data format of selected resource</span></h4>
 						  
 				    <div id="divDisplayInitialState_DataFormatClasses_TreeView">
-						   <select id="selectInitialState_DataFormatClasses_TreeView" class="selectpicker">
-						      <option value=""></option>
-						      <option value="list_of_things">list_of_things</option>
-						      <option value="list_of_strings">list_of_strings</option>
-						      <option value="number">number</option>
-						      <option value="double">double</option>
-						      <option value="integer">integer</option>
-						      <option value="http_url">http_url</option>
-						      <option value="uri">uri</option>
-						      <option value="string">string</option>
-						      <option value="data_format_A">data_format_A</option>
-						      <option value="data_format_B">data_format_B</option>
-						      <option value="data_format_C">data_format_C</option>
-						      <option value="data_format_D">data_format_D</option>
-						      <option value="data_format_E">data_format_E</option>
-						      <option value="data_format_F">data_format_F</option>
-						      <option value="plain_text">plain_text</option>
-						      <option value="data_format_A_1">data_format_A_1</option>
-						      <option value="data_format_A_2">data_format_A_2</option>
-						      <option value="data_format_A_3">data_format_A_3</option>
-						      <option value="names_format_1">names_format_1</option>
-						      <option value="names_format_2">names_format_2</option>
-						      <option value="names_format_3">names_format_3</option>
-						      <option value="names_format_4">names_format_4</option>
-						      <option value="names_format_5">names_format_5</option>
-						      <option value="names_format_6">names_format_6</option>
-						      <option value="names_format_resolved_GNR">names_format_resolved_GNR</option>
-						      <option value="names_format_resolved_OT">names_format_resolved_OT</option>
-						      <option value="data_format_C_1">data_format_C_1</option>
-						      <option value="data_format_C_2">data_format_C_2</option>
-						      <option value="tree_format_1">tree_format_1</option>
-						      <option value="tree_format_2">tree_format_2</option>
-						      <option value="tree_format_3">tree_format_3</option>
-						      <option value="tree_format_4">tree_format_4</option>
-						      <option value="newickTree">newickTree</option>
-						      <option value="phyloXML">phyloXML</option>
-						      <option value="phylo4Tree">phylo4Tree</option>
-						      <option value="boolean">boolean</option>
-						       <option value="compare_tree_format">compare_tree_format</option>	
+						   <select id="selectInitialState_DataFormatClasses_TreeView" class="selectpicker show-tick" data-live-search="true">
+						      <optgroup label="Primitive">
+						        <option value=""></option>
+						        <option value="boolean">boolean</option>
+						      	<option value="number">number</option>
+						        <option value="double">double</option>
+						        <option value="integer">integer</option>
+						        <option value="string">string</option>	
+						      </optgroup>
+						      <optgroup label="Set">
+						      	<option value="list_of_things">list_of_things</option>
+						        <option value="list_of_strings">list_of_strings</option>	
+						      </optgroup>
+						      <optgroup label="Text format">
+						      	<option value="plain_text">plain_text</option>
+						      	<option value="raw_text">raw_text</option>
+						      	<option value="encoded_text">encoded_text</option>
+						      </optgroup>
+						     	<optgroup label="Phylogeny format">
+							      <option value="tree_format_1">tree_format_1</option>
+							      <option value="tree_format_2">tree_format_2</option>
+							      <option value="tree_format_3">tree_format_3</option>
+							      <option value="tree_format_4">tree_format_4</option>
+							      <option value="newickTree">newickTree</option>
+							      <option value="phyloXML">phyloXML</option>
+							      <option value="phylo4Tree">phylo4Tree</option>
+							       <option value="compare_tree_format">compare_tree_format</option>	
+							    </optgroup> 
+							    <optgroup label="URI format">
+						        <option value="http_url">http_url</option>
+						         <option value="uri">uri</option>
+						      </optgroup>
+						      <optgroup label="Test data format">
+						      	<option value="data_format_A">data_format_A</option>
+							      <option value="data_format_B">data_format_B</option>
+							      <option value="data_format_C">data_format_C</option>
+							      <option value="data_format_D">data_format_D</option>
+							      <option value="data_format_E">data_format_E</option>
+							      <option value="data_format_F">data_format_F</option>
+							      <option value="data_format_A_1">data_format_A_1</option>
+							      <option value="data_format_A_2">data_format_A_2</option>
+							      <option value="data_format_A_3">data_format_A_3</option>  
+							      <option value="data_format_C_1">data_format_C_1</option>
+						        <option value="data_format_C_2">data_format_C_2</option>
+						      </optgroup>
+						      <optgroup label="Names Format">
+						         <option value="names_format_1">names_format_1</option>
+						      	 <option value="names_format_2">names_format_2</option>
+						         <option value="names_format_3">names_format_3</option>
+						         <option value="names_format_4">names_format_4</option>
+						         <option value="names_format_5">names_format_5</option>
+						         <option value="names_format_6">names_format_6</option>
+						         <option value="names_format_resolved_GNR">names_format_resolved_GNR</option>
+						         <option value="names_format_resolved_OT">names_format_resolved_OT</option>
+						      </optgroup>
 						   </select>  
 						</div>
 						 
@@ -423,45 +439,62 @@
 					  <h4><span class="label label-primary">Data format of selected resource</span></h4>
 					  
 			    	<div id="divDisplayGoalState_DataFormatClasses_TreeView">
-					   <select id="selectGoalState_DataFormatClasses_TreeView" class="selectpicker">
-					      <option value=""></option>
-					      <option value="list_of_things">list_of_things</option>
-					      <option value="list_of_strings">list_of_strings</option>
-					      <option value="number">number</option>
-					      <option value="double">double</option>
-					      <option value="integer">integer</option>
-					      <option value="http_url">http_url</option>
-					      <option value="uri">uri</option>
-					      <option value="string">string</option>
-					      <option value="data_format_A">data_format_A</option>
-					      <option value="data_format_B">data_format_B</option>
-					      <option value="data_format_C">data_format_C</option>
-					      <option value="data_format_D">data_format_D</option>
-					      <option value="data_format_E">data_format_E</option>
-					      <option value="data_format_F">data_format_F</option>
-					      <option value="plain_text">plain_text</option>
-					      <option value="data_format_A_1">data_format_A_1</option>
-					      <option value="data_format_A_2">data_format_A_2</option>
-					      <option value="data_format_A_3">data_format_A_3</option>
-					      <option value="names_format_1">names_format_1</option>
-					      <option value="names_format_2">names_format_2</option>
-					      <option value="names_format_3">names_format_3</option>
-					      <option value="names_format_4">names_format_4</option>
-					      <option value="names_format_5">names_format_5</option>
-					      <option value="names_format_6">names_format_6</option>
-					      <option value="names_format_resolved_GNR">names_format_resolved_GNR</option>
-					      <option value="names_format_resolved_OT">names_format_resolved_OT</option>
-					      <option value="data_format_C_1">data_format_C_1</option>
-					      <option value="data_format_C_2">data_format_C_2</option>
-					      <option value="tree_format_1">tree_format_1</option>
-					      <option value="tree_format_2">tree_format_2</option>
-					      <option value="tree_format_3">tree_format_3</option>
-					      <option value="tree_format_4">tree_format_4</option>
-					      <option value="newickTree">newickTree</option>
-					      <option value="phyloXML">phyloXML</option>
-					      <option value="phylo4Tree">phylo4Tree</option>
-					      <option value="boolean">boolean</option>
-					      <option value="compare_tree_format">compare_tree_format</option>	
+					   <select id="selectGoalState_DataFormatClasses_TreeView" class="selectpicker show-tick" data-live-search="true">
+					      <optgroup label="Primitive">
+						        <option value=""></option>
+						        <option value="boolean">boolean</option>
+						      	<option value="number">number</option>
+						        <option value="double">double</option>
+						        <option value="integer">integer</option>
+						        <option value="string">string</option>	
+						      </optgroup>
+						      <optgroup label="Set">
+						      	<option value="list_of_things">list_of_things</option>
+						        <option value="list_of_strings">list_of_strings</option>	
+						      </optgroup>
+						      <optgroup label="Text format">
+						      	<option value="plain_text">plain_text</option>
+						      	<option value="raw_text">raw_text</option>
+						      	<option value="encoded_text">encoded_text</option>
+						      </optgroup>
+						     	<optgroup label="Phylogeny format">
+							      <option value="tree_format_1">tree_format_1</option>
+							      <option value="tree_format_2">tree_format_2</option>
+							      <option value="tree_format_3">tree_format_3</option>
+							      <option value="tree_format_4">tree_format_4</option>
+							      <option value="newickTree">newickTree</option>
+							      <option value="phyloXML">phyloXML</option>
+							      <option value="phylo4Tree">phylo4Tree</option>
+							       <option value="compare_tree_format">compare_tree_format</option>	
+							    </optgroup> 
+							    <optgroup label="URI format">
+						        <option value="http_url">http_url</option>
+						         <option value="uri">uri</option>
+						      </optgroup>
+						      <optgroup label="Test data format">
+						      	<option value="data_format_A">data_format_A</option>
+							      <option value="data_format_B">data_format_B</option>
+							      <option value="data_format_C">data_format_C</option>
+							      <option value="data_format_D">data_format_D</option>
+							      <option value="data_format_E">data_format_E</option>
+							      <option value="data_format_F">data_format_F</option>
+							      <option value="data_format_A_1">data_format_A_1</option>
+							      <option value="data_format_A_2">data_format_A_2</option>
+							      <option value="data_format_A_3">data_format_A_3</option>  
+							      <option value="data_format_C_1">data_format_C_1</option>
+						        <option value="data_format_C_2">data_format_C_2</option>
+						      </optgroup>
+
+						      <optgroup label="Names Format">
+						         <option value="names_format_1">names_format_1</option>
+						      	 <option value="names_format_2">names_format_2</option>
+						         <option value="names_format_3">names_format_3</option>
+						         <option value="names_format_4">names_format_4</option>
+						         <option value="names_format_5">names_format_5</option>
+						         <option value="names_format_6">names_format_6</option>
+						         <option value="names_format_resolved_GNR">names_format_resolved_GNR</option>
+						         <option value="names_format_resolved_OT">names_format_resolved_OT</option>
+						      </optgroup>	
 					   </select>  
 					</div>
 					 
