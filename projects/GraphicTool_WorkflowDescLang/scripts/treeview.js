@@ -294,11 +294,24 @@ function saveAddOperationNodeData_Modal(){
    var e =  document.getElementById("select_concrete_op_name");
    var selected_op_id = e.options[e.selectedIndex].value
    if (isEmpty(selected_op_id)){
-     selected_op_id = "unknown"
+     //selected_op_id = "unknown"
+     $.msgBox({
+        title:"Warning",
+        content:"Please select a service that you want to include !",
+        type:"warning"
+      }); 
+   
+      return;
    } 
 
    if (selected_op_id == null) {
-       return;
+      $.msgBox({
+        title:"Warning",
+        content:"Please select a service that you want to include !",
+        type:"warning"
+      }); 
+   
+      return;
    }
 
    
@@ -346,4 +359,43 @@ function saveAddOperationNodeData_Modal(){
    cy.center()
    cy.fit()
    
+}
+
+/**
+ ** AVOIDACNE
+ **/
+
+function openAvoidanceService_Modal_List(){
+    document.getElementById('cy').style.visibility = "hidden";
+    var avoidanceService_Modal_List = document.getElementById('avoidanceService_Modal_List');
+    avoidanceService_Modal_List.style.display = "block";
+}
+
+function closeAvoidanceService_Modal_List(){
+   var avoidanceService_Modal_List = document.getElementById('avoidanceService_Modal_List');
+   avoidanceService_Modal_List.style.display = "none";
+   document.getElementById('cy').style.visibility = "visible";
+}
+
+function saveAvoidanceService_Modal_List(){
+   var avoidanceService_Modal_List = document.getElementById('avoidanceService_Modal_List');
+   avoidanceService_Modal_List.style.display = "none";
+   document.getElementById('cy').style.visibility = "visible";
+
+   var avoids  = []
+   $.each($("#selectAvoidacneService_Modal_List"), function(){
+      avoids.push($(this).val());
+   });
+   
+   for(var index = 0 ; index < avoids[0].length ; index++){
+      if (!isExistedNormalList(avoids[0][index],AVOIDANCE_OPERATION_NODES_LIST)){
+        AVOIDANCE_OPERATION_NODES_LIST.push(avoids[0][index])
+      }
+      var check = ADDED_OPERATION_NODES_LIST.indexOf(avoids[0][index])
+      if (check > -1){
+        ADDED_OPERATION_NODES_LIST.splice(check,1)
+      }
+   }
+
+   console.log(AVOIDANCE_OPERATION_NODES_LIST)
 }

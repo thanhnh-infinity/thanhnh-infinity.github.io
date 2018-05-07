@@ -97,9 +97,15 @@
 									<li>
 									   <a class="parent" href="#"><i class="fa fa-edit"></i>  Refine current Workflow</a>
 									   <ul class="sub-menu">
-											 <li><a href="#"><i class="fa fa-user-times"></i> Avoidance services</a></li>
+											 <li><a href="#" onclick="openAvoidanceService_Modal_List();"><i class="fa fa-user-times"></i> Avoidance services</a></li>
 											 <li><a href="#" onclick="openAddOperationNodeData_Modal();"><i class="fa fa-user-plus"></i> Inclusion services</a></li>
 											 <li><a href="#"><i class="fa fa-users"></i> Insertion services</a></li>
+											 <li>
+											    <a class="parent" href="#"><i class="fa fa-share-alt"></i> Condition Block</a>
+											    <ul class="sub-menu">
+											       <li><a href="#"><i class="fa fa-share-alt"></i> Set Up Condition Block</a></li>
+											    </ul>
+											 </li>
 										</ul>
 									</li>
 									<li>
@@ -553,6 +559,59 @@
 				  </div>
 			   </div> 
 		
+		</div>
+
+		<div id="avoidanceService_Modal_List" class="modal">
+			   <div class="modal-content">
+			      <span class="close" onclick="closeAvoidanceService_Modal_List();">&times;</span>
+			   		<div class="msgBoxTitle">Select concrete service to be avoided in Workflow<</div>
+			   		<br/>
+			   		
+					  <h4><span class="label label-primary">Avoidance Services</span></h4>
+					  <hr/>
+			  		<div id="divAvoidacneService_Modal_List">
+					   <select id="selectAvoidacneService_Modal_List" class="selectpicker show-tick" data-live-search="true" multiple>
+						      	<option value="phylotastic_ResolvedScientificNames_GNR_TNRS_GET">phylotastic_ResolvedScientificNames_GNR_TNRS_GET</option>
+							      <option value="phylotastic_ResolvedScientificNames_GNR_TNRS_POST">phylotastic_ResolvedScientificNames_GNR_TNRS_POST</option>
+							      <option value="phylotastic_ResolvedScientificNames_OT_TNRS_GET">phylotastic_ResolvedScientificNames_OT_TNRS_GET</option>
+							      <option value="phylotastic_ResolvedScientificNames_OT_TNRS_POST">phylotastic_ResolvedScientificNames_OT_TNRS_POST</option>
+							      <option value="phylotastic_GetAllSpeciesFromTaxon_OT_GET">phylotastic_GetAllSpeciesFromTaxon_OT_GET</option>
+							      <option value="phylotastic_GetPhylogeneticTree_OT_GET">phylotastic_GetPhylogeneticTree_OT_GET</option>
+							      <option value="phylotastic_GetPhylogeneticTree_OT_POST">phylotastic_GetPhylogeneticTree_OT_POST</option>
+							      <option value="phylotastic_GetPhylogeneticTree_Phylomatic_GET">phylotastic_GetPhylogeneticTree_Phylomatic_GET</option>
+							      <option value="phylotastic_GetPhylogeneticTree_Phylomatic_POST">phylotastic_GetPhylogeneticTree_Phylomatic_POST</option>  
+							      <option value="phylotastic_GetPhylogeneticTree_PhyloT_GET">phylotastic_GetPhylogeneticTree_PhyloT_GET</option>
+						        <option value="phylotastic_GetPhylogeneticTree_PhyloT_POST">phylotastic_GetPhylogeneticTree_PhyloT_POST</option>
+						        <option value="phylotastic_GetInformationURLsOfSpecies_EOL_POST">phylotastic_GetInformationURLsOfSpecies_EOL_POST</option>
+						        <option value="phylotastic_GetInformationURLsOfSpecies_EOL_GET">phylotastic_GetInformationURLsOfSpecies_EOL_GET</option>
+						        <option value="phylotastic_GetImageURLsOfSpecies_EOL_GET">phylotastic_GetImageURLsOfSpecies_EOL_GET</option>
+						        <option value="phylotastic_GetImageURLsOfSpecies_EOL_POST">phylotastic_GetImageURLsOfSpecies_EOL_POST</option>
+						        <option value="phylotastic_FindScientificNamesFromWeb_GNRD_GET">phylotastic_FindScientificNamesFromWeb_GNRD_GET</option>
+						        <option value="phylotastic_FindScientificNamesFromFreeText_GNRD_GET">phylotastic_FindScientificNamesFromFreeText_GNRD_GET</option>
+						        <option value="phylotastic_GetSpeciesOfTaxon_Genome_NCBI_GET">phylotastic_GetSpeciesOfTaxon_Genome_NCBI_GET</option>
+						        <option value="phylotastic_GetAllSpeciesFromTaxon_Country_OT_GET">phylotastic_GetAllSpeciesFromTaxon_Country_OT_GET</option>
+						        <option value="phylotastic_GetChronograms_ScaledSpeciesTree_DateLife_POST">phylotastic_GetChronograms_ScaledSpeciesTree_DateLife_POST</option>
+						        <option value="phylotastic_GetSpeciesScientificNameFromCommonName_NCBI_GET">phylotastic_GetSpeciesScientificNameFromCommonName_NCBI_GET</option>
+						        <option value="phylotastic_GetMetadata_Chronogram_DateLife_POST">phylotastic_GetMetadata_Chronogram_DateLife_POST</option>
+						        <option value="phylotastic_CompareTrees_Sym_Dendropy_POST">phylotastic_CompareTrees_Sym_Dendropy_POST</option>
+						        <option value="phylotastic_CompareTrees_BL_Dendropy_POST">phylotastic_CompareTrees_BL_Dendropy_POST</option>
+						        <option value="phylotastic_FindScientificNamesFromWeb_CS_NMSU_GET">phylotastic_FindScientificNamesFromWeb_CS_NMSU_GET</option>
+						        <option value="phylotastic_ExtractSpeciesNames_From_Gene_Tree_GET">phylotastic_ExtractSpeciesNames_From_Gene_Tree_GET</option>
+						        <option value="phylotastic_GetReconciliationTree_GET">phylotastic_GetReconciliationTree_GET</option>
+						        <option value="phylotastic_GenerateGeneTree_From_Genes">phylotastic_GenerateGeneTree_From_Genes</option>
+						        <option value="phylotastic_GeneTree_Scaling">phylotastic_GeneTree_Scaling</option>
+						        
+
+					   </select>  
+					  </div>	 
+		    	  <br/>
+				  
+
+				    <div class="msgBoxButtons">
+				  	  <input class="msgButton" type="button" name="Avoid" value="Avoid" onclick="saveAvoidanceService_Modal_List();" id="btn_Avoid_AvoidanceServices">
+				  	  <input class="msgButton" type="button" name="Cancel" value="Cancel" onclick="closeAvoidanceService_Modal_List();" id="btn_Avoid_AvoidanceServices">
+				    </div>
+			   </div> 
 		</div>
 		
 		<div id="cy"></div>
