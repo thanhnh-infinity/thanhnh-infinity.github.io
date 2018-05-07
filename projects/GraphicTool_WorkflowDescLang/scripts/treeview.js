@@ -301,11 +301,27 @@ function saveAddOperationNodeData_Modal(){
        return;
    }
 
-   seeToast(selected_op_id,12000,"INCLUSION")
+   
 
    if (!isExistedNormalList(selected_op_id,ADDED_OPERATION_NODES_LIST)){
-      ADDED_OPERATION_NODES_LIST.push(selected_op_id)
+      if (!isExistedNormalList(selected_op_id,AVOIDANCE_OPERATION_NODES_LIST)){   
+        ADDED_OPERATION_NODES_LIST.push(selected_op_id)
+        seeToast(selected_op_id,12000,"INCLUSION")  
+      } else {
+        var r = confirm("Service " + selected_op_id + " is existed in AVOIDANCE list. Do you want to add this service in INCLUSION list and remove it out of AVOIDANCE list ?");
+        if (r == true) {
+            var index = AVOIDANCE_OPERATION_NODES_LIST.indexOf(selected_op_id)
+            if (index > -1){
+              AVOIDANCE_OPERATION_NODES_LIST.splice(index,1)
+            }
+            ADDED_OPERATION_NODES_LIST.push(selected_op_id)
+            seeToast(selected_op_id,12000,"INCLUSION")  
+        } else {
+           return;
+        }
+      }
    }
+
    var data = {
        group: 'nodes',
        id: selected_op_id,
@@ -329,4 +345,5 @@ function saveAddOperationNodeData_Modal(){
 
    cy.center()
    cy.fit()
+   
 }

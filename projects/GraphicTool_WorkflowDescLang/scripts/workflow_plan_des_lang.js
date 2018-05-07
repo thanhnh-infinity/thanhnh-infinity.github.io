@@ -31,8 +31,33 @@ function infoWFChangesData(){
    divAvoidance.innerHTML = htmlDivAvoid
 }
 
+function removeAvoidanceService(item){
+    $.msgBox({
+          title: "Confirm Remove",
+          content: "Do you want to remove " + item + " out of Avoidance list ?",
+          type: "confirm",
+          buttons: [{ value: "Yes" }, { value: "No" }],
+          success: function (result) {
+            if (result == "Yes") {
+               var index = AVOIDANCE_OPERATION_NODES_LIST.indexOf(item);
+               if (index > -1){
+                   AVOIDANCE_OPERATION_NODES_LIST.splice(index,1);
+                  /* Update div list */
+                   var divAvoidance = document.getElementById('avoidance_grid');
+                   var htmlDivAvoid = ""
+                   for(var index = 0 ; index < AVOIDANCE_OPERATION_NODES_LIST.length ; index++){
+                      htmlDivAvoid += '<div class="row"><div class="col-sm-4"><h5><b>' + AVOIDANCE_OPERATION_NODES_LIST[index] + '</b></h5></div><div class="col-sm-2"><button type="button" class="btn btn-danger btn-sm" onclick="removeAvoidanceService(\'' + AVOIDANCE_OPERATION_NODES_LIST[index] + '\')">Remove</button></div></div>';
+                   }
+                   divAvoidance.innerHTML = htmlDivAvoid
+
+               }
+            }
+          }
+    });
+}
+
 function removeInclusionService(item){
-    console.log(item)
+    //console.log(item)
     $.msgBox({
           title: "Confirm Remove",
           content: "Do you want to remove " + item + " out of inclusion ?",
@@ -43,12 +68,17 @@ function removeInclusionService(item){
                var index = ADDED_OPERATION_NODES_LIST.indexOf(item);
                if (index > -1){
                    ADDED_OPERATION_NODES_LIST.splice(index,1);
+                   /* Update div list */
                    var divInclusion = document.getElementById('inclusion_grid');
                    var htmlDivInc = ""
                    for(var index = 0 ; index < ADDED_OPERATION_NODES_LIST.length ; index++){
                      htmlDivInc += '<div class="row"><div class="col-sm-4"><h5><b>' + ADDED_OPERATION_NODES_LIST[index] + '</b></h5></div><div class="col-sm-2"><button type="button" class="btn btn-danger btn-sm" onclick="removeInclusionService(\'' + ADDED_OPERATION_NODES_LIST[index] + '\')">Remove</button></div></div>';
                    }
                    divInclusion.innerHTML = htmlDivInc
+
+                   /* Update Canvas */
+                   var selector = cy.getElementById(item)
+                   cy.remove(selector)
                }
             }
           }
@@ -852,13 +882,32 @@ function displayInfo_Node_V2(event, node_type){
 }
 
 function removeOperationNode(event){
+    //console.log("Remove")
+    //console.log(event)
     /* Remove out of screen */
     event.cyTarget.remove();
+    
     /* if this service is in inclusion list => Remove */
     var index = ADDED_OPERATION_NODES_LIST.indexOf(event.cyTarget._private.data.id);
     if (index > -1){
       ADDED_OPERATION_NODES_LIST.splice(index,1);
     }
+
+    $.msgBox({
+          title: "Confirm Avoidance",
+          content: "Do you want to AVOID service " + event.cyTarget._private.data.id + " in Workflow ?",
+          type: "confirm",
+          buttons: [{ value: "Yes" }, { value: "No" }],
+          success: function (result) {
+            if (result == "Yes") {
+               var index = AVOIDANCE_OPERATION_NODES_LIST.indexOf(event.cyTarget._private.data.id);
+               if (index <= -1){
+                   AVOIDANCE_OPERATION_NODES_LIST.push(event.cyTarget._private.data.id);
+               }
+            }
+            //console.log(AVOIDANCE_OPERATION_NODES_LIST)
+          }
+    });
 }
 
 function initGraphicFrame(){
@@ -935,7 +984,7 @@ function initGraphicFrame(){
     menuItems: [
            {
               id: 'remove-node-edge',
-              title: 'Remove node or edge',
+              title: 'Remove Service Out-Of Inclusion',
               selector: 'node, edge',
               onClickFunction: function (event) {
                 //event.cyTarget.remove();
