@@ -101,9 +101,9 @@
 											 <li><a href="#" onclick="openAddOperationNodeData_Modal();"><i class="fa fa-user-plus"></i> Inclusion services</a></li>
 											 <li><a href="#"><i class="fa fa-users"></i> Insertion services</a></li>
 											 <li>
-											    <a class="parent" href="#"><i class="fa fa-share-alt"></i> Condition Block</a>
+											    <a class="parent" href="#"><i class="fa fa-steam"></i> Manually Configurations</a>
 											    <ul class="sub-menu">
-											       <li><a href="#"><i class="fa fa-share-alt"></i> Set Up Condition Block</a></li>
+											       <li><a href="#"><i class="material-icons" style="font-size:15px">call_split</i> Set Up Condition Block</a></li>
 											    </ul>
 											 </li>
 										</ul>
@@ -123,11 +123,9 @@
 							<li class="parent">
 								<a href="#"><i class="fa fa-legal"></i> Tools</a>
 								<ul class="sub-menu">
-								  <li><a href="#" onclick="infoWFChangesData();"><i class="fa fa-info-circle"></i>  Workflow Changes Info</a></li>
+								  <li><a href="#" onclick="infoWFChangesData();"><i class="fa fa-dashboard"></i>  Dashboard</a></li>
 								  <li><a href="#" onclick="reload();"><i class="glyphicon glyphicon-screenshot"></i>  Focus view</a></li>
-									<li><a href="#" onclick="clearData();"><i class="fa fa-trash"></i> Clear Workstation Data</a></li>
-									
-									
+									<li><a href="#" onclick="clearData();"><i class="fa fa-trash"></i> Clear Workstation Data</a></li>		
 								</ul>
 							</li>
 							<li class="parent">
@@ -189,9 +187,9 @@
 
 
 			      <span class="close" onclick="closeAddOperationNodeData_Modal();">&times;</span>
-			   		<div class="msgBoxTitle">Select concrete service to be included in Workflow</div>
+			   		<div class="msgBoxTitle"><i class="fa fa-user-plus"></i> Select concrete service to be included in Workflow</div>
 			   	
-					  <h4><span class="label label-primary">Services Class Tree - Click an item to select</span></h4>
+					  <h4><span class="label label-primary"><i class="fa fa-database"></i>  Services Class Tree - Click an item to select</span></h4>
 			    	<div id="service_hierarchy_tree"></div>
 			    	<br/>
 			    	<h4><span class="label label-primary">Select Concrete Service Operation</span></h4>
@@ -354,14 +352,14 @@
 		<div id="addInitialStateModal_TreeView" class="modal">
 			   <div class="modal-content">
 			      <span class="close" onclick="closeAddInitialState_Modal_TreeView();">&times;</span>
-			   		<div class="msgBoxTitle">Initial State Definition : Resources and Data Formats</div>
+			   		<div class="msgBoxTitle"><i class="fa fa-sign-in"></i> Initial State Definition : Resources and Data Formats</div>
 			   		<br/>
 			   		
-					  <h4><span class="label label-primary">Resources Tree - Click an item to select</span></h4>
+					  <h4><span class="label label-primary"><i class="fa fa-database"></i>  Resources Tree - Click an item to select</span></h4>
 						
 			    	<div id="resource_tree_init"></div>
 			    	
-			    	<h4><span class="label label-primary">Data format of selected resource</span></h4>
+			    	<h4><span class="label label-primary"><i class="fa fa-info-circle"></i>  Data format of selected resource</span></h4>
 						  
 				    <div id="divDisplayInitialState_DataFormatClasses_TreeView">
 						   <select id="selectInitialState_DataFormatClasses_TreeView" class="selectpicker show-tick" data-live-search="true">
@@ -435,14 +433,14 @@
 		<div id="addGoalStateModal_TreeView" class="modal">
 			   <div class="modal-content">
 			      <span class="close" onclick="closeAddGoalState_Modal_TreeView();">&times;</span>
-			   		<div class="msgBoxTitle">Goal State Definition : Resources and Data Formats</div>
+			   		<div class="msgBoxTitle"><i class="fa fa-sign-in"></i> Goal State Definition : Resources and Data Formats</div>
 			   		<br/>
 			   		
-					  <h4><span class="label label-primary">Resources Tree - Click an item to select</span></h4>
+					  <h4><span class="label label-primary"><i class="fa fa-database"></i>  Resources Tree - Click an item to select</span></h4>
 				
 			    	<div id="resource_tree_goal"></div>
 			    
-					  <h4><span class="label label-primary">Data format of selected resource</span></h4>
+					  <h4><span class="label label-primary"><i class="fa fa-info-circle"></i>  Data format of selected resource</span></h4>
 					  
 			    	<div id="divDisplayGoalState_DataFormatClasses_TreeView">
 					   <select id="selectGoalState_DataFormatClasses_TreeView" class="selectpicker show-tick" data-live-search="true">
@@ -518,10 +516,10 @@
 		<div id="displayChangesInformation_Modal" class="modal">
 			   <div class="modal-content">
 			      <span class="close" onclick="closeDisplayChangesInformation_Modal();">&times;</span>
-			   		<div class="msgBoxTitle">Current scenario of Workflow Changes</div>
+			   		<div class="msgBoxTitle"><i class="fa fa-dashboard"></i> Workflow Configuration Dashboard</div>
 			   		<br/>
 			   		
-					  <h4><span class="label label-primary">Inclusion Services</span></h4>
+					  <h4><span class="label label-primary"><i class="fa fa-user-plus"></i>  Inclusion Services</span></h4>
 					  <hr/>
 			  		<div id = "inclusion_grid" class="container-fluid">
 			  		  <!--
@@ -533,7 +531,7 @@
 						</div>
 				
 						<br/>
-					  <h4><span class="label label-primary">Avoidance Services</span></h4>
+					  <h4><span class="label label-danger"><i class="fa fa-user-times"></i> Avoidance Services</span></h4>
 					  <hr/>
 					  <div id = "avoidance_grid" class="container-fluid">
 			  		  <!--
@@ -545,12 +543,34 @@
 						</div>
 					  
 					  <br/>
-			    	<h4><span class="label label-primary">Insertion Services</span></h4>
+			    	<h4><span class="label label-info"><i class="fa fa-users"></i> Insertion Services</span></h4>
 			    	<hr/>
 					 	
 					 	<br/>
-					 	<h4><span class="label label-primary">Graph Connections</span></h4>
+					 	<h4><span class="label label-success"><i class="fa fa-users"></i> Graph Connections</span></h4>
 					 	<hr/>
+
+					 	<h4><span class="label label-default"><i class="fa fa-sign-in"></i>  Initial State</span></h4>
+					  <hr/>
+			  		<div id = "initial_state_grid" class="container-fluid">
+			  		  <!--
+						  <div class="row">
+						    <div class="col-sm-4">.col-sm-4</div>
+						    <div class="col-sm-2">.col-sm-2</div>
+						  </div>
+						  -->
+						</div>
+
+						<h4><span class="label label-default"><i class="fa fa-sign-out"></i>  Goal State</span></h4>
+					  <hr/>
+			  		<div id = "goal_state_grid" class="container-fluid">
+			  		  <!--
+						  <div class="row">
+						    <div class="col-sm-4">.col-sm-4</div>
+						    <div class="col-sm-2">.col-sm-2</div>
+						  </div>
+						  -->
+						</div>
 		    	<br/>
 				  <br/>
 
@@ -564,10 +584,10 @@
 		<div id="avoidanceService_Modal_List" class="modal">
 			   <div class="modal-content">
 			      <span class="close" onclick="closeAvoidanceService_Modal_List();">&times;</span>
-			   		<div class="msgBoxTitle">Select concrete service to be avoided in Workflow<</div>
+			   		<div class="msgBoxTitle"><i class="fa fa-user-times"></i> Select concrete service to be avoided in Workflow</div>
 			   		<br/>
 			   		
-					  <h4><span class="label label-primary">Avoidance Services</span></h4>
+					  <h4><span class="label label-primary"><i class="fa fa-user-times"></i>  Avoidance Services</span></h4>
 					  <hr/>
 			  		<div id="divAvoidacneService_Modal_List">
 					   <select id="selectAvoidacneService_Modal_List" class="selectpicker show-tick" data-live-search="true" multiple>

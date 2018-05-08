@@ -208,7 +208,7 @@ function saveAddInitialState_Modal_TreeView(){
       content:"Please select resources and their data formats to define Initial State!",
       type:"warning"
      }); 
-    return
+    //return
   }
 }
 
@@ -281,7 +281,7 @@ function saveAddGoalState_Modal_TreeView(){
         content:"Please select resources and their data formats to define Goal State !",
         type:"warning"
      }); 
-    return
+    //return
   }
 }
 
@@ -369,6 +369,7 @@ function openAvoidanceService_Modal_List(){
     document.getElementById('cy').style.visibility = "hidden";
     var avoidanceService_Modal_List = document.getElementById('avoidanceService_Modal_List');
     avoidanceService_Modal_List.style.display = "block";
+    //$("#selectAvoidacneService_Modal_List").selectpicker('refresh');
 }
 
 function closeAvoidanceService_Modal_List(){
