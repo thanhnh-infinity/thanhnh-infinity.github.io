@@ -1029,24 +1029,12 @@ function initGraphicFrame(){
                 CURRENT_Y = event.cyPosition.y;
               }
             },
-            /*
-            {
-              id: 'add-node-operation-class',
-              title: 'Add a Class of Service Node',
-              coreAsWell: true,
-              onClickFunction: function (event) {
-                openAdd_ServiceClassData_Modal();
-                CURRENT_X = event.cyPosition.x;
-                CURRENT_Y = event.cyPosition.y;
-              }
-            },
-            */
             {
               id: 'add-node-initial-state-hierarchy',
               title: 'Add/Update Inital State Node Data',
               coreAsWell: true,
               onClickFunction: function (event) {
-                openAddInitialState_FromOntology_Modal_Hierarchy();
+                openAddInitialState_FromOntology_Modal_TreeView();
                 CURRENT_X = event.cyPosition.x;
                 CURRENT_Y = event.cyPosition.y;
               }
@@ -1057,14 +1045,11 @@ function initGraphicFrame(){
               title: 'Add/Update Goal State Node Data',
               coreAsWell: true,
               onClickFunction: function (event) {
-                openAddGoalState_FromOntology_Modal_Hierarchy();
+                openAddGoalState_FromOntology_Modal_TreeView();
                 CURRENT_X = event.cyPosition.x;
                 CURRENT_Y = event.cyPosition.y;
               }
             },
-
-         
-
             {
               id: 'add-edge',
               title: 'Add edge',
