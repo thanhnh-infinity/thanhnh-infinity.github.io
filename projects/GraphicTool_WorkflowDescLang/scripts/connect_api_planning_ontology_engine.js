@@ -8,7 +8,7 @@ function request_PlanningOntologyEngine_List_Of_All_Resources(){
   //window.localStorage.setItem("ONTOLOGY_LIST_OF_HIERARCHY_CLASSES_OF_SERVICES","")  
   $.ajax({
         type: "GET",
-        url: "http://127.0.0.1:8000/query",
+        url: ONTOLOGY_API_ROOT,
         dataType: "application/x-www-urlencoded",
         async:false,
         data: { 
@@ -23,6 +23,7 @@ function request_PlanningOntologyEngine_List_Of_All_Resources(){
               //window.localStorage.setItem(ONTOLOGY_LIST_RESOURCES,JSON.stringify(GLOBAL_LIST_RESOURCES_ONTOLOGY))  
         },
         error: function (textStatus, errorThrown) {
+             console.log(textStatus)
         	 if (textStatus.status = 200){
         	 	jsonData = JSON.parse(textStatus.responseText)
         	 	console.log(JSON.parse(textStatus.responseText))
@@ -52,7 +53,7 @@ function request_HierarchyClasses_Of_Class(str_owl_class_uri){
 	
 	$.ajax({
         type: "GET",
-        url: "http://127.0.0.1:8000/query",
+        url: ONTOLOGY_API_ROOT,
         dataType: "application/x-www-urlencoded",
         async:false,
         data: { 
