@@ -111,6 +111,9 @@
 									<li>
 									   <a href="#" onclick="openAddEdgeData_Modal();"><i class="fa fa-sitemap"></i>  Set up Connections (Edges)</a>
 									</li>
+									<li>
+									   <a href="#" onclick="openChangeEngine_Modal();"><i class="fa fa-gear"></i>  Configurate Engines</a>
+									</li>
 								</ul>
 							</li>
 							<li class="parent">
@@ -180,7 +183,36 @@
 			  </div>
 			</div>
 
-			
+			<div id="changeEngine_Modal" class="modal">
+			  <div class="modal-content">
+			  		<span class="close" onclick="closeChangeEngine_Modal();">&times;</span>	
+			  		<div class="msgBoxTitle"><i class="fa fa-gear"></i> Configurate Composite and Re-composite Engines</div>
+			   		<br/>   
+					  <h4><span class="label label-primary"><i class="fa fa-rocket"></i> Composition Engine</span></h4>
+					     
+			    	<select id="selectCompositionEngine" class="selectpicker" data-width="auto">
+				  	  <option value="1" title="1 - Clingo, Generate a random Workflow">1 - Clingo, Generate a random Workflow</option>
+				  	  <option value="2" title="2 - Clingo, Generate Highest QoS value Workflow by External Calculation">2 - Clingo, Generate Highest QoS value Workflow by External Calculation</option>
+				  	  <option value="3" title="3 - Clingcon, Generate Highest QoS value Workflow by Internal Calculation">3 - Clingcon, Generate Highest QoS value Workflow by Internal Calculation</option>
+			      </select> 
+							  
+				    <br/><br/>
+				    
+				    <h4><span class="label label-primary"><i class="fa fa-retweet"></i> Re-Composition Engine</span></h4>
+				    <select id="selectReCompositionEngine" class="selectpicker" data-width="auto">
+				  	  <option value="1" title="1 - Clingo, Approximate Sim Index, Sim Nodes Only">1 - Clingo, Approximate Sim Index, Sim Nodes Only</option>
+				  	  <option value="2" title="2 - Clingo, Exact Sim Index, (Nodes, Edges and Topology) Sim Index">2 - Clingo, Exact Sim Index, (Nodes, Edges and Topology) Sim Index</option>
+			      </select>
+				    <br/><br/>
+				    
+						<div id="div_Save_Operations_TreeView" class="msgBoxButtons">
+					  	<input class="msgButton" type="button" name="Save" value="Save" onclick="saveChangeEngine_Modal();" id="btn_Save_ChangeEngine">
+					  	<input class="msgButton" type="button" name="Cancel" value="Cancel" onclick="closeChangeEngine_Modal();" id="btn_Cancel_ChangeEngine">
+					  </div>
+			  </div>
+			</div>
+
+
 			<!-- Modal for Operation Node Adding tool -->
 			<div id="addOperationNodeDataModal" class="modal">
 			  <div class="modal-content">
@@ -564,6 +596,16 @@
 						<h4><span class="label label-default"><i class="fa fa-sign-out"></i>  Goal State</span></h4>
 					  <hr/>
 			  		<div id = "goal_state_grid" class="container-fluid">
+			  		  <!--
+						  <div class="row">
+						    <div class="col-sm-4">.col-sm-4</div>
+						    <div class="col-sm-2">.col-sm-2</div>
+						  </div>
+						  -->
+						</div>
+						<h4><span class="label label-primary"><i class="fa fa-gear"></i>  Engine Configuration</span></h4>
+					  <hr/>
+			  		<div id = "engine_state_grid" class="container-fluid">
 			  		  <!--
 						  <div class="row">
 						    <div class="col-sm-4">.col-sm-4</div>

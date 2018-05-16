@@ -29,6 +29,36 @@ function infoWFChangesData(){
      htmlDivAvoid += '<div class="row"><div class="col-sm-5"><h5><b>' + AVOIDANCE_OPERATION_NODES_LIST[index] + '</b></h5></div><div class="col-sm-2"><button type="button" class="btn btn-danger btn-sm" onclick="removeAvoidanceService(\'' + AVOIDANCE_OPERATION_NODES_LIST[index] + '\')">Remove</button></div></div>';
    }
    divAvoidance.innerHTML = htmlDivAvoid
+
+   var divEngineConf = document.getElementById('engine_state_grid');
+   var htmlDivEngineConf = ""
+
+   if (isEmpty(PLANNING_ENGINE_ID) || PLANNING_ENGINE_ID == 0){
+    PLANNING_ENGINE_ID=2
+   }
+   if (isEmpty(RECOMPOSITE_ENGINE_ID) || RECOMPOSITE_ENGINE_ID ==0){
+    RECOMPOSITE_ENGINE_ID=2
+   }
+
+   if (PLANNING_ENGINE_ID == 1){
+     planning_engine_mess = "For Test Only - Run Clingo normally - Simple Case"
+   } else if (PLANNING_ENGINE_ID == 2){
+     planning_engine_mess = "Generate Highest QoS Value Workflow - QoS External Calculation (Clingo)"
+   } else if (PLANNING_ENGINE_ID == 3){
+     planning_engine_mess = "Generate Highest QoS Value Workflow - QoS Internal Calculation (Clingcon)"
+   }
+
+
+   if (RECOMPOSITE_ENGINE_ID == 1){
+     recomposite_engine_mess = "Clingo - Approximate Sim Index - Sim Nodes Only"
+   } else if (RECOMPOSITE_ENGINE_ID == 2){
+     recomposite_engine_mess = "Clingo - Ext Sim Index (Node, Edge, Topo) - External calculation"
+   } 
+
+
+   htmlDivEngineConf += '<div class="row"><div class="col-sm-3"><h5>Planning Engine: <b>' + PLANNING_ENGINE_ID + '</b></h5></div><div class="col-sm-7"><h5>' + planning_engine_mess + '</h5></div><div class="col-sm-1"><button type="button" class="btn btn-primary btn-sm" onclick="updatePlanningEngine()">Change</button></div></div><div class="row"><div class="col-sm-3"><h5>Recomposite Engine: <b>' + RECOMPOSITE_ENGINE_ID + '</b></h5></div><div class="col-sm-7"><h5>' + recomposite_engine_mess + '</h5></div><div class="col-sm-1"><button type="button" class="btn btn-primary btn-sm" onclick="updateRecompositeEngine()">Change</button></div></div>';
+   
+   divEngineConf.innerHTML = htmlDivEngineConf   
 }
 
 function removeAvoidanceService(item){
@@ -92,6 +122,70 @@ function closeDisplayChangesInformation_Modal(){
    document.getElementById('cy').style.visibility = "visible";
 }
 
+/* Change ENgine Modal */
+function openChangeEngine_Modal(){
+   document.getElementById('cy').style.visibility = "hidden";
+   var divChangeEngine_Modal = document.getElementById('changeEngine_Modal');
+   divChangeEngine_Modal.style.display = "block";
+   
+   
+   var planning_engine = parseInt(window.localStorage.getItem("PLANNING_ENGINE_ID"))
+   if (isEmpty(planning_engine) || planning_engine == 0 || isNaN(planning_engine)){
+     PLANNING_ENGINE_ID = 2
+   } else {
+     PLANNING_ENGINE_ID = planning_engine
+   }
+
+   
+   var recomposite_engine = parseInt(window.localStorage.getItem("RECOMPOSITE_ENGINE_ID"))
+   if (isEmpty(recomposite_engine) || recomposite_engine == 0 || isNaN(planning_engine)){
+     RECOMPOSITE_ENGINE_ID = 2
+   } else {
+     RECOMPOSITE_ENGINE_ID = recomposite_engine
+   } 
+
+   $('select[id=selectCompositionEngine]').val(PLANNING_ENGINE_ID);
+   $('select[id=selectCompositionEngine]').selectpicker('refresh');
+   $('select[id=selectReCompositionEngine]').val(RECOMPOSITE_ENGINE_ID);
+   $('select[id=selectReCompositionEngine]').selectpicker('refresh');
+
+
+}
+
+function saveChangeEngine_Modal(){
+   var e =  document.getElementById("selectCompositionEngine");
+   var selectCompositionEngine = e.options[e.selectedIndex].value
+   if (isEmpty(selectCompositionEngine)){
+        selectCompositionEngine = "2"
+   }
+
+   var e2 =  document.getElementById("selectReCompositionEngine");
+   var selectReCompositionEngine = e2.options[e2.selectedIndex].value
+   if (isEmpty(selectReCompositionEngine)){
+        selectReCompositionEngine = "2"
+   } 
+
+
+   window.localStorage.setItem("PLANNING_ENGINE_ID",selectCompositionEngine) 
+   PLANNING_ENGINE_ID = parseInt(selectCompositionEngine)
+   window.localStorage.setItem("RECOMPOSITE_ENGINE_ID",selectReCompositionEngine)
+   RECOMPOSITE_ENGINE_ID = parseInt(selectReCompositionEngine)
+   
+   var changeEngine_Modal = document.getElementById('changeEngine_Modal');
+   changeEngine_Modal.style.display = "none";
+   document.getElementById('cy').style.visibility = "visible";
+
+}
+
+function closeChangeEngine_Modal(){
+   var changeEngine_Modal = document.getElementById('changeEngine_Modal');
+   changeEngine_Modal.style.display = "none";
+   document.getElementById('cy').style.visibility = "visible";
+
+
+}
+
+/**********************/
 function clearData(){
   GLOBAL_NODES_DATA = [];
   GLOBAL_EDGES_DATA = [];
@@ -1076,14 +1170,15 @@ $(function(){
   buildUpTreeView_Resources();
 
   console.log("Set Up Planning Engine");
-  PLANNING_ENGINE_ID = window.localStorage.getItem("PLANNING_ENGINE_ID")
-  if (isEmpty(PLANNING_ENGINE_ID) || PLANNING_ENGINE_ID == 0){
+  PLANNING_ENGINE_ID = parseInt(window.localStorage.getItem("PLANNING_ENGINE_ID"))
+  console.log(PLANNING_ENGINE_ID)
+  if (isEmpty(PLANNING_ENGINE_ID) || PLANNING_ENGINE_ID == 0 || isNaN(PLANNING_ENGINE_ID)){
     PLANNING_ENGINE_ID = 2
   }
 
   console.log("Set Up Re-Composite Engine");
-  RECOMPOSITE_ENGINE_ID = window.localStorage.getItem("RECOMPOSITE_ENGINE_ID")
-  if (isEmpty(RECOMPOSITE_ENGINE_ID) || RECOMPOSITE_ENGINE_ID == 0){
+  RECOMPOSITE_ENGINE_ID = parseInt(window.localStorage.getItem("RECOMPOSITE_ENGINE_ID"))
+  if (isEmpty(RECOMPOSITE_ENGINE_ID) || RECOMPOSITE_ENGINE_ID == 0 || isNaN(RECOMPOSITE_ENGINE_ID)){
     RECOMPOSITE_ENGINE_ID = 2
   }  
 
