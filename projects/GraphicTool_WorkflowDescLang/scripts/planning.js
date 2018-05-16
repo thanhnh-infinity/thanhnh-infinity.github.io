@@ -13,6 +13,10 @@ function recomposite_get_simWorkflow(){
   inclusion_data = ADDED_OPERATION_NODES_LIST
   avoidance_data = AVOIDANCE_OPERATION_NODES_LIST
 
+  if (isEmpty(RECOMPOSITE_ENGINE_ID) || RECOMPOSITE_ENGINE_ID == 0){
+    RECOMPOSITE_ENGINE_ID = 2
+  }
+
   /* Step 2 : Send POST METHOD API
      http://<planning_ontology_server:8080>/getPlanningWorkflow (Python + CherryPy)
      Input : Initial State, Goal State, Condition, etx
@@ -86,7 +90,7 @@ function recomposite_get_simWorkflow(){
                    },
                    "models" : {
                       "number" : 1,
-                      "engine" : 2
+                      "engine" : RECOMPOSITE_ENGINE_ID //default 2
                    }
                  };
 
@@ -144,6 +148,12 @@ function executePlanner_toGet_WorkFlow(){
   /* Step 1  : Read data from initial_state_data */
   initial_state_data = GLOBAL_INITIAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE
   goal_state_data =   GLOBAL_GOAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE
+  inclusion_data = ADDED_OPERATION_NODES_LIST
+  avoidance_data = AVOIDANCE_OPERATION_NODES_LIST
+
+  if (isEmpty(PLANNING_ENGINE_ID) || PLANNING_ENGINE_ID == 0){
+    PLANNING_ENGINE_ID = 2
+  }
 
   /* Step 2 : Send POST METHOD API
      http:<planning_ontology_server:8080>/getPlanningWorkflow (Python + CherryPy)
@@ -209,11 +219,14 @@ function executePlanner_toGet_WorkFlow(){
                    "request_parameters" : 
                    {
                       "input" : input_array_object,
-                      "output" : output_array_object
+                      "output" : output_array_object,
+                      "avoidance" : avoidance_data,
+                      "inclusion" : inclusion_data,
+                      "insertion" : []
                    },
                    "models" : {
                       "number" : 1,
-                      "engine" : 2
+                      "engine" : PLANNING_ENGINE_ID //defaut 2
                    }
                  };
 

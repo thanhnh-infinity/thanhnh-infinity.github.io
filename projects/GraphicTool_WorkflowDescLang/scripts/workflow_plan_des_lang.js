@@ -1075,10 +1075,20 @@ $(function(){
   console.log("Build up data for model");
   buildUpTreeView_Resources();
 
+  console.log("Set Up Planning Engine");
+  PLANNING_ENGINE_ID = window.localStorage.getItem("PLANNING_ENGINE_ID")
+  if (isEmpty(PLANNING_ENGINE_ID) || PLANNING_ENGINE_ID == 0){
+    PLANNING_ENGINE_ID = 2
+  }
+
+  console.log("Set Up Re-Composite Engine");
+  RECOMPOSITE_ENGINE_ID = window.localStorage.getItem("RECOMPOSITE_ENGINE_ID")
+  if (isEmpty(RECOMPOSITE_ENGINE_ID) || RECOMPOSITE_ENGINE_ID == 0){
+    RECOMPOSITE_ENGINE_ID = 2
+  }  
+
   console.log("Ready to Go")
   initGraphicFrame();
-
-
 });
 
 

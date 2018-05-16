@@ -7,6 +7,8 @@
 
 /* Global variable and components */
 var GLOBAL_NODES_DATA = [];
+var PLANNING_ENGINE_ID = 0;
+var RECOMPOSITE_ENGINE_ID = 0;
 var cy;
 var CURRENT_X;
 var CURRENT_Y;
