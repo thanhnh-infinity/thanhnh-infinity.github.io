@@ -10,6 +10,11 @@ function reload(){
    cy.fit()
 }
 
+function updateEngine(){
+  closeDisplayChangesInformation_Modal();
+  openChangeEngine_Modal();
+}
+
 function infoWFChangesData(){
    document.getElementById('cy').style.visibility = "hidden";
    var displayChangesInformation_Modal = document.getElementById('displayChangesInformation_Modal');
@@ -56,7 +61,7 @@ function infoWFChangesData(){
    } 
 
 
-   htmlDivEngineConf += '<div class="row"><div class="col-sm-3"><h5>Planning Engine: <b>' + PLANNING_ENGINE_ID + '</b></h5></div><div class="col-sm-7"><h5>' + planning_engine_mess + '</h5></div><div class="col-sm-1"><button type="button" class="btn btn-primary btn-sm" onclick="updatePlanningEngine()">Change</button></div></div><div class="row"><div class="col-sm-3"><h5>Recomposite Engine: <b>' + RECOMPOSITE_ENGINE_ID + '</b></h5></div><div class="col-sm-7"><h5>' + recomposite_engine_mess + '</h5></div><div class="col-sm-1"><button type="button" class="btn btn-primary btn-sm" onclick="updateRecompositeEngine()">Change</button></div></div>';
+   htmlDivEngineConf += '<div class="row"><div class="col-sm-3"><h5>Planning Engine: <b>' + PLANNING_ENGINE_ID + '</b></h5></div><div class="col-sm-7"><h5>' + planning_engine_mess + '</h5></div></div><div class="row"><div class="col-sm-3"><h5>Recomposite Engine: <b>' + RECOMPOSITE_ENGINE_ID + '</b></h5></div><div class="col-sm-7"><h5>' + recomposite_engine_mess + '</h5></div></div>';
    
    divEngineConf.innerHTML = htmlDivEngineConf   
 }
