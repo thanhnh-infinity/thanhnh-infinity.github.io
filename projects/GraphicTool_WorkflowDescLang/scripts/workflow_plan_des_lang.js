@@ -1018,9 +1018,15 @@ function initGraphicFrame(){
       name: 'dagre',
       rankDir:'LR',
       ranker:'network-simplex'
-      //name:'preset'
     },
+    //style: cytoscape.stylesheet()
+      //.selector('#phylotastic_GetPhylogeneticTree_OT_POST')
+        //.css({
+          //'background-image': './images/services/opentree2.png'
+        //}),
+
     style: [
+      //cytoscape.stylesheet().selector('#phylotastic_GetPhylogeneticTree_OT_POST').css({'background-image': '../images/services/opentree2.png'}),
       {
         selector: 'node',
         style: {
@@ -1055,7 +1061,6 @@ function initGraphicFrame(){
           'color':'#ad1a66'
         }
       }
-
     ],
     elements: {
       nodes: GLOBAL_NODES_DATA,
