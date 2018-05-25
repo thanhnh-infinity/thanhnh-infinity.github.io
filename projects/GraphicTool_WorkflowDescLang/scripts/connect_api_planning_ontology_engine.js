@@ -16,7 +16,7 @@ function request_PlanningOntologyEngine_List_Of_All_Resources(){
         		parser_engine : 1,
         		owl_class_uri : "http://www.cs.nmsu.edu/~epontell/CDAO/cdao.owl#phylotastic_resources"
               },
-        contentType: "application/json; charset=utf-8",
+        contentType: "text/plain; charset=utf-8",
         success: function (data) {
         	  jsonData = JSON.parse(data.responseText)
               GLOBAL_LIST_RESOURCES_ONTOLOGY = jsonData.list_instances
@@ -61,7 +61,7 @@ function request_HierarchyClasses_Of_Class(str_owl_class_uri){
         		level : 0,
         		owl_class_uri : str_owl_class_uri
               },
-        contentType: "application/json; charset=utf-8",
+        contentType: "text/plain; charset=utf-8",
         success: function (data) {
         	  jsonData = JSON.parse(data.responseText)
               if (str_owl_class_uri === "http://www.cs.nmsu.edu/~epontell/Ontologies/phylogenetic_methods.owl#operationClassification"){
