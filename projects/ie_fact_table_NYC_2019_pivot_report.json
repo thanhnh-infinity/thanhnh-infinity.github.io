@@ -1,0 +1,57 @@
+{
+    "dataSource": {
+        "dataSourceType": "csv",
+        "filename": "file:///Users/ThanhN/Workspace/IAEA_Workspace/mz_data_pivot/csv_sources/ie_fact_table_NYC_2019.csv"
+    },
+    "slice": {
+        "rows": [
+            {
+                "uniqueName": "income_or_expense"
+            },
+            {
+                "uniqueName": "category"
+            },
+            {
+                "uniqueName": "original_category"
+            }
+        ],
+        "columns": [
+            {
+                "uniqueName": "Measures"
+            },
+            {
+                "uniqueName": "year"
+            },
+            {
+                "uniqueName": "month"
+            }
+        ],
+        "measures": [
+            {
+                "uniqueName": "amount",
+                "aggregation": "sum"
+            }
+        ],
+        "expands": {
+            "rows": [
+                {
+                    "tuple": [
+                        "income_or_expense.Expense"
+                    ]
+                },
+                {
+                    "tuple": [
+                        "income_or_expense.Income"
+                    ]
+                }
+            ],
+            "columns": [
+                {
+                    "tuple": [
+                        "year.2019"
+                    ]
+                }
+            ]
+        }
+    }
+}
