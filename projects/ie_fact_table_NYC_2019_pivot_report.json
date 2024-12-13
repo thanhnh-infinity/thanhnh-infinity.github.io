@@ -1,7 +1,7 @@
 {
     "dataSource": {
         "dataSourceType": "csv",
-        "filename": "file:///Users/ThanhN/Workspace/IAEA_Workspace/mz_data_pivot/csv_sources/ie_fact_table_NYC_2019.csv"
+        "filename": "https://raw.githubusercontent.com/thanhnh-infinity/thanhnh-infinity.github.io/refs/heads/master/projects/ie_fact_table_NYC_2019.csv"
     },
     "slice": {
         "rows": [
