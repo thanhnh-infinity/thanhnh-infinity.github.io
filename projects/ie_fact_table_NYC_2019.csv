@@ -1,0 +1,433 @@
+index,income_or_expense,category,original_category,month,year,amount
+0,Income,Rent,"INCOME, , 30100-00-110, Apartment Rent",January,2019,36610.74
+1,Income,Rent,"INCOME, , 32200-00-1:10, Store.Rent",January,2019,12667.72
+2,Income,Other Income,"INCOME, , 35300-00-110, Real Estate Taxes",January,2019,1827.79
+3,Income,Other Income,"INCOME, , 35400-00-110, Water/Sewer",January,2019,0.0
+4,Income,Other Income,"INCOME, , 36100-03-110, Late Fees",January,2019,0.0
+5,Income,Rent,"INCOME, , 36900-00-110, MTSC Rental Income",January,2019,0.0
+6,Income,Rent,"INCOME, , 37100-00-110, Apartment Vacancies",January,2019,-3200.0
+7,Income,Other Income,"INCOME, , 38900-00-110, Misc. Income",January,2019,0.0
+8,Expense,Real Estate Taxes,"EXPENSES, Operating Expenses, 51100-00-110, Real Estate Taxes",January,2019,0.0
+9,Expense,Utilities,"EXPENSES, Operating Expenses, 51200-00-110, Water & Sewer Taxes",January,2019,1373.74
+10,Expense,Utilities,"EXPENSES, Operating Expenses, 52300-00-1-10, Gas Electric",January,2019,86.76
+11,Expense,Other Expense,"EXPENSES, Operating Expenses, 52700-00-110, Security Services",January,2019,246.97
+12,Expense,Other Expense,"EXPENSES, Operating Expenses, 53000-00-110, Inspection Fees",January,2019,0.0
+13,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60100-00-110, Building Repairs",January,2019,0.0
+14,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60200-00-110, Boiler Repairs",January,2019,0.0
+15,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60600-00-110, Intercom Repairs",January,2019,152.43
+16,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60900-00-110, Rubbish Removal",January,2019,0.0
+17,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 61100-00-110, Cleaning",January,2019,0.0
+18,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 51800-00-110, Misc. Repairs & Maintenance",January,2019,0.0
+19,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62100-00-110, Tenant Painting/Plastering",January,2019,0.0
+20,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62200-00-110, Plumbing Repairs",January,2019,0.0
+21,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62400-00-110, Glass & Window-Repairs",January,2019,0.0
+22,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62500-00-110, Appliances",January,2019,0.0
+23,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 54200-00-110, Hardware & Supplies",January,2019,439.42
+24,Expense,Management Fee,"EXPENSES, Professional Fees, 73100-00-110, Management Fees",January,2019,5000.0
+25,Expense,General & Administrative,"EXPENSES, Professional Fees, 73200-00-110, Accounting Fees",January,2019,0.0
+26,Expense,General & Administrative,"EXPENSES, Professional Fees, 73300-00-110, Legal Fees",January,2019,75.0
+27,Expense,General & Administrative,"EXPENSES, Professional Fees, 73500-00-110, Rental Commissions",January,2019,0.0
+28,Expense,General & Administrative,"EXPENSES, Professional Fees, 74200-00-110, Misc Professional Fees",January,2019,0.0
+29,Expense,Other Expense,"EXPENSES, Other Expenses, 76700-00-110, Filing Fees",January,2019,0.0
+30,Expense,Other Expense,"EXPENSES, Other Expenses, 76800-00-110, Fines & Penalties",January,2019,0.0
+31,Expense,Other Expense,"EXPENSES, Other Expenses, 77200-00-110, Dues & Subscriptions",January,2019,0.0
+32,Expense,Other Expense,"EXPENSES, Other Expenses, 77900-00-110, Misc. Other Expense",January,2019,0.0
+33,Expense,Insurance,"EXPENSES, Insurance, 82300-00-110, Liability",January,2019,0.0
+34,Expense,Insurance,"EXPENSES, Insurance, 82400-00-110, Umbrella",January,2019,0.0
+35,Expense,Insurance,"EXPENSES, Insurance, 82500-00-110, Fire",January,2019,0.0
+36,Income,Rent,"INCOME, , 30100-00-110, Apartment Rent",February,2019,39836.63
+37,Income,Rent,"INCOME, , 32200-00-1:10, Store.Rent",February,2019,12667.72
+38,Income,Other Income,"INCOME, , 35300-00-110, Real Estate Taxes",February,2019,1827.79
+39,Income,Other Income,"INCOME, , 35400-00-110, Water/Sewer",February,2019,0.0
+40,Income,Other Income,"INCOME, , 36100-03-110, Late Fees",February,2019,25.0
+41,Income,Rent,"INCOME, , 36900-00-110, MTSC Rental Income",February,2019,0.0
+42,Income,Rent,"INCOME, , 37100-00-110, Apartment Vacancies",February,2019,-3200.0
+43,Income,Other Income,"INCOME, , 38900-00-110, Misc. Income",February,2019,0.0
+44,Expense,Real Estate Taxes,"EXPENSES, Operating Expenses, 51100-00-110, Real Estate Taxes",February,2019,0.0
+45,Expense,Utilities,"EXPENSES, Operating Expenses, 51200-00-110, Water & Sewer Taxes",February,2019,0.0
+46,Expense,Utilities,"EXPENSES, Operating Expenses, 52300-00-1-10, Gas Electric",February,2019,181.72
+47,Expense,Other Expense,"EXPENSES, Operating Expenses, 52700-00-110, Security Services",February,2019,101.28
+48,Expense,Other Expense,"EXPENSES, Operating Expenses, 53000-00-110, Inspection Fees",February,2019,85.0
+49,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60100-00-110, Building Repairs",February,2019,0.0
+50,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60200-00-110, Boiler Repairs",February,2019,0.0
+51,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60600-00-110, Intercom Repairs",February,2019,0.0
+52,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60900-00-110, Rubbish Removal",February,2019,0.0
+53,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 61100-00-110, Cleaning",February,2019,0.0
+54,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 51800-00-110, Misc. Repairs & Maintenance",February,2019,898.22
+55,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62100-00-110, Tenant Painting/Plastering",February,2019,0.0
+56,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62200-00-110, Plumbing Repairs",February,2019,0.0
+57,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62400-00-110, Glass & Window-Repairs",February,2019,0.0
+58,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62500-00-110, Appliances",February,2019,0.0
+59,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 54200-00-110, Hardware & Supplies",February,2019,38.86
+60,Expense,Management Fee,"EXPENSES, Professional Fees, 73100-00-110, Management Fees",February,2019,0.0
+61,Expense,General & Administrative,"EXPENSES, Professional Fees, 73200-00-110, Accounting Fees",February,2019,0.0
+62,Expense,General & Administrative,"EXPENSES, Professional Fees, 73300-00-110, Legal Fees",February,2019,0.0
+63,Expense,General & Administrative,"EXPENSES, Professional Fees, 73500-00-110, Rental Commissions",February,2019,0.0
+64,Expense,General & Administrative,"EXPENSES, Professional Fees, 74200-00-110, Misc Professional Fees",February,2019,0.0
+65,Expense,Other Expense,"EXPENSES, Other Expenses, 76700-00-110, Filing Fees",February,2019,0.0
+66,Expense,Other Expense,"EXPENSES, Other Expenses, 76800-00-110, Fines & Penalties",February,2019,0.0
+67,Expense,Other Expense,"EXPENSES, Other Expenses, 77200-00-110, Dues & Subscriptions",February,2019,179.75
+68,Expense,Other Expense,"EXPENSES, Other Expenses, 77900-00-110, Misc. Other Expense",February,2019,0.0
+69,Expense,Insurance,"EXPENSES, Insurance, 82300-00-110, Liability",February,2019,0.0
+70,Expense,Insurance,"EXPENSES, Insurance, 82400-00-110, Umbrella",February,2019,0.0
+71,Expense,Insurance,"EXPENSES, Insurance, 82500-00-110, Fire",February,2019,0.0
+72,Income,Rent,"INCOME, , 30100-00-110, Apartment Rent",March,2019,45167.26
+73,Income,Rent,"INCOME, , 32200-00-1:10, Store.Rent",March,2019,12667.72
+74,Income,Other Income,"INCOME, , 35300-00-110, Real Estate Taxes",March,2019,1827.79
+75,Income,Other Income,"INCOME, , 35400-00-110, Water/Sewer",March,2019,0.0
+76,Income,Other Income,"INCOME, , 36100-03-110, Late Fees",March,2019,0.0
+77,Income,Rent,"INCOME, , 36900-00-110, MTSC Rental Income",March,2019,0.0
+78,Income,Rent,"INCOME, , 37100-00-110, Apartment Vacancies",March,2019,-3200.0
+79,Income,Other Income,"INCOME, , 38900-00-110, Misc. Income",March,2019,0.0
+80,Expense,Real Estate Taxes,"EXPENSES, Operating Expenses, 51100-00-110, Real Estate Taxes",March,2019,0.0
+81,Expense,Utilities,"EXPENSES, Operating Expenses, 51200-00-110, Water & Sewer Taxes",March,2019,0.0
+82,Expense,Utilities,"EXPENSES, Operating Expenses, 52300-00-1-10, Gas Electric",March,2019,162.88
+83,Expense,Other Expense,"EXPENSES, Operating Expenses, 52700-00-110, Security Services",March,2019,0.0
+84,Expense,Other Expense,"EXPENSES, Operating Expenses, 53000-00-110, Inspection Fees",March,2019,0.0
+85,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60100-00-110, Building Repairs",March,2019,0.0
+86,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60200-00-110, Boiler Repairs",March,2019,0.0
+87,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60600-00-110, Intercom Repairs",March,2019,0.0
+88,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60900-00-110, Rubbish Removal",March,2019,0.0
+89,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 61100-00-110, Cleaning",March,2019,0.0
+90,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 51800-00-110, Misc. Repairs & Maintenance",March,2019,288.52
+91,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62100-00-110, Tenant Painting/Plastering",March,2019,0.0
+92,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62200-00-110, Plumbing Repairs",March,2019,0.0
+93,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62400-00-110, Glass & Window-Repairs",March,2019,0.0
+94,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62500-00-110, Appliances",March,2019,0.0
+95,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 54200-00-110, Hardware & Supplies",March,2019,0.0
+96,Expense,Management Fee,"EXPENSES, Professional Fees, 73100-00-110, Management Fees",March,2019,5250.43
+97,Expense,General & Administrative,"EXPENSES, Professional Fees, 73200-00-110, Accounting Fees",March,2019,0.0
+98,Expense,General & Administrative,"EXPENSES, Professional Fees, 73300-00-110, Legal Fees",March,2019,0.0
+99,Expense,General & Administrative,"EXPENSES, Professional Fees, 73500-00-110, Rental Commissions",March,2019,0.0
+100,Expense,General & Administrative,"EXPENSES, Professional Fees, 74200-00-110, Misc Professional Fees",March,2019,0.0
+101,Expense,Other Expense,"EXPENSES, Other Expenses, 76700-00-110, Filing Fees",March,2019,0.0
+102,Expense,Other Expense,"EXPENSES, Other Expenses, 76800-00-110, Fines & Penalties",March,2019,8752.79
+103,Expense,Other Expense,"EXPENSES, Other Expenses, 77200-00-110, Dues & Subscriptions",March,2019,0.0
+104,Expense,Other Expense,"EXPENSES, Other Expenses, 77900-00-110, Misc. Other Expense",March,2019,0.0
+105,Expense,Insurance,"EXPENSES, Insurance, 82300-00-110, Liability",March,2019,0.0
+106,Expense,Insurance,"EXPENSES, Insurance, 82400-00-110, Umbrella",March,2019,0.0
+107,Expense,Insurance,"EXPENSES, Insurance, 82500-00-110, Fire",March,2019,0.0
+108,Income,Rent,"INCOME, , 30100-00-110, Apartment Rent",April,2019,38917.63
+109,Income,Rent,"INCOME, , 32200-00-1:10, Store.Rent",April,2019,12667.72
+110,Income,Other Income,"INCOME, , 35300-00-110, Real Estate Taxes",April,2019,1827.79
+111,Income,Other Income,"INCOME, , 35400-00-110, Water/Sewer",April,2019,0.0
+112,Income,Other Income,"INCOME, , 36100-03-110, Late Fees",April,2019,0.0
+113,Income,Rent,"INCOME, , 36900-00-110, MTSC Rental Income",April,2019,0.0
+114,Income,Rent,"INCOME, , 37100-00-110, Apartment Vacancies",April,2019,-3221.4
+115,Income,Other Income,"INCOME, , 38900-00-110, Misc. Income",April,2019,0.0
+116,Expense,Real Estate Taxes,"EXPENSES, Operating Expenses, 51100-00-110, Real Estate Taxes",April,2019,0.0
+117,Expense,Utilities,"EXPENSES, Operating Expenses, 51200-00-110, Water & Sewer Taxes",April,2019,1191.92
+118,Expense,Utilities,"EXPENSES, Operating Expenses, 52300-00-1-10, Gas Electric",April,2019,176.78
+119,Expense,Other Expense,"EXPENSES, Operating Expenses, 52700-00-110, Security Services",April,2019,214.88
+120,Expense,Other Expense,"EXPENSES, Operating Expenses, 53000-00-110, Inspection Fees",April,2019,0.0
+121,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60100-00-110, Building Repairs",April,2019,0.0
+122,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60200-00-110, Boiler Repairs",April,2019,0.0
+123,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60600-00-110, Intercom Repairs",April,2019,0.0
+124,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60900-00-110, Rubbish Removal",April,2019,0.0
+125,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 61100-00-110, Cleaning",April,2019,0.0
+126,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 51800-00-110, Misc. Repairs & Maintenance",April,2019,0.0
+127,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62100-00-110, Tenant Painting/Plastering",April,2019,0.0
+128,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62200-00-110, Plumbing Repairs",April,2019,0.0
+129,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62400-00-110, Glass & Window-Repairs",April,2019,0.0
+130,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62500-00-110, Appliances",April,2019,0.0
+131,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 54200-00-110, Hardware & Supplies",April,2019,199.37
+132,Expense,Management Fee,"EXPENSES, Professional Fees, 73100-00-110, Management Fees",April,2019,0.0
+133,Expense,General & Administrative,"EXPENSES, Professional Fees, 73200-00-110, Accounting Fees",April,2019,0.0
+134,Expense,General & Administrative,"EXPENSES, Professional Fees, 73300-00-110, Legal Fees",April,2019,550.0
+135,Expense,General & Administrative,"EXPENSES, Professional Fees, 73500-00-110, Rental Commissions",April,2019,0.0
+136,Expense,General & Administrative,"EXPENSES, Professional Fees, 74200-00-110, Misc Professional Fees",April,2019,287.11
+137,Expense,Other Expense,"EXPENSES, Other Expenses, 76700-00-110, Filing Fees",April,2019,0.0
+138,Expense,Other Expense,"EXPENSES, Other Expenses, 76800-00-110, Fines & Penalties",April,2019,0.0
+139,Expense,Other Expense,"EXPENSES, Other Expenses, 77200-00-110, Dues & Subscriptions",April,2019,0.0
+140,Expense,Other Expense,"EXPENSES, Other Expenses, 77900-00-110, Misc. Other Expense",April,2019,20000.0
+141,Expense,Insurance,"EXPENSES, Insurance, 82300-00-110, Liability",April,2019,0.0
+142,Expense,Insurance,"EXPENSES, Insurance, 82400-00-110, Umbrella",April,2019,0.0
+143,Expense,Insurance,"EXPENSES, Insurance, 82500-00-110, Fire",April,2019,0.0
+144,Income,Rent,"INCOME, , 30100-00-110, Apartment Rent",May,2019,38808.52
+145,Income,Rent,"INCOME, , 32200-00-1:10, Store.Rent",May,2019,13047.75
+146,Income,Other Income,"INCOME, , 35300-00-110, Real Estate Taxes",May,2019,1827.79
+147,Income,Other Income,"INCOME, , 35400-00-110, Water/Sewer",May,2019,1191.92
+148,Income,Other Income,"INCOME, , 36100-03-110, Late Fees",May,2019,0.0
+149,Income,Rent,"INCOME, , 36900-00-110, MTSC Rental Income",May,2019,0.0
+150,Income,Rent,"INCOME, , 37100-00-110, Apartment Vacancies",May,2019,0.0
+151,Income,Other Income,"INCOME, , 38900-00-110, Misc. Income",May,2019,0.0
+152,Expense,Real Estate Taxes,"EXPENSES, Operating Expenses, 51100-00-110, Real Estate Taxes",May,2019,0.0
+153,Expense,Utilities,"EXPENSES, Operating Expenses, 51200-00-110, Water & Sewer Taxes",May,2019,0.0
+154,Expense,Utilities,"EXPENSES, Operating Expenses, 52300-00-1-10, Gas Electric",May,2019,90.03
+155,Expense,Other Expense,"EXPENSES, Operating Expenses, 52700-00-110, Security Services",May,2019,116.59
+156,Expense,Other Expense,"EXPENSES, Operating Expenses, 53000-00-110, Inspection Fees",May,2019,0.0
+157,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60100-00-110, Building Repairs",May,2019,10684.8
+158,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60200-00-110, Boiler Repairs",May,2019,0.0
+159,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60600-00-110, Intercom Repairs",May,2019,0.0
+160,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60900-00-110, Rubbish Removal",May,2019,0.0
+161,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 61100-00-110, Cleaning",May,2019,0.0
+162,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 51800-00-110, Misc. Repairs & Maintenance",May,2019,0.0
+163,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62100-00-110, Tenant Painting/Plastering",May,2019,0.0
+164,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62200-00-110, Plumbing Repairs",May,2019,0.0
+165,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62400-00-110, Glass & Window-Repairs",May,2019,174.2
+166,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62500-00-110, Appliances",May,2019,0.0
+167,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 54200-00-110, Hardware & Supplies",May,2019,960.14
+168,Expense,Management Fee,"EXPENSES, Professional Fees, 73100-00-110, Management Fees",May,2019,4642.68
+169,Expense,General & Administrative,"EXPENSES, Professional Fees, 73200-00-110, Accounting Fees",May,2019,0.0
+170,Expense,General & Administrative,"EXPENSES, Professional Fees, 73300-00-110, Legal Fees",May,2019,0.0
+171,Expense,General & Administrative,"EXPENSES, Professional Fees, 73500-00-110, Rental Commissions",May,2019,2775.0
+172,Expense,General & Administrative,"EXPENSES, Professional Fees, 74200-00-110, Misc Professional Fees",May,2019,0.0
+173,Expense,Other Expense,"EXPENSES, Other Expenses, 76700-00-110, Filing Fees",May,2019,50.0
+174,Expense,Other Expense,"EXPENSES, Other Expenses, 76800-00-110, Fines & Penalties",May,2019,0.0
+175,Expense,Other Expense,"EXPENSES, Other Expenses, 77200-00-110, Dues & Subscriptions",May,2019,0.0
+176,Expense,Other Expense,"EXPENSES, Other Expenses, 77900-00-110, Misc. Other Expense",May,2019,0.0
+177,Expense,Insurance,"EXPENSES, Insurance, 82300-00-110, Liability",May,2019,0.0
+178,Expense,Insurance,"EXPENSES, Insurance, 82400-00-110, Umbrella",May,2019,0.0
+179,Expense,Insurance,"EXPENSES, Insurance, 82500-00-110, Fire",May,2019,0.0
+180,Income,Rent,"INCOME, , 30100-00-110, Apartment Rent",June,2019,31262.1
+181,Income,Rent,"INCOME, , 32200-00-1:10, Store.Rent",June,2019,13047.75
+182,Income,Other Income,"INCOME, , 35300-00-110, Real Estate Taxes",June,2019,1827.79
+183,Income,Other Income,"INCOME, , 35400-00-110, Water/Sewer",June,2019,0.0
+184,Income,Other Income,"INCOME, , 36100-03-110, Late Fees",June,2019,0.0
+185,Income,Rent,"INCOME, , 36900-00-110, MTSC Rental Income",June,2019,0.0
+186,Income,Rent,"INCOME, , 37100-00-110, Apartment Vacancies",June,2019,-918.56
+187,Income,Other Income,"INCOME, , 38900-00-110, Misc. Income",June,2019,-35.0
+188,Expense,Real Estate Taxes,"EXPENSES, Operating Expenses, 51100-00-110, Real Estate Taxes",June,2019,100227.58
+189,Expense,Utilities,"EXPENSES, Operating Expenses, 51200-00-110, Water & Sewer Taxes",June,2019,0.0
+190,Expense,Utilities,"EXPENSES, Operating Expenses, 52300-00-1-10, Gas Electric",June,2019,170.52
+191,Expense,Other Expense,"EXPENSES, Operating Expenses, 52700-00-110, Security Services",June,2019,109.94
+192,Expense,Other Expense,"EXPENSES, Operating Expenses, 53000-00-110, Inspection Fees",June,2019,600.0
+193,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60100-00-110, Building Repairs",June,2019,3548.71
+194,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60200-00-110, Boiler Repairs",June,2019,8000.0
+195,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60600-00-110, Intercom Repairs",June,2019,0.0
+196,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60900-00-110, Rubbish Removal",June,2019,68.0
+197,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 61100-00-110, Cleaning",June,2019,91.74
+198,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 51800-00-110, Misc. Repairs & Maintenance",June,2019,0.0
+199,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62100-00-110, Tenant Painting/Plastering",June,2019,0.0
+200,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62200-00-110, Plumbing Repairs",June,2019,0.0
+201,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62400-00-110, Glass & Window-Repairs",June,2019,0.0
+202,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62500-00-110, Appliances",June,2019,0.0
+203,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 54200-00-110, Hardware & Supplies",June,2019,579.19
+204,Expense,Management Fee,"EXPENSES, Professional Fees, 73100-00-110, Management Fees",June,2019,4657.86
+205,Expense,General & Administrative,"EXPENSES, Professional Fees, 73200-00-110, Accounting Fees",June,2019,2500.0
+206,Expense,General & Administrative,"EXPENSES, Professional Fees, 73300-00-110, Legal Fees",June,2019,0.0
+207,Expense,General & Administrative,"EXPENSES, Professional Fees, 73500-00-110, Rental Commissions",June,2019,0.0
+208,Expense,General & Administrative,"EXPENSES, Professional Fees, 74200-00-110, Misc Professional Fees",June,2019,0.0
+209,Expense,Other Expense,"EXPENSES, Other Expenses, 76700-00-110, Filing Fees",June,2019,13.0
+210,Expense,Other Expense,"EXPENSES, Other Expenses, 76800-00-110, Fines & Penalties",June,2019,554.12
+211,Expense,Other Expense,"EXPENSES, Other Expenses, 77200-00-110, Dues & Subscriptions",June,2019,0.0
+212,Expense,Other Expense,"EXPENSES, Other Expenses, 77900-00-110, Misc. Other Expense",June,2019,-18918.95
+213,Expense,Insurance,"EXPENSES, Insurance, 82300-00-110, Liability",June,2019,0.0
+214,Expense,Insurance,"EXPENSES, Insurance, 82400-00-110, Umbrella",June,2019,0.0
+215,Expense,Insurance,"EXPENSES, Insurance, 82500-00-110, Fire",June,2019,0.0
+216,Income,Rent,"INCOME, , 30100-00-110, Apartment Rent",July,2019,39377.13
+217,Income,Rent,"INCOME, , 32200-00-1:10, Store.Rent",July,2019,13047.75
+218,Income,Other Income,"INCOME, , 35300-00-110, Real Estate Taxes",July,2019,0.0
+219,Income,Other Income,"INCOME, , 35400-00-110, Water/Sewer",July,2019,1232.32
+220,Income,Other Income,"INCOME, , 36100-03-110, Late Fees",July,2019,0.0
+221,Income,Rent,"INCOME, , 36900-00-110, MTSC Rental Income",July,2019,595.47
+222,Income,Rent,"INCOME, , 37100-00-110, Apartment Vacancies",July,2019,-918.56
+223,Income,Other Income,"INCOME, , 38900-00-110, Misc. Income",July,2019,0.0
+224,Expense,Real Estate Taxes,"EXPENSES, Operating Expenses, 51100-00-110, Real Estate Taxes",July,2019,0.0
+225,Expense,Utilities,"EXPENSES, Operating Expenses, 51200-00-110, Water & Sewer Taxes",July,2019,19121.66
+226,Expense,Utilities,"EXPENSES, Operating Expenses, 52300-00-1-10, Gas Electric",July,2019,97.22
+227,Expense,Other Expense,"EXPENSES, Operating Expenses, 52700-00-110, Security Services",July,2019,109.94
+228,Expense,Other Expense,"EXPENSES, Operating Expenses, 53000-00-110, Inspection Fees",July,2019,58.69
+229,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60100-00-110, Building Repairs",July,2019,0.0
+230,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60200-00-110, Boiler Repairs",July,2019,0.0
+231,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60600-00-110, Intercom Repairs",July,2019,0.0
+232,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60900-00-110, Rubbish Removal",July,2019,0.0
+233,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 61100-00-110, Cleaning",July,2019,319.61
+234,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 51800-00-110, Misc. Repairs & Maintenance",July,2019,0.0
+235,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62100-00-110, Tenant Painting/Plastering",July,2019,0.0
+236,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62200-00-110, Plumbing Repairs",July,2019,0.0
+237,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62400-00-110, Glass & Window-Repairs",July,2019,0.0
+238,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62500-00-110, Appliances",July,2019,0.0
+239,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 54200-00-110, Hardware & Supplies",July,2019,280.01
+240,Expense,Management Fee,"EXPENSES, Professional Fees, 73100-00-110, Management Fees",July,2019,4059.89
+241,Expense,General & Administrative,"EXPENSES, Professional Fees, 73200-00-110, Accounting Fees",July,2019,0.0
+242,Expense,General & Administrative,"EXPENSES, Professional Fees, 73300-00-110, Legal Fees",July,2019,375.0
+243,Expense,General & Administrative,"EXPENSES, Professional Fees, 73500-00-110, Rental Commissions",July,2019,0.0
+244,Expense,General & Administrative,"EXPENSES, Professional Fees, 74200-00-110, Misc Professional Fees",July,2019,0.0
+245,Expense,Other Expense,"EXPENSES, Other Expenses, 76700-00-110, Filing Fees",July,2019,0.0
+246,Expense,Other Expense,"EXPENSES, Other Expenses, 76800-00-110, Fines & Penalties",July,2019,0.0
+247,Expense,Other Expense,"EXPENSES, Other Expenses, 77200-00-110, Dues & Subscriptions",July,2019,0.0
+248,Expense,Other Expense,"EXPENSES, Other Expenses, 77900-00-110, Misc. Other Expense",July,2019,0.0
+249,Expense,Insurance,"EXPENSES, Insurance, 82300-00-110, Liability",July,2019,0.0
+250,Expense,Insurance,"EXPENSES, Insurance, 82400-00-110, Umbrella",July,2019,0.0
+251,Expense,Insurance,"EXPENSES, Insurance, 82500-00-110, Fire",July,2019,0.0
+252,Income,Rent,"INCOME, , 30100-00-110, Apartment Rent",August,2019,37765.23
+253,Income,Rent,"INCOME, , 32200-00-1:10, Store.Rent",August,2019,13047.75
+254,Income,Other Income,"INCOME, , 35300-00-110, Real Estate Taxes",August,2019,2170.49
+255,Income,Other Income,"INCOME, , 35400-00-110, Water/Sewer",August,2019,0.0
+256,Income,Other Income,"INCOME, , 36100-03-110, Late Fees",August,2019,0.0
+257,Income,Rent,"INCOME, , 36900-00-110, MTSC Rental Income",August,2019,0.0
+258,Income,Rent,"INCOME, , 37100-00-110, Apartment Vacancies",August,2019,-7256.37
+259,Income,Other Income,"INCOME, , 38900-00-110, Misc. Income",August,2019,-30.0
+260,Expense,Real Estate Taxes,"EXPENSES, Operating Expenses, 51100-00-110, Real Estate Taxes",August,2019,0.0
+261,Expense,Utilities,"EXPENSES, Operating Expenses, 51200-00-110, Water & Sewer Taxes",August,2019,0.0
+262,Expense,Utilities,"EXPENSES, Operating Expenses, 52300-00-1-10, Gas Electric",August,2019,98.15
+263,Expense,Other Expense,"EXPENSES, Operating Expenses, 52700-00-110, Security Services",August,2019,109.94
+264,Expense,Other Expense,"EXPENSES, Operating Expenses, 53000-00-110, Inspection Fees",August,2019,0.0
+265,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60100-00-110, Building Repairs",August,2019,0.0
+266,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60200-00-110, Boiler Repairs",August,2019,0.0
+267,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60600-00-110, Intercom Repairs",August,2019,0.0
+268,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60900-00-110, Rubbish Removal",August,2019,0.0
+269,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 61100-00-110, Cleaning",August,2019,0.0
+270,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 51800-00-110, Misc. Repairs & Maintenance",August,2019,0.0
+271,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62100-00-110, Tenant Painting/Plastering",August,2019,0.0
+272,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62200-00-110, Plumbing Repairs",August,2019,0.0
+273,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62400-00-110, Glass & Window-Repairs",August,2019,0.0
+274,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62500-00-110, Appliances",August,2019,0.0
+275,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 54200-00-110, Hardware & Supplies",August,2019,207.72
+276,Expense,Management Fee,"EXPENSES, Professional Fees, 73100-00-110, Management Fees",August,2019,4719.14
+277,Expense,General & Administrative,"EXPENSES, Professional Fees, 73200-00-110, Accounting Fees",August,2019,0.0
+278,Expense,General & Administrative,"EXPENSES, Professional Fees, 73300-00-110, Legal Fees",August,2019,2075.0
+279,Expense,General & Administrative,"EXPENSES, Professional Fees, 73500-00-110, Rental Commissions",August,2019,0.0
+280,Expense,General & Administrative,"EXPENSES, Professional Fees, 74200-00-110, Misc Professional Fees",August,2019,0.0
+281,Expense,Other Expense,"EXPENSES, Other Expenses, 76700-00-110, Filing Fees",August,2019,0.0
+282,Expense,Other Expense,"EXPENSES, Other Expenses, 76800-00-110, Fines & Penalties",August,2019,912.04
+283,Expense,Other Expense,"EXPENSES, Other Expenses, 77200-00-110, Dues & Subscriptions",August,2019,0.0
+284,Expense,Other Expense,"EXPENSES, Other Expenses, 77900-00-110, Misc. Other Expense",August,2019,0.0
+285,Expense,Insurance,"EXPENSES, Insurance, 82300-00-110, Liability",August,2019,0.0
+286,Expense,Insurance,"EXPENSES, Insurance, 82400-00-110, Umbrella",August,2019,0.0
+287,Expense,Insurance,"EXPENSES, Insurance, 82500-00-110, Fire",August,2019,0.0
+288,Income,Rent,"INCOME, , 30100-00-110, Apartment Rent",September,2019,39954.16
+289,Income,Rent,"INCOME, , 32200-00-1:10, Store.Rent",September,2019,13047.75
+290,Income,Other Income,"INCOME, , 35300-00-110, Real Estate Taxes",September,2019,2170.25
+291,Income,Other Income,"INCOME, , 35400-00-110, Water/Sewer",September,2019,0.0
+292,Income,Other Income,"INCOME, , 36100-03-110, Late Fees",September,2019,0.0
+293,Income,Rent,"INCOME, , 36900-00-110, MTSC Rental Income",September,2019,0.0
+294,Income,Rent,"INCOME, , 37100-00-110, Apartment Vacancies",September,2019,-7256.37
+295,Income,Other Income,"INCOME, , 38900-00-110, Misc. Income",September,2019,30.0
+296,Expense,Real Estate Taxes,"EXPENSES, Operating Expenses, 51100-00-110, Real Estate Taxes",September,2019,0.0
+297,Expense,Utilities,"EXPENSES, Operating Expenses, 51200-00-110, Water & Sewer Taxes",September,2019,0.0
+298,Expense,Utilities,"EXPENSES, Operating Expenses, 52300-00-1-10, Gas Electric",September,2019,88.35
+299,Expense,Other Expense,"EXPENSES, Operating Expenses, 52700-00-110, Security Services",September,2019,109.94
+300,Expense,Other Expense,"EXPENSES, Operating Expenses, 53000-00-110, Inspection Fees",September,2019,0.0
+301,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60100-00-110, Building Repairs",September,2019,0.0
+302,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60200-00-110, Boiler Repairs",September,2019,0.0
+303,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60600-00-110, Intercom Repairs",September,2019,0.0
+304,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60900-00-110, Rubbish Removal",September,2019,56.0
+305,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 61100-00-110, Cleaning",September,2019,134.14
+306,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 51800-00-110, Misc. Repairs & Maintenance",September,2019,0.0
+307,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62100-00-110, Tenant Painting/Plastering",September,2019,0.0
+308,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62200-00-110, Plumbing Repairs",September,2019,0.0
+309,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62400-00-110, Glass & Window-Repairs",September,2019,0.0
+310,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62500-00-110, Appliances",September,2019,0.0
+311,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 54200-00-110, Hardware & Supplies",September,2019,832.32
+312,Expense,Management Fee,"EXPENSES, Professional Fees, 73100-00-110, Management Fees",September,2019,5603.52
+313,Expense,General & Administrative,"EXPENSES, Professional Fees, 73200-00-110, Accounting Fees",September,2019,0.0
+314,Expense,General & Administrative,"EXPENSES, Professional Fees, 73300-00-110, Legal Fees",September,2019,475.0
+315,Expense,General & Administrative,"EXPENSES, Professional Fees, 73500-00-110, Rental Commissions",September,2019,0.0
+316,Expense,General & Administrative,"EXPENSES, Professional Fees, 74200-00-110, Misc Professional Fees",September,2019,0.0
+317,Expense,Other Expense,"EXPENSES, Other Expenses, 76700-00-110, Filing Fees",September,2019,0.0
+318,Expense,Other Expense,"EXPENSES, Other Expenses, 76800-00-110, Fines & Penalties",September,2019,475.0
+319,Expense,Other Expense,"EXPENSES, Other Expenses, 77200-00-110, Dues & Subscriptions",September,2019,0.0
+320,Expense,Other Expense,"EXPENSES, Other Expenses, 77900-00-110, Misc. Other Expense",September,2019,0.0
+321,Expense,Insurance,"EXPENSES, Insurance, 82300-00-110, Liability",September,2019,1263.22
+322,Expense,Insurance,"EXPENSES, Insurance, 82400-00-110, Umbrella",September,2019,2000.0
+323,Expense,Insurance,"EXPENSES, Insurance, 82500-00-110, Fire",September,2019,0.0
+324,Income,Rent,"INCOME, , 30100-00-110, Apartment Rent",October,2019,39873.25
+325,Income,Rent,"INCOME, , 32200-00-1:10, Store.Rent",October,2019,13047.75
+326,Income,Other Income,"INCOME, , 35300-00-110, Real Estate Taxes",October,2019,1952.25
+327,Income,Other Income,"INCOME, , 35400-00-110, Water/Sewer",October,2019,0.0
+328,Income,Other Income,"INCOME, , 36100-03-110, Late Fees",October,2019,0.0
+329,Income,Rent,"INCOME, , 36900-00-110, MTSC Rental Income",October,2019,0.0
+330,Income,Rent,"INCOME, , 37100-00-110, Apartment Vacancies",October,2019,-918.56
+331,Income,Other Income,"INCOME, , 38900-00-110, Misc. Income",October,2019,0.0
+332,Expense,Real Estate Taxes,"EXPENSES, Operating Expenses, 51100-00-110, Real Estate Taxes",October,2019,0.0
+333,Expense,Utilities,"EXPENSES, Operating Expenses, 51200-00-110, Water & Sewer Taxes",October,2019,1666.59
+334,Expense,Utilities,"EXPENSES, Operating Expenses, 52300-00-1-10, Gas Electric",October,2019,357.42
+335,Expense,Other Expense,"EXPENSES, Operating Expenses, 52700-00-110, Security Services",October,2019,109.94
+336,Expense,Other Expense,"EXPENSES, Operating Expenses, 53000-00-110, Inspection Fees",October,2019,0.0
+337,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60100-00-110, Building Repairs",October,2019,0.0
+338,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60200-00-110, Boiler Repairs",October,2019,38.11
+339,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60600-00-110, Intercom Repairs",October,2019,0.0
+340,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60900-00-110, Rubbish Removal",October,2019,0.0
+341,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 61100-00-110, Cleaning",October,2019,0.0
+342,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 51800-00-110, Misc. Repairs & Maintenance",October,2019,156.0
+343,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62100-00-110, Tenant Painting/Plastering",October,2019,130.69
+344,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62200-00-110, Plumbing Repairs",October,2019,11000.0
+345,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62400-00-110, Glass & Window-Repairs",October,2019,0.0
+346,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62500-00-110, Appliances",October,2019,0.0
+347,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 54200-00-110, Hardware & Supplies",October,2019,760.92
+348,Expense,Management Fee,"EXPENSES, Professional Fees, 73100-00-110, Management Fees",October,2019,0.0
+349,Expense,General & Administrative,"EXPENSES, Professional Fees, 73200-00-110, Accounting Fees",October,2019,0.0
+350,Expense,General & Administrative,"EXPENSES, Professional Fees, 73300-00-110, Legal Fees",October,2019,0.0
+351,Expense,General & Administrative,"EXPENSES, Professional Fees, 73500-00-110, Rental Commissions",October,2019,0.0
+352,Expense,General & Administrative,"EXPENSES, Professional Fees, 74200-00-110, Misc Professional Fees",October,2019,0.0
+353,Expense,Other Expense,"EXPENSES, Other Expenses, 76700-00-110, Filing Fees",October,2019,0.0
+354,Expense,Other Expense,"EXPENSES, Other Expenses, 76800-00-110, Fines & Penalties",October,2019,1611.51
+355,Expense,Other Expense,"EXPENSES, Other Expenses, 77200-00-110, Dues & Subscriptions",October,2019,0.0
+356,Expense,Other Expense,"EXPENSES, Other Expenses, 77900-00-110, Misc. Other Expense",October,2019,0.0
+357,Expense,Insurance,"EXPENSES, Insurance, 82300-00-110, Liability",October,2019,9920.05
+358,Expense,Insurance,"EXPENSES, Insurance, 82400-00-110, Umbrella",October,2019,0.0
+359,Expense,Insurance,"EXPENSES, Insurance, 82500-00-110, Fire",October,2019,6247.75
+360,Income,Rent,"INCOME, , 30100-00-110, Apartment Rent",November,2019,36788.43
+361,Income,Rent,"INCOME, , 32200-00-1:10, Store.Rent",November,2019,13047.75
+362,Income,Other Income,"INCOME, , 35300-00-110, Real Estate Taxes",November,2019,1952.25
+363,Income,Other Income,"INCOME, , 35400-00-110, Water/Sewer",November,2019,0.0
+364,Income,Other Income,"INCOME, , 36100-03-110, Late Fees",November,2019,0.0
+365,Income,Rent,"INCOME, , 36900-00-110, MTSC Rental Income",November,2019,0.0
+366,Income,Rent,"INCOME, , 37100-00-110, Apartment Vacancies",November,2019,-918.56
+367,Income,Other Income,"INCOME, , 38900-00-110, Misc. Income",November,2019,-143.29
+368,Expense,Real Estate Taxes,"EXPENSES, Operating Expenses, 51100-00-110, Real Estate Taxes",November,2019,0.0
+369,Expense,Utilities,"EXPENSES, Operating Expenses, 51200-00-110, Water & Sewer Taxes",November,2019,0.0
+370,Expense,Utilities,"EXPENSES, Operating Expenses, 52300-00-1-10, Gas Electric",November,2019,90.09
+371,Expense,Other Expense,"EXPENSES, Operating Expenses, 52700-00-110, Security Services",November,2019,119.94
+372,Expense,Other Expense,"EXPENSES, Operating Expenses, 53000-00-110, Inspection Fees",November,2019,0.0
+373,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60100-00-110, Building Repairs",November,2019,0.0
+374,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60200-00-110, Boiler Repairs",November,2019,0.0
+375,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60600-00-110, Intercom Repairs",November,2019,0.0
+376,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60900-00-110, Rubbish Removal",November,2019,0.0
+377,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 61100-00-110, Cleaning",November,2019,78.85
+378,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 51800-00-110, Misc. Repairs & Maintenance",November,2019,0.0
+379,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62100-00-110, Tenant Painting/Plastering",November,2019,0.0
+380,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62200-00-110, Plumbing Repairs",November,2019,0.0
+381,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62400-00-110, Glass & Window-Repairs",November,2019,0.0
+382,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62500-00-110, Appliances",November,2019,496.91
+383,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 54200-00-110, Hardware & Supplies",November,2019,1496.82
+384,Expense,Management Fee,"EXPENSES, Professional Fees, 73100-00-110, Management Fees",November,2019,4770.17
+385,Expense,General & Administrative,"EXPENSES, Professional Fees, 73200-00-110, Accounting Fees",November,2019,0.0
+386,Expense,General & Administrative,"EXPENSES, Professional Fees, 73300-00-110, Legal Fees",November,2019,0.0
+387,Expense,General & Administrative,"EXPENSES, Professional Fees, 73500-00-110, Rental Commissions",November,2019,0.0
+388,Expense,General & Administrative,"EXPENSES, Professional Fees, 74200-00-110, Misc Professional Fees",November,2019,0.0
+389,Expense,Other Expense,"EXPENSES, Other Expenses, 76700-00-110, Filing Fees",November,2019,0.0
+390,Expense,Other Expense,"EXPENSES, Other Expenses, 76800-00-110, Fines & Penalties",November,2019,0.0
+391,Expense,Other Expense,"EXPENSES, Other Expenses, 77200-00-110, Dues & Subscriptions",November,2019,0.0
+392,Expense,Other Expense,"EXPENSES, Other Expenses, 77900-00-110, Misc. Other Expense",November,2019,0.0
+393,Expense,Insurance,"EXPENSES, Insurance, 82300-00-110, Liability",November,2019,0.0
+394,Expense,Insurance,"EXPENSES, Insurance, 82400-00-110, Umbrella",November,2019,0.0
+395,Expense,Insurance,"EXPENSES, Insurance, 82500-00-110, Fire",November,2019,0.0
+396,Income,Rent,"INCOME, , 30100-00-110, Apartment Rent",December,2019,37813.35
+397,Income,Rent,"INCOME, , 32200-00-1:10, Store.Rent",December,2019,13047.75
+398,Income,Other Income,"INCOME, , 35300-00-110, Real Estate Taxes",December,2019,1952.25
+399,Income,Other Income,"INCOME, , 35400-00-110, Water/Sewer",December,2019,0.0
+400,Income,Other Income,"INCOME, , 36100-03-110, Late Fees",December,2019,0.0
+401,Income,Rent,"INCOME, , 36900-00-110, MTSC Rental Income",December,2019,0.0
+402,Income,Rent,"INCOME, , 37100-00-110, Apartment Vacancies",December,2019,-918.56
+403,Income,Other Income,"INCOME, , 38900-00-110, Misc. Income",December,2019,0.0
+404,Expense,Real Estate Taxes,"EXPENSES, Operating Expenses, 51100-00-110, Real Estate Taxes",December,2019,98018.3
+405,Expense,Utilities,"EXPENSES, Operating Expenses, 51200-00-110, Water & Sewer Taxes",December,2019,0.0
+406,Expense,Utilities,"EXPENSES, Operating Expenses, 52300-00-1-10, Gas Electric",December,2019,81.38
+407,Expense,Other Expense,"EXPENSES, Operating Expenses, 52700-00-110, Security Services",December,2019,119.94
+408,Expense,Other Expense,"EXPENSES, Operating Expenses, 53000-00-110, Inspection Fees",December,2019,0.0
+409,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60100-00-110, Building Repairs",December,2019,0.0
+410,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60200-00-110, Boiler Repairs",December,2019,707.69
+411,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60600-00-110, Intercom Repairs",December,2019,0.0
+412,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 60900-00-110, Rubbish Removal",December,2019,1561.4
+413,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 61100-00-110, Cleaning",December,2019,0.0
+414,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 51800-00-110, Misc. Repairs & Maintenance",December,2019,0.0
+415,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62100-00-110, Tenant Painting/Plastering",December,2019,0.0
+416,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62200-00-110, Plumbing Repairs",December,2019,0.0
+417,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62400-00-110, Glass & Window-Repairs",December,2019,0.0
+418,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 62500-00-110, Appliances",December,2019,0.0
+419,Expense,Repairs & Maintenance,"EXPENSES, Repairs & Maintenance, 54200-00-110, Hardware & Supplies",December,2019,0.0
+420,Expense,Management Fee,"EXPENSES, Professional Fees, 73100-00-110, Management Fees",December,2019,4762.89
+421,Expense,General & Administrative,"EXPENSES, Professional Fees, 73200-00-110, Accounting Fees",December,2019,0.0
+422,Expense,General & Administrative,"EXPENSES, Professional Fees, 73300-00-110, Legal Fees",December,2019,0.0
+423,Expense,General & Administrative,"EXPENSES, Professional Fees, 73500-00-110, Rental Commissions",December,2019,0.0
+424,Expense,General & Administrative,"EXPENSES, Professional Fees, 74200-00-110, Misc Professional Fees",December,2019,0.0
+425,Expense,Other Expense,"EXPENSES, Other Expenses, 76700-00-110, Filing Fees",December,2019,122.4
+426,Expense,Other Expense,"EXPENSES, Other Expenses, 76800-00-110, Fines & Penalties",December,2019,0.0
+427,Expense,Other Expense,"EXPENSES, Other Expenses, 77200-00-110, Dues & Subscriptions",December,2019,0.0
+428,Expense,Other Expense,"EXPENSES, Other Expenses, 77900-00-110, Misc. Other Expense",December,2019,0.0
+429,Expense,Insurance,"EXPENSES, Insurance, 82300-00-110, Liability",December,2019,0.0
+430,Expense,Insurance,"EXPENSES, Insurance, 82400-00-110, Umbrella",December,2019,0.0
+431,Expense,Insurance,"EXPENSES, Insurance, 82500-00-110, Fire",December,2019,0.0
